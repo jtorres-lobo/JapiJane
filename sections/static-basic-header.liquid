@@ -1,17 +1,13 @@
 {% case section.settings.live_search_content_types %}
-  {% when 'page,product' %}
-    {% assign content_title_key = 'pages_title' %}
-  {% when 'article,product' %}
-    {% assign content_title_key = 'posts_title' %}
-  {% else %}
-    {% assign content_title_key = 'pages_and_posts_title' %}
+{% when 'page,product' %}
+{% assign content_title_key = 'pages_title' %}
+{% when 'article,product' %}
+{% assign content_title_key = 'posts_title' %}
+{% else %}
+{% assign content_title_key = 'pages_and_posts_title' %}
 {% endcase %}
 
-<script
-  type="application/json"
-  data-section-id="{{ section.id }}"
-  data-section-type="static-header"
-  data-section-data>
+<script type="application/json" data-section-id="{{ section.id }}" data-section-type="static-header" data-section-data>
   {
     "settings": {
       "header_layout": "basic",
@@ -40,30 +36,26 @@
 </script>
 
 {% style %}
-  {% if section.settings.border_enabled %}
-    .site-header {
-      border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
-    }
-  {% endif %}
+{% if section.settings.border_enabled %}
+.site-header {
+border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.border_color }};
+}
+{% endif %}
 {% endstyle %}
 
 {% capture header_nav %}
-  <nav
-    class="site-navigation"
-    aria-label="{{ 'general.accessibility.nav_main' | t }}"
-  >
-    {%
-      include 'navmenu',
-      menu: section.settings.menu,
-      blocks: section.blocks,
-      is_mobile: false,
-      highlight_item: settings.header_navigation_sale_link_label,
-    %}
-  </nav>
+<nav class="site-navigation" aria-label="{{ 'general.accessibility.nav_main' | t }}">
+  {%
+  include 'navmenu',
+  menu: section.settings.menu,
+  blocks: section.blocks,
+  is_mobile: false,
+  highlight_item: settings.header_navigation_sale_link_label,
+  %}
+</nav>
 {% endcapture %}
 
-<header
-  class="
+<header class="
     site-header
     site-header--basic
     site-header--basic-navigation-{{ section.settings.navigation_layout }}
@@ -72,12 +64,8 @@
     site-header--mobile-logo-{{ section.settings.mobile_logo_position }}
     {% if shop.customer_accounts_enabled %}site-header-accounts-enabled{% endif %}
     {% if section.settings.navigation_layout == 'below' %}site-header-nav--open{% endif %}
-  "
-  role="banner"
-  data-site-header
->
-  <div
-    class="
+  " role="banner" data-site-header>
+  <div class="
       site-header-main
       {% if section.settings.full_width_header %}
         site-header--full-width
@@ -88,10 +76,7 @@
       {% else %}
         live-search-disabled
       {% endif %}
-    "
-    data-site-header-main
-    {% if section.settings.sticky_header %}data-site-header-sticky{% endif %}
-  >
+    " data-site-header-main {% if section.settings.sticky_header %}data-site-header-sticky{% endif %}>
     <button class="site-header-button site-header-menu-button" href="#" data-menu-toggle>
       <div class="site-header-icon site-header-menu-icon" tabindex="-1">
         {% include 'icon-library', id: 'icon-menu' %}
@@ -99,100 +84,98 @@
       </div>
     </button>
     <div class="site-logo">
-      <a
-        class="site-logo-link"
-        href="{{ routes.root_url }}">
+      <a class="site-logo-link" href="{{ routes.root_url }}">
         {% assign logo_alt = section.settings.logo.alt %}
-          {% if logo_alt == blank %}
-            {% assign logo_alt = shop.name | strip %}
-          {% endif %}
+        {% if logo_alt == blank %}
+        {% assign logo_alt = shop.name | strip %}
+        {% endif %}
 
         {% if section.settings.desktop_logo %}
-          {% assign logo_height = section.settings.desktop_logo_height | default: 20 %}
-          {% assign logo_size = logo_height | prepend: 'x' %}
+        {% assign logo_height = section.settings.desktop_logo_height | default: 20 %}
+        {% assign logo_size = logo_height | prepend: 'x' %}
 
-          {% capture logo_style %}
-            height: {{ logo_height }}px;
-          {% endcapture %}
+        {% capture logo_style %}
+        height: {{ logo_height }}px;
+        {% endcapture %}
 
-          {%
-            include 'rimg',
-            img: section.settings.desktop_logo,
-            class: 'desktop-logo-image',
-            size: logo_size,
-            style: logo_style,
-            alt: logo_alt,
-            lazy: true,
-          %}
-          {% if template == 'index' %}
-            <h1 class="desktop-logo-text visually-hidden">
-              {{ shop.name }}
-            </h1>
-          {% endif %}
+        {%
+        include 'rimg',
+        img: section.settings.desktop_logo,
+        class: 'desktop-logo-image',
+        size: logo_size,
+        style: logo_style,
+        alt: logo_alt,
+        lazy: true,
+        %}
+        {% if template == 'index' %}
+        <h1 class="desktop-logo-text visually-hidden">
+          {{ shop.name }}
+        </h1>
+        {% endif %}
         {% else %}
-          {% if template == 'index' %}
-            <h1 class="desktop-logo-text">
-              {{ shop.name }}
-            </h1>
-          {% else %}
-            <span class="desktop-logo-text">
-              {{ shop.name }}
-            </span>
-          {% endif %}
+        {% if template == 'index' %}
+        <h1 class="desktop-logo-text">
+          {{ shop.name }}
+        </h1>
+        {% else %}
+        <span class="desktop-logo-text">
+          {{ shop.name }}
+        </span>
+        {% endif %}
         {% endif %}
 
         {% if section.settings.mobile_logo or section.settings.desktop_logo %}
-          {% if section.settings.mobile_logo %}
-            {% assign logo_image = section.settings.mobile_logo %}
-          {% else %}
-            {% assign logo_image = section.settings.desktop_logo %}
-          {% endif %}
-
-          {% assign logo_height = section.settings.mobile_logo_height | default: 30 %}
-          {% assign logo_size = logo_height | prepend: 'x' %}
-
-          {% capture logo_style %}
-            max-height: {{ logo_height }}px;
-          {% endcapture %}
-
-          {%
-            include 'rimg',
-            img: logo_image,
-            class: 'mobile-logo-image',
-            size: logo_size,
-            style: logo_style,
-            alt: logo_alt,
-          %}
-          {% if template == 'index' %}
-            <h1 class="mobile-logo-text visually-hidden">
-              {{ shop.name }}
-            </h1>
-          {% endif %}
+        {% if section.settings.mobile_logo %}
+        {% assign logo_image = section.settings.mobile_logo %}
         {% else %}
-          {% if template == 'index' %}
-            <h1 class="mobile-logo-text">
-              {{ shop.name }}
-            </h1>
-          {% else %}
-            <span class="mobile-logo-text">
-              {{ shop.name }}
-            </span>
-          {% endif %}
+        {% assign logo_image = section.settings.desktop_logo %}
+        {% endif %}
+
+        {% assign logo_height = section.settings.mobile_logo_height | default: 30 %}
+        {% assign logo_size = logo_height | prepend: 'x' %}
+
+        {% capture logo_style %}
+        max-height: {{ logo_height }}px;
+        {% endcapture %}
+
+        {%
+        include 'rimg',
+        img: logo_image,
+        class: 'mobile-logo-image',
+        size: logo_size,
+        style: logo_style,
+        alt: logo_alt,
+        %}
+        {% if template == 'index' %}
+        <h1 class="mobile-logo-text visually-hidden">
+          {{ shop.name }}
+        </h1>
+        {% endif %}
+        {% else %}
+        {% if template == 'index' %}
+        <h1 class="mobile-logo-text">
+          {{ shop.name }}
+        </h1>
+        {% else %}
+        <span class="mobile-logo-text">
+          {{ shop.name }}
+        </span>
+        {% endif %}
         {% endif %}
       </a>
     </div>
 
     {%- unless section.settings.navigation_layout == 'below' -%}
-      {{ header_nav }}
+    {{ header_nav }}
     {%- endunless -%}
 
     <div class="site-header-search" data-site-header-search>
       <div class="site-header-search-wrapper" data-search-wrapper>
         {%
-          include 'live-search-form',
-          search_quick_links: linklists[section.settings.search_quick_links],
-          enable_live_search: section.settings.enable_live_search,
-          content_types: section.settings.live_search_content_types
+        include 'live-search-form',
+        search_quick_links: linklists[section.settings.search_quick_links],
+        enable_live_search: section.settings.enable_live_search,
+        content_types: section.settings.live_search_content_types
         %}
         <button class="site-header-button site-header-search-close" data-search-close>
           {% include 'icon-library', id: 'icon-search-close' %}
@@ -224,31 +207,43 @@
       <div id="ssw-topauth" class="ssw-topauth site-header-button site-header-account-button">
         {% if customer %}
         <div class="ssw-tprofile ssw-dropdown">
-          <a class="ssw-dropdown-toggle site-header-icon site-header-account-icon" data-toggle="ssw-dropdown" href="javascript:void(0);">
+          <a class="ssw-dropdown-toggle site-header-icon site-header-account-icon" data-toggle="ssw-dropdown"
+            href="javascript:void(0);">
             {% include 'icon-library', id: 'icon-account' %}
             <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
           </a>
           <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
+            <li id="customer_myorders_li">
+              
+                      <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
+          onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal"
+          onclick="trackShopStats('login_popup_view', 'all')">
+          {% include 'icon-library', id: 'icon-account' %}
+          <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+        </a>
+
+            </li>
             {% render 'ssw-widget-dropdown' %}
             <li class="ssw-divider"></li>
-            <li><a id="customer_logout_link" tabindex="-1" href='#' data-href="/account/logout">{{ 'socialshopwave.logout' | t }}</a></li>
+            <li><a id="customer_logout_link" tabindex="-1" href='#' data-href="/account/logout">{{
+                'socialshopwave.logout' | t }}</a></li>
           </ul>
         </div>
         {% else %}
-        <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#" onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal" onclick="trackShopStats('login_popup_view', 'all')">
+        <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
+          onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal"
+          onclick="trackShopStats('login_popup_view', 'all')">
           {% include 'icon-library', id: 'icon-account' %}
           <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
-        </a>        {% endif %}
+        </a> {% endif %}
       </div>
-      {% endif %}    
+      {% endif %}
 
 
 
       <a class="site-header-button site-header-cart-button" href="{{ routes.cart_url }}">
         <div class="site-header-icon site-header-cart-icon">
-          <span
-            class="site-header-cart--count {% if cart.item_count > 0 %}visible{% endif %}"
+          <span class="site-header-cart--count {% if cart.item_count > 0 %}visible{% endif %}"
             data-header-cart-count="{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}">
           </span>
 
@@ -260,14 +255,14 @@
   </div>
 
   {%- if section.settings.navigation_layout == 'below' -%}
-    <div class="site-navigation-wrapper">
-      {{ header_nav }}
-    </div>
+  <div class="site-navigation-wrapper">
+    {{ header_nav }}
+  </div>
   {%- endif -%}
 
   {%
-    include 'site-mobile-nav',
-    blocks: section.blocks,
+  include 'site-mobile-nav',
+  blocks: section.blocks,
   %}
 </header>
 
