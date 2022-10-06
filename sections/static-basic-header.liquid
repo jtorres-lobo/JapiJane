@@ -196,9 +196,6 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
       {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
       {% if the_snippet_auth contains 'Liquid error' %}
       {% if shop.customer_accounts_enabled %}
-      {%- comment -%} 
-      // Este elemento es el original para ir a una paginacion de inicio de sesion, Aun no sabemmos
-      porque que activa el "customer_accounts"
 
       <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
         <div class="site-header-icon site-header-account-icon">
@@ -206,13 +203,7 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
           <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
         </div>
       </a>
-      {%- endcomment -%}
-              <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
-          onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal"
-          onclick="trackShopStats('login_popup_view', 'all')">
-          {% include 'icon-library', id: 'icon-account' %}
-          <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
-        </a>
+      
       {% endif %}
       {% else %}
       <div id="ssw-topauth" class="ssw-topauth site-header-button site-header-account-button">
