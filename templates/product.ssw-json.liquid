@@ -75,7 +75,7 @@
 
   {%assign divided_price =  variant.price | divided_by: 100 %}
   {%assign modulo_price =  variant.price | modulo: 100 %}
-  {% if modulo_price >9 %}
+  {% if modulo_price > 9 %}
     {%assign modulo_price = '.' | append: modulo_price %}
   {% elsif modulo_price > 0 %}
     {%assign modulo_price = '.0' | append: modulo_price %}

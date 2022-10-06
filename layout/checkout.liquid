@@ -1,0 +1,166 @@
+{%- comment -%}
+ Script Name: Checkout Plus 2.1.0
+      Author: Lobo Creaciones (https://lobocreaciones.com)
+       Store: Japi Jane® (japijanecl-dev.myshopify.com)
+ Description: Change the native Checkout into a Client specification.
+{%- endcomment -%}
+
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+    
+    {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%} 
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+
+
+    {% section 'check-terms' %}
+
+    <style>
+    @media (min-width: 750px){
+      .floating-labels .field--third {
+          width: 50%;
+      }
+    }
+    
+    @media (min-width: 1000px){
+      .order-summary__sections{
+        height: auto !important;
+      }
+    }
+
+    div[data-address-field="city"]:first-child{
+      display: none;
+    }
+
+    #continue_button{
+      cursor: pointer;
+    }
+    </style>
+
+    <script>
+    const validateDV = (T) => {
+          var M = 0;
+          var S = 1;
+          for (; T; T = Math.floor(T / 10)) S = (S + (T % 10) * (9 - (M++ % 6))) % 11;
+          return S ? S - 1 : "k";
+	  };
+
+      const validateRut = (rutCompleto) => {
+          if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto)) return false;
+          var tmp = rutCompleto.split("-");
+          var digv = tmp[1];
+          var rut = tmp[0];
+          if (digv == "K") digv = "k";
+          return {
+              valid: validateDV(rut) == digv,
+              formattedValue: rutCompleto,
+          };
+      };
+
+      const createDniMessageElement = () => {
+          const dniWrapper = document.querySelector("[data-address-field='company']");
+          if (!dniWrapper.querySelector(".field__message")) {
+              const message = document.createElement("p");
+              message.classList = "field__message field__message--error hidden";
+              dniWrapper.append(message);
+          }
+      };
+
+      function dniFieldError(message, error) {
+          const dniWrapper = document.querySelector("[data-address-field='company']");
+          const messageWrapper = dniWrapper.querySelector(".field__message");
+          const dniField = document.querySelector("#checkout_shipping_address_company");
+          if (error) {
+              dniWrapper.classList.add("field--error");
+              messageWrapper.innerText = message || "";
+              messageWrapper.classList.remove("hidden");
+              const dniField = document.querySelector("#checkout_shipping_address_company");
+              dniField.style = ''
+          } else {
+              dniWrapper.classList.remove("field--error");
+              messageWrapper.innerText = "";
+              messageWrapper.classList.add("hidden");
+              dniField.style = 'border: 1px solid rgb(46, 204, 113);'
+          }
+      }
+
+      function addEventsToDniField() {
+          const dniField = document.querySelector(
+              "#checkout_shipping_address_company"
+          );
+          if(!dniField) return;
+
+          const continueButton = document.querySelector("#continue_button");
+
+          dniField.setAttribute("maxlength", "12");
+          dniField.setAttribute("size", "12");
+
+      }
+
+      window.addEventListener("load", () => {
+          const currentStep = window.Shopify.Checkout.step;
+          if (currentStep === "contact_information") {
+              createDniMessageElement();
+              addEventsToDniField();
+          }
+      });
+    </script>
+
+  </head>
+  <body>
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+
+
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+
+
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyCjBJa2FL6-65hwAwqz1ifrcItY2VnhYb8&libraries=places"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ 'check-custom.js' | asset_url }}"></script>
+    {{ tracking_code }}
+  </body>
+</html>
