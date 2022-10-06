@@ -3,9 +3,9 @@
    {% assign font_family_override = 'inherit' %}
   {% endif %}
 {%- comment -%}type_body{%- endcomment -%}
-  
+
 {%- assign fonts_type_body_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_body_family = font_family_override -%}
@@ -15,7 +15,7 @@
   {%- assign fonts_type_body_weight_bolder = 700 -%}
   {%- assign fonts_type_body_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_body_family = settings.type_body.family | append: ',' | append: settings.type_body.fallback_families -%}
@@ -27,7 +27,7 @@
 
   {%- assign fonts_type_body_style_italic = settings.type_body | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_body | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_display }}
-  
+
   {%- comment -%}Bolder{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 700 -%}
@@ -38,7 +38,7 @@
   {%- assign fonts_type_body_weight_bolder = fonts_type_body_bolder.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_body_bolder | font_face: font_display: fonts_type_body_display }}
   {{ fonts_type_body_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_display }}
-    
+
   {%- comment -%}Lighter{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 300 -%}
@@ -49,7 +49,7 @@
   {%- assign fonts_type_body_weight_lighter = fonts_type_body_lighter.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_body_lighter | font_face: font_display: fonts_type_body_display }}
   {{ fonts_type_body_lighter | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_display }}
-    
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_body_custom' -%}
 
@@ -188,12 +188,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_body_bold{%- endcomment -%}
-  
+
 {%- assign fonts_type_body_bold_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_body_bold_family = font_family_override -%}
@@ -203,7 +203,7 @@
   {%- assign fonts_type_body_bold_weight_bolder = 700 -%}
   {%- assign fonts_type_body_bold_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_body_bold_family = settings.type_body_bold.family | append: ',' | append: settings.type_body_bold.fallback_families -%}
@@ -215,7 +215,7 @@
 
   {%- assign fonts_type_body_bold_style_italic = settings.type_body_bold | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_body_bold | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_bold_display }}
-  
+
   {%- comment -%}Bolder{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 700 -%}
@@ -226,7 +226,7 @@
   {%- assign fonts_type_body_bold_weight_bolder = fonts_type_body_bold_bolder.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_body_bold_bolder | font_face: font_display: fonts_type_body_bold_display }}
   {{ fonts_type_body_bold_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_bold_display }}
-    
+
   {%- comment -%}Lighter{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 300 -%}
@@ -237,7 +237,7 @@
   {%- assign fonts_type_body_bold_weight_lighter = fonts_type_body_bold_lighter.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_body_bold_lighter | font_face: font_display: fonts_type_body_bold_display }}
   {{ fonts_type_body_bold_lighter | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_bold_display }}
-    
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_body_bold_custom' -%}
 
@@ -376,12 +376,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_heading{%- endcomment -%}
-  
+
 {%- assign fonts_type_heading_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_heading_family = font_family_override -%}
@@ -391,7 +391,7 @@
   {%- assign fonts_type_heading_weight_bolder = 700 -%}
   {%- assign fonts_type_heading_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_heading_family = settings.type_heading.family | append: ',' | append: settings.type_heading.fallback_families -%}
@@ -403,7 +403,7 @@
 
   {%- assign fonts_type_heading_style_italic = settings.type_heading | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_heading | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_heading_display }}
-  
+
   {%- comment -%}Bolder{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 700 -%}
@@ -414,7 +414,7 @@
   {%- assign fonts_type_heading_weight_bolder = fonts_type_heading_bolder.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_heading_bolder | font_face: font_display: fonts_type_heading_display }}
   {{ fonts_type_heading_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_heading_display }}
-    
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_heading_custom' -%}
 
@@ -553,12 +553,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_menu{%- endcomment -%}
-  
+
 {%- assign fonts_type_menu_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_menu_family = font_family_override -%}
@@ -568,7 +568,7 @@
   {%- assign fonts_type_menu_weight_bolder = 700 -%}
   {%- assign fonts_type_menu_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_menu_family = settings.type_menu.family | append: ',' | append: settings.type_menu.fallback_families -%}
@@ -580,7 +580,7 @@
 
   {%- assign fonts_type_menu_style_italic = settings.type_menu | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_menu | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_menu_display }}
-  
+
   {%- comment -%}Bolder{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 700 -%}
@@ -591,7 +591,7 @@
   {%- assign fonts_type_menu_weight_bolder = fonts_type_menu_bolder.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_menu_bolder | font_face: font_display: fonts_type_menu_display }}
   {{ fonts_type_menu_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_menu_display }}
-    
+
   {%- comment -%}Lighter{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 300 -%}
@@ -602,7 +602,7 @@
   {%- assign fonts_type_menu_weight_lighter = fonts_type_menu_lighter.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_menu_lighter | font_face: font_display: fonts_type_menu_display }}
   {{ fonts_type_menu_lighter | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_menu_display }}
-    
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_menu_custom' -%}
 
@@ -741,12 +741,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_section{%- endcomment -%}
-  
+
 {%- assign fonts_type_section_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_section_family = font_family_override -%}
@@ -756,7 +756,7 @@
   {%- assign fonts_type_section_weight_bolder = 700 -%}
   {%- assign fonts_type_section_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_section_family = settings.type_section.family | append: ',' | append: settings.type_section.fallback_families -%}
@@ -768,7 +768,7 @@
 
   {%- assign fonts_type_section_style_italic = settings.type_section | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_section | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_section_display }}
-  
+
   {%- comment -%}Bolder{%- endcomment -%}
 
   {%- assign fonts_weight_adjustment_default = 700 -%}
@@ -779,7 +779,7 @@
   {%- assign fonts_type_section_weight_bolder = fonts_type_section_bolder.weight | default: fonts_weight_adjustment_default -%}
   {{ fonts_type_section_bolder | font_face: font_display: fonts_type_section_display }}
   {{ fonts_type_section_bolder | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_section_display }}
-    
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_section_custom' -%}
 
@@ -918,12 +918,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_button{%- endcomment -%}
-  
+
 {%- assign fonts_type_button_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_button_family = font_family_override -%}
@@ -933,7 +933,7 @@
   {%- assign fonts_type_button_weight_bolder = 700 -%}
   {%- assign fonts_type_button_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_button_family = settings.type_button.family | append: ',' | append: settings.type_button.fallback_families -%}
@@ -945,7 +945,7 @@
 
   {%- assign fonts_type_button_style_italic = settings.type_button | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_button | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_button_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_button_custom' -%}
 
@@ -1084,12 +1084,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_product_price{%- endcomment -%}
-  
+
 {%- assign fonts_type_product_price_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_product_price_family = font_family_override -%}
@@ -1099,7 +1099,7 @@
   {%- assign fonts_type_product_price_weight_bolder = 700 -%}
   {%- assign fonts_type_product_price_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_product_price_family = settings.type_product_price.family | append: ',' | append: settings.type_product_price.fallback_families -%}
@@ -1111,7 +1111,7 @@
 
   {%- assign fonts_type_product_price_style_italic = settings.type_product_price | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_product_price | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_product_price_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_product_price_custom' -%}
 
@@ -1250,12 +1250,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_product_card_title{%- endcomment -%}
-  
+
 {%- assign fonts_type_product_card_title_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_product_card_title_family = font_family_override -%}
@@ -1265,7 +1265,7 @@
   {%- assign fonts_type_product_card_title_weight_bolder = 700 -%}
   {%- assign fonts_type_product_card_title_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_product_card_title_family = settings.type_product_card_title.family | append: ',' | append: settings.type_product_card_title.fallback_families -%}
@@ -1277,7 +1277,7 @@
 
   {%- assign fonts_type_product_card_title_style_italic = settings.type_product_card_title | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_product_card_title | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_product_card_title_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_product_card_title_custom' -%}
 
@@ -1416,12 +1416,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_product_vendor{%- endcomment -%}
-  
+
 {%- assign fonts_type_product_vendor_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_product_vendor_family = font_family_override -%}
@@ -1431,7 +1431,7 @@
   {%- assign fonts_type_product_vendor_weight_bolder = 700 -%}
   {%- assign fonts_type_product_vendor_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_product_vendor_family = settings.type_product_vendor.family | append: ',' | append: settings.type_product_vendor.fallback_families -%}
@@ -1443,7 +1443,7 @@
 
   {%- assign fonts_type_product_vendor_style_italic = settings.type_product_vendor | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_product_vendor | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_product_vendor_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_product_vendor_custom' -%}
 
@@ -1582,12 +1582,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_footer_heading{%- endcomment -%}
-  
+
 {%- assign fonts_type_footer_heading_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_footer_heading_family = font_family_override -%}
@@ -1597,7 +1597,7 @@
   {%- assign fonts_type_footer_heading_weight_bolder = 700 -%}
   {%- assign fonts_type_footer_heading_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_footer_heading_family = settings.type_footer_heading.family | append: ',' | append: settings.type_footer_heading.fallback_families -%}
@@ -1609,7 +1609,7 @@
 
   {%- assign fonts_type_footer_heading_style_italic = settings.type_footer_heading | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_footer_heading | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_footer_heading_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_footer_heading_custom' -%}
 
@@ -1748,12 +1748,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_highlights_bar{%- endcomment -%}
-  
+
 {%- assign fonts_type_highlights_bar_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_highlights_bar_family = font_family_override -%}
@@ -1763,7 +1763,7 @@
   {%- assign fonts_type_highlights_bar_weight_bolder = 700 -%}
   {%- assign fonts_type_highlights_bar_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_highlights_bar_family = settings.type_highlights_bar.family | append: ',' | append: settings.type_highlights_bar.fallback_families -%}
@@ -1775,7 +1775,7 @@
 
   {%- assign fonts_type_highlights_bar_style_italic = settings.type_highlights_bar | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_highlights_bar | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_highlights_bar_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_highlights_bar_custom' -%}
 
@@ -1914,12 +1914,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_signpost{%- endcomment -%}
-  
+
 {%- assign fonts_type_signpost_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_signpost_family = font_family_override -%}
@@ -1929,7 +1929,7 @@
   {%- assign fonts_type_signpost_weight_bolder = 700 -%}
   {%- assign fonts_type_signpost_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_signpost_family = settings.type_signpost.family | append: ',' | append: settings.type_signpost.fallback_families -%}
@@ -1941,7 +1941,7 @@
 
   {%- assign fonts_type_signpost_style_italic = settings.type_signpost | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_signpost | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_signpost_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_signpost_custom' -%}
 
@@ -2080,12 +2080,12 @@
 {%- endfor -%}
 
 {%- endif -%}
-    
+
 
 {%- comment -%}type_body_bold{%- endcomment -%}
-  
+
 {%- assign fonts_type_body_bold_display = settings.font_display | default: 'auto' -%}
-    
+
 {%- if font_family_override and font_family_override != 'disable' -%}
   {%- comment -%}Font family override{%- endcomment -%}
   {%- assign fonts_type_body_bold_family = font_family_override -%}
@@ -2095,7 +2095,7 @@
   {%- assign fonts_type_body_bold_weight_bolder = 700 -%}
   {%- assign fonts_type_body_bold_weight_lighter = 300 -%}
 {%- else -%}
-    
+
   {%- comment -%}Normal{%- endcomment -%}
 
   {%- assign fonts_type_body_bold_family = settings.type_body_bold.family | append: ',' | append: settings.type_body_bold.fallback_families -%}
@@ -2107,7 +2107,7 @@
 
   {%- assign fonts_type_body_bold_style_italic = settings.type_body_bold | font_modify: 'style', 'italic' | map: 'style' | default: 'italic' -%}
   {{ settings.type_body_bold | font_modify: 'style', 'italic' | font_face: font_display: fonts_type_body_bold_display }}
-  
+
 {%- comment -%}Custom{%- endcomment -%}
 {%- assign font_family = 'type_body_bold_custom' -%}
 
@@ -2246,7 +2246,7 @@
 {%- endfor -%}
 
 {%- endif -%}
-{% comment %}font-sizes{% endcomment %}
+{% comment %}Inject font-sizes begin{% endcomment %}
 {%- assign font_size_types = 'heading-large|heading-medium|heading-1|heading-2|heading-3|heading-4|heading-5|heading-6|section-heading|highlight-banner-heading|body-larger|body-large|body-medium|body|form|body-small|body-smaller|body-smallest|body-tiny|product-card|button-small|button-medium|button-large|button-x-large|button-signpost|menu-large|menu|footer-heading|input' | split: '|' -%}
 {%- assign font_size_types_forloop_iterations = font_size_types | size | times: 2 | minus: 1 -%}
 {%- assign font_size_half_iterations_minus_one = font_size_types.size | minus: 1 -%}
@@ -2549,45 +2549,36 @@
   {%- assign font_size_rem = false -%}
   {%- assign font_size_scale = false -%}
 {%- endfor -%}
+{% comment %}Inject font-sizes end{% endcomment %}
+
 /* External libraries */
-/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
-/**
- * 1. Change the default font family in all browsers (opinionated).
- * 2. Correct the line height in all browsers.
- * 3. Prevent adjustments of font size after orientation changes in
- *    IE on Windows Phone and in iOS.
- */
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
 html {
-  font-family: sans-serif;
-  /* 1 */
   line-height: 1.15;
-  /* 2 */
-  -ms-text-size-adjust: 100%;
-  /* 3 */
+  /* 1 */
   -webkit-text-size-adjust: 100%;
-  /* 3 */
+  /* 2 */
 }
 
 /* Sections
    ========================================================================== */
 /**
- * Remove the margin in all browsers (opinionated).
+ * Remove the margin in all browsers.
  */
 body {
   margin: 0;
 }
 
 /**
- * Add the correct display in IE 9-.
+ * Render the `main` element consistently in IE.
  */
-article,
-aside,
-footer,
-header,
-nav,
-section {
+main {
   display: block;
 }
 
@@ -2602,24 +2593,6 @@ h1 {
 
 /* Grouping content
    ========================================================================== */
-/**
- * Add the correct display in IE 9-.
- * 1. Add the correct display in IE.
- */
-figcaption,
-figure,
-main {
-  /* 1 */
-  display: block;
-}
-
-/**
- * Add the correct margin in IE 8.
- */
-figure {
-  margin: 1em 40px;
-}
-
 /**
  * 1. Add the correct box sizing in Firefox.
  * 2. Show the overflow in Edge and IE.
@@ -2647,27 +2620,14 @@ pre {
 /* Text-level semantics
    ========================================================================== */
 /**
- * 1. Remove the gray background on active links in IE 10.
- * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ * Remove the gray background on active links in IE 10.
  */
 a {
   background-color: transparent;
-  /* 1 */
-  -webkit-text-decoration-skip: objects;
-  /* 2 */
 }
 
 /**
- * Remove the outline on focused links when they are also active or hovered
- * in all browsers (opinionated).
- */
-a:active,
-a:hover {
-  outline-width: 0;
-}
-
-/**
- * 1. Remove the bottom border in Firefox 39-.
+ * 1. Remove the bottom border in Chrome 57-
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 abbr[title] {
@@ -2678,14 +2638,6 @@ abbr[title] {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
   /* 2 */
-}
-
-/**
- * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
- */
-b,
-strong {
-  font-weight: inherit;
 }
 
 /**
@@ -2707,21 +2659,6 @@ samp {
   /* 1 */
   font-size: 1em;
   /* 2 */
-}
-
-/**
- * Add the correct font style in Android 4.3-.
- */
-dfn {
-  font-style: italic;
-}
-
-/**
- * Add the correct background and color in IE 9-.
- */
-mark {
-  background-color: #ff0;
-  color: #000;
 }
 
 /**
@@ -2754,39 +2691,16 @@ sup {
 /* Embedded content
    ========================================================================== */
 /**
- * Add the correct display in IE 9-.
- */
-audio,
-video {
-  display: inline-block;
-}
-
-/**
- * Add the correct display in iOS 4-7.
- */
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-/**
- * Remove the border on images inside links in IE 10-.
+ * Remove the border on images inside links in IE 10.
  */
 img {
   border-style: none;
 }
 
-/**
- * Hide the overflow in IE.
- */
-svg:not(:root) {
-  overflow: hidden;
-}
-
 /* Forms
    ========================================================================== */
 /**
- * 1. Change the font styles in all browsers (opinionated).
+ * 1. Change the font styles in all browsers.
  * 2. Remove the margin in Firefox and Safari.
  */
 button,
@@ -2794,7 +2708,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: sans-serif;
+  font-family: inherit;
   /* 1 */
   font-size: 100%;
   /* 1 */
@@ -2825,25 +2739,22 @@ select {
 }
 
 /**
- * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
- *    controls in Android 4.
- * 2. Correct the inability to style clickable types in iOS and Safari.
+ * Correct the inability to style clickable types in iOS and Safari.
  */
 button,
-html [type="button"],
-[type="reset"],
-[type="submit"] {
+[type=button],
+[type=reset],
+[type=submit] {
   -webkit-appearance: button;
-  /* 2 */
 }
 
 /**
  * Remove the inner border and padding in Firefox.
  */
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -2852,19 +2763,17 @@ button::-moz-focus-inner,
  * Restore the focus styles unset by the previous rule.
  */
 button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
 /**
- * Change the border, margin, and padding in all browsers (opinionated).
+ * Correct the padding in Firefox.
  */
 fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
+  padding: 0.35em 0.75em 0.625em;
 }
 
 /**
@@ -2889,29 +2798,25 @@ legend {
 }
 
 /**
- * 1. Add the correct display in IE 9-.
- * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
  */
 progress {
-  display: inline-block;
-  /* 1 */
   vertical-align: baseline;
-  /* 2 */
 }
 
 /**
- * Remove the default vertical scrollbar in IE.
+ * Remove the default vertical scrollbar in IE 10+.
  */
 textarea {
   overflow: auto;
 }
 
 /**
- * 1. Add the correct box sizing in IE 10-.
- * 2. Remove the padding in IE 10-.
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
  */
-[type="checkbox"],
-[type="radio"] {
+[type=checkbox],
+[type=radio] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -2921,8 +2826,8 @@ textarea {
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -2930,7 +2835,7 @@ textarea {
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
  */
-[type="search"] {
+[type=search] {
   -webkit-appearance: textfield;
   /* 1 */
   outline-offset: -2px;
@@ -2938,10 +2843,9 @@ textarea {
 }
 
 /**
- * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
+ * Remove the inner padding in Chrome and Safari on macOS.
  */
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
+[type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -2959,11 +2863,9 @@ textarea {
 /* Interactive
    ========================================================================== */
 /*
- * Add the correct display in IE 9-.
- * 1. Add the correct display in Edge, IE, and Firefox.
+ * Add the correct display in Edge, IE 10+, and Firefox.
  */
-details,
-menu {
+details {
   display: block;
 }
 
@@ -2974,26 +2876,17 @@ summary {
   display: list-item;
 }
 
-/* Scripting
+/* Misc
    ========================================================================== */
 /**
- * Add the correct display in IE 9-.
- */
-canvas {
-  display: inline-block;
-}
-
-/**
- * Add the correct display in IE.
+ * Add the correct display in IE 10+.
  */
 template {
   display: none;
 }
 
-/* Hidden
-   ========================================================================== */
 /**
- * Add the correct display in IE 10-.
+ * Add the correct display in IE 10.
  */
 [hidden] {
   display: none;
@@ -3014,7 +2907,7 @@ template {
 {% assign color_border = settings.color_layout_site_background | color_mix: color_layout_site_background_border_mix, 50 %}
 
 {% assign morph_color = settings.color_products_vendor_name %}
-{% capture color_morph_products_vendor_name %}{% comment %}morph{% endcomment %}
+{% capture color_morph_products_vendor_name %}{% comment %}Inject morph begin{% endcomment %}
 {% comment %}
   This adjusts the color to give it an appropriate difference from the original color.
   It is usually used for link hover color, and things where we need to distinguish a change.
@@ -3055,9 +2948,11 @@ template {
 
 {{ new_color }}
 
-{% assign morph_adjustment = blank %}{% endcapture %}
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
 {% assign morph_color = settings.color_forms_input_border %}
-{% capture color_morph_forms_input_border %}{% comment %}morph{% endcomment %}
+{% capture color_morph_forms_input_border %}{% comment %}Inject morph begin{% endcomment %}
 {% comment %}
   This adjusts the color to give it an appropriate difference from the original color.
   It is usually used for link hover color, and things where we need to distinguish a change.
@@ -3098,7 +2993,9 @@ template {
 
 {{ new_color }}
 
-{% assign morph_adjustment = blank %}{% endcapture %}
+{% assign morph_adjustment = blank %}
+{% comment %}Inject morph end{% endcomment %}
+{% endcapture %}
 
 {% assign color_site_overlays_opacity = settings.color_site_overlays_opacity | divided_by: '100.00' %}
 
@@ -3113,60 +3010,53 @@ template {
  * {% if chb_extract_total == 0 %}
  *   {% assign color_header_background = "rgba(255,255,255,1)" %}
  * {% endif %}
-h1, h2, h3, h4, h5, h6 {
+ * {% assign color_text_regular_text_encoded = settings.color_text_headings | color_to_hex | replace: '#', '' %}
+h6, h5, h4, h3, h2, h1 {
   font-family: {{ fonts_type_heading_family }};
   font-style: {{ fonts_type_heading_style }};
   font-weight: {{ fonts_type_heading_weight }};
   letter-spacing: {{ settings.type_heading_spacing | divided_by: 100.0 | append: 'em' }};
 }
-
 {%- if settings.type_heading_capitalize -%}
-
-h1, h2, h3, h4, h5, h6 {
+h6, h5, h4, h3, h2, h1 {
     text-transform: uppercase;
   }
-
 {%- else -%}
-
-h1, h2, h3, h4, h5, h6 {
+h6, h5, h4, h3, h2, h1 {
     text-transform: none;
   }
-
 {%- endif -%}
-
-h1 b, h2 b, h3 b, h4 b, h5 b, h6 b,
-h1 strong,
-h2 strong,
-h3 strong,
-h4 strong,
+h6 b, h5 b, h4 b, h3 b, h2 b, h1 b,
+h6 strong,
 h5 strong,
-h6 strong {
+h4 strong,
+h3 strong,
+h2 strong,
+h1 strong {
   font-weight: {{ fonts_type_heading_weight_bolder }};
 }
-
-h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
+h6 em, h5 em, h4 em, h3 em, h2 em, h1 em {
   font-style: {{ fonts_type_heading_style_italic }};
 }
-
-h1 b em, h2 b em, h3 b em, h4 b em, h5 b em, h6 b em,
-h1 strong em,
-h2 strong em,
-h3 strong em,
-h4 strong em,
-h5 strong em,
+h6 b em, h5 b em, h4 b em, h3 b em, h2 b em, h1 b em,
 h6 strong em,
-h1 em b,
-h2 em b,
-h3 em b,
-h4 em b,
-h5 em b,
+h5 strong em,
+h4 strong em,
+h3 strong em,
+h2 strong em,
+h1 strong em,
 h6 em b,
-h1 em strong,
-h2 em strong,
-h3 em strong,
-h4 em strong,
+h5 em b,
+h4 em b,
+h3 em b,
+h2 em b,
+h1 em b,
+h6 em strong,
 h5 em strong,
-h6 em strong {
+h4 em strong,
+h3 em strong,
+h2 em strong,
+h1 em strong {
   font-style: {{ fonts_type_heading_style_italic }};
 }
 
@@ -3195,12 +3085,10 @@ h6 {
 }
 
 {%- if settings.type_menu_capitalize -%}
-
 {%- else -%}
-
 {%- endif -%}
 
-.button-primary, .button-secondary {
+.button-secondary, .button-primary {
   font-size: var(--font-size-button-small);
   padding: 0.6875rem 1.375rem;
   letter-spacing: {{ settings.type_button_spacing | divided_by: 100.0 | append: 'em' }};
@@ -3213,22 +3101,17 @@ h6 {
   border-radius: {{ settings.button_border_radius | append: 'px' }};
   transition: border-color 0.2s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
-
 {%- if settings.type_button_capitalize -%}
-
-.button-primary, .button-secondary {
+.button-secondary, .button-primary {
     text-transform: uppercase;
   }
-
 {%- else -%}
-
-.button-primary, .button-secondary {
+.button-secondary, .button-primary {
     text-transform: none;
   }
-
 {%- endif -%}
 
-.disabled.button-primary, .disabled.button-secondary, .disabled.button-primary:active, .disabled.button-secondary:active, .disabled.button-primary:focus, .disabled.button-secondary:focus {
+.disabled.button-secondary, .disabled.button-primary {
   color: #696969;
   cursor: default;
   background-color: #ebebeb;
@@ -3240,34 +3123,28 @@ h6 {
   background-color: {{ settings.color_buttons_primary_button_background }};
   border: 1px solid {{ settings.color_buttons_primary_button_background }};
 }
-
 .button-primary:not(.disabled):hover {
   background: {{ settings.color_buttons_primary_button_background_hover }};
   border: 1px solid {{ settings.color_buttons_primary_button_background_hover }};
 }
-
 .button-primary:active, .button-primary:focus {
   background: {{ settings.color_buttons_primary_button_background_hover }};
   border: 1px solid {{ settings.color_buttons_primary_button_background_hover }};
 }
-
 .button-secondary {
   color: {{ settings.color_buttons_secondary_button_text }};
   background-color: {{ settings.color_buttons_secondary_button_background }};
   border: 1px solid {{ settings.color_buttons_secondary_button_border }};
 }
-
 .button-secondary:not(.disabled):hover {
   color: {{ settings.color_buttons_secondary_button_text_hover }};
   background: {{ settings.color_buttons_secondary_button_background_hover }};
   border: 1px solid {{ settings.color_buttons_secondary_button_border_hover }};
 }
-
 .button-secondary:active, .button-secondary:focus {
   background: {{ settings.color_buttons_secondary_button_background_hover }};
   border: 1px solid {{ settings.color_buttons_secondary_button_border_hover }};
 }
-
 .giftcard--container {
   max-width: {{ settings.layout_max_width | append: 'px' }};
   padding-right: 10px;
@@ -3275,14 +3152,12 @@ h6 {
   margin-right: auto;
   margin-left: auto;
 }
-
 @media screen and (max-width: 1079px) and (min-width: 720px) {
   .giftcard--container {
     padding-right: {{ settings.type_size_base | times: 1.75 | divided_by: 16.0 | append: 'rem' }};
     padding-left: {{ settings.type_size_base | times: 1.75 | divided_by: 16.0 | append: 'rem' }};
   }
 }
-
 @media screen and (min-width: 1080px) {
   .giftcard--container {
     padding-right: 40px;
@@ -3290,26 +3165,24 @@ h6 {
   }
 }
 
-.button-icon, .button-signpost .signpost-icon {
+.button-signpost .signpost-icon, .button-icon {
   display: inline-block;
   margin-left: 0.3125rem;
   vertical-align: middle;
 }
-
-.button-icon svg, .button-signpost .signpost-icon svg {
+.button-signpost .signpost-icon svg, .button-icon svg {
   display: block;
   margin-top: -0.125rem;
   transform: rotate(-90deg);
 }
 
-.giftcard-message.message--error, .giftcard-message {
+.giftcard-message, .giftcard-message.message--error {
   font-style: {{ fonts_type_body_style }};
   font-weight: {{ fonts_type_body_weight_bolder }};
   font-size: var(--font-size-body);
   letter-spacing: {{ settings.type_body_spacing | divided_by: 100.0 | append: 'em' }};
 }
-
-.giftcard-message.message--error a, .giftcard-message a {
+.giftcard-message a, .giftcard-message.message--error a {
   color: currentColor;
 }
 
@@ -3319,15 +3192,12 @@ h6 {
 }
 
 {%- if settings.type_button_capitalize -%}
-
 {%- else -%}
-
 {%- endif -%}
 
 .button-icon {
   margin-left: 3px;
 }
-
 .button-icon svg {
   width: calc(14px * {{ settings.type_button_sizing | divided_by: 100.0 }});
   height: calc(14px * {{ settings.type_button_sizing | divided_by: 100.0 }});
@@ -3346,17 +3216,14 @@ h6 {
   text-decoration: none;
   text-transform: none;
 }
-
 @media screen and (min-width: 860px) {
   .button-signpost {
     margin-top: {{ settings.type_size_base | times: 1.75 | divided_by: 16.0 | append: 'rem' }};
   }
 }
-
 .button-signpost .signpost-icon {
   margin-left: 2px;
 }
-
 .button-signpost .signpost-icon svg {
   width: 0.75rem;
   height: 0.75rem;
@@ -3376,87 +3243,69 @@ body {
 html {
   height: 100%;
 }
-
 html::before {
   display: none;
   content: "XS,S,M,L,L+,XL,XXL";
 }
-
 html::after {
   display: none;
   content: "XS";
 }
-
 @media screen and (min-width: 720px) {
   html::after {
     content: "S";
   }
 }
-
 @media screen and (min-width: 860px) {
   html::after {
     content: "M";
   }
 }
-
 @media screen and (min-width: 1024px) {
   html::after {
     content: "L";
   }
 }
-
 @media screen and (min-width: 1080px) {
   html::after {
     content: "L+";
   }
 }
-
 @media screen and (min-width: 1280px) {
   html::after {
     content: "XL";
   }
 }
-
 {%- if settings.layout_max_width == 1200 -%}
-
 @media screen and (min-width: 1250px) {
     html::after {
       content: "XXL";
     }
   }
-
 {%- elsif settings.layout_max_width == 1300 -%}
-
 @media screen and (min-width: 1350px) {
     html::after {
       content: "XXL";
     }
   }
-
 {%- elsif settings.layout_max_width == 1400 -%}
-
 @media screen and (min-width: 1450px) {
     html::after {
       content: "XXL";
     }
   }
-
 {%- elsif settings.layout_max_width == 1500 -%}
-
 @media screen and (min-width: 1550px) {
     html::after {
       content: "XXL";
     }
   }
-
 {%- elsif settings.layout_max_width == 1600 -%}
-
 @media screen and (min-width: 1660px) {
     html::after {
       content: "XXL";
     }
   }
-
 {%- endif -%}
 
 body {
@@ -3468,21 +3317,16 @@ body {
   letter-spacing: {{ settings.type_body_spacing | divided_by: 100.0 | append: 'em' }};
   color: {{ settings.color_text_regular_text }};
 }
-
 {%- if settings.font_family_override -%}
-
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-sans, Ubuntu, Cantarell, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
-
 {%- endif -%}
-
 @media screen and (max-width: 719px) {
   body {
     font-size: var(--font-size-body-small);
   }
 }
-
 body.scroll-lock {
   height: 100vh;
   overflow: hidden;
@@ -3494,27 +3338,22 @@ b,
 strong {
   letter-spacing: {{ settings.type_body_spacing | divided_by: 100.0 | append: 'em' }};
 }
-
 {%- if settings.type_body_custom == blank and settings.type_body_enable_bold -%}
-
 th,
-  b,
-  strong {
+b,
+strong {
     font-family: {{ fonts_type_body_bold_family }};
     font-style: {{ fonts_type_body_bold_style }};
     font-weight: {{ fonts_type_body_bold_weight }};
   }
-
 {%- else -%}
-
 th,
-  b,
-  strong {
+b,
+strong {
     font-family: {{ fonts_type_body_family }};
     font-style: {{ fonts_type_body_style }};
     font-weight: {{ fonts_type_body_weight }};
   }
-
 {%- endif -%}
 
 em {
@@ -3528,33 +3367,27 @@ em b,
 em strong {
   letter-spacing: {{ settings.type_body_spacing | divided_by: 100.0 | append: 'em' }};
 }
-
 {%- if settings.type_body_custom == blank and settings.type_body_enable_bold -%}
-
 th em,
-  b em,
-  strong em,
-  em b,
-  em strong {
+b em,
+strong em,
+em b,
+em strong {
     font-family: {{ fonts_type_body_bold_family }};
     font-style: {{ fonts_type_body_bold_style_italic }};
     font-weight: {{ fonts_type_body_bold_weight }};
   }
-
 {%- else -%}
-
 th em,
-  b em,
-  strong em,
-  em b,
-  em strong {
+b em,
+strong em,
+em b,
+em strong {
     font-family: {{ fonts_type_body_family }};
     font-style: {{ fonts_type_body_style_italic }};
     font-weight: {{ fonts_type_body_weight }};
   }
-
 {%- endif -%}
-
 
 .visually-hidden {
   position: absolute !important;
@@ -3577,7 +3410,6 @@ th em,
   text-decoration: none;
   padding: 1em;
 }
-
 .skip-to-main:focus, .skip-to-main:active {
   left: 0;
   z-index: 702;
@@ -3598,12 +3430,12 @@ th em,
     orphans: 3;
     widows: 3;
   }
+
   .giftcard__print-link,
-  .giftcard__apple-wallet {
+.giftcard__apple-wallet {
     display: none;
   }
 }
-
 /*================ Custom Giftcard Styles ================*/
 .giftcard-header {
   padding: {{ settings.type_size_base | divided_by: 16.0 | append: 'rem' }} {{ settings.type_size_base | times: 1.75 | divided_by: 16.0 | append: 'rem' }};
@@ -3646,7 +3478,6 @@ th em,
   justify-content: center;
   margin-top: {{ settings.type_size_base | times: 1.25 | divided_by: 16.0 | append: 'rem' }};
 }
-
 .giftcard-actions .button-secondary {
   margin-left: 20px;
 }
@@ -3656,7 +3487,6 @@ th em,
   position: relative;
   text-align: center;
 }
-
 .giftcard-image img {
   position: relative;
   display: block;
@@ -3664,21 +3494,18 @@ th em,
   border-radius: 10px;
   z-index: 2;
 }
-
 .giftcard-image::before, .giftcard-image::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 47px;
   height: 47px;
   z-index: 3;
 }
-
 .giftcard-image::before {
   background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE3LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDdweCIgaGVpZ2h0PSI0N3B4IiB2aWV3Qm94PSIwIDAgNDcgNDciIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQ3IDQ3IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBvcGFjaXR5PSIwLjEiPgoJCTxwYXRoIGQ9Ik00NC41ODYsMUwxLDQ0LjU4NlYxMGMwLTQuOTYzLDQuMDM3LTksOS05SDQ0LjU4NiBNNDcsMEgxMEM0LjQ3NywwLDAsNC40NzcsMCwxMHYzN0w0NywwTDQ3LDB6Ii8+Cgk8L2c+CjwvZz4KPGc+Cgk8Zz4KCQk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNDQuNTg2LDFMMSw0NC41ODZWMTBjMC00Ljk2Myw0LjAzNy05LDktOUg0NC41ODYiLz4KCTwvZz4KPC9nPgo8L3N2Zz4K") 0 0 no-repeat;
   top: -1px;
   left: -1px;
 }
-
 .giftcard-image::after {
   background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE3LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNDdweCIgaGVpZ2h0PSI0N3B4IiB2aWV3Qm94PSIwIDAgNDcgNDciIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDQ3IDQ3IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBvcGFjaXR5PSIwLjEiPgoJCTxwYXRoIGQ9Ik0yLjQxNCw0Nkw0NiwyLjQxNFYzN2MwLDQuOTYzLTQuMDM3LDktOSw5SDIuNDE0IE0wLDQ3aDM3YzUuNTIzLDAsMTAtNC40NzcsMTAtMTBWMEwwLDQ3TDAsNDd6Ii8+Cgk8L2c+CjwvZz4KPGc+Cgk8Zz4KCQk8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMi40MTQsNDZMNDYsMi40MTRWMzdjMCw0Ljk2My00LjAzNyw5LTksOUgyLjQxNCIvPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=") 0 0 no-repeat;
   bottom: -1px;
@@ -3723,7 +3550,6 @@ th em,
   background-color: #fff;
   border: 1px dashed {{ color_border }};
 }
-
 .giftcard-code-text.disabled {
   text-decoration: line-through;
 }
@@ -3737,9 +3563,8 @@ th em,
   line-height: 1.2;
   padding: 10px;
   z-index: 5;
-  color: #3C3B5B;
+  color: #fff;
 }
-
 .giftcard-amount strong {
   display: block;
 }
@@ -3755,9 +3580,8 @@ th em,
   text-align: center;
   white-space: nowrap;
 }
-
 .giftcard-tooltip::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   left: 100%;
@@ -3789,7 +3613,6 @@ th em,
   border: 0;
   border-radius: 4px;
 }
-
 .giftcard-tooltip-label small {
   font-size: 0.875em;
   letter-spacing: 0.1em;
@@ -3802,32 +3625,35 @@ th em,
     display: none;
   }
 }
-
 /*================ Small width ================*/
 @media screen and (max-width: 400px) {
-  .giftcard-image::before, .giftcard-image::after {
+  .giftcard-image::before,
+.giftcard-image::after {
     display: none;
   }
+
   .giftcard-code {
     font-size: 0.75em;
   }
+
   .giftcard-code--medium {
     font-size: 0.65em;
   }
+
   .giftcard-code--small {
     font-size: 0.55em;
   }
 }
-
 /*============================================================================
   #Print Styles
 ==============================================================================*/
 @media print {
   .giftcard-image::before,
-  .giftcard-image::after,
-  .giftcard-tooltip {
+.giftcard-image::after,
+.giftcard-tooltip {
     display: none;
   }
+
   .giftcard-actions {
     display: none;
   }
