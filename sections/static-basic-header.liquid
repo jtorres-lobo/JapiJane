@@ -203,6 +203,20 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
           <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
         </div>
       </a>
+      <div class="ssw-tprofile ssw-dropdown">
+          <a class="ssw-dropdown-toggle site-header-icon site-header-account-icon" data-toggle="ssw-dropdown"
+            href="javascript:void(0);">
+            {% include 'icon-library', id: 'icon-account' %}
+            <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+          </a>
+          <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
+            {% render 'ssw-widget-dropdown' %}
+            <li class="ssw-divider"></li>
+            <li><a id="customer_logout_link" tabindex="-1" href='#' data-href="/account/logout">{{
+                'socialshopwave.logout' | t }}</a></li>
+          </ul>
+        </div>
       {% endif %}
       {% else %}
       <div id="ssw-topauth" class="ssw-topauth site-header-button site-header-account-button">
