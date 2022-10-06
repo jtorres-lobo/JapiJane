@@ -196,8 +196,18 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
       {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
       {% if the_snippet_auth contains 'Liquid error' %}
       {% if shop.customer_accounts_enabled %}
-      <p>1</p>
-        <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
+      {%- comment -%} 
+      // Este elemento es el original para ir a una paginacion de inicio de sesion, Aun no sabemmos
+      porque que activa el "customer_accounts_enabled""
+
+      <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
+        <div class="site-header-icon site-header-account-icon">
+          {% include 'icon-library', id: 'icon-account' %}
+          <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+        </div>
+      </a>
+      {%- endcomment -%}
+              <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
           onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal"
           onclick="trackShopStats('login_popup_view', 'all')">
           {% include 'icon-library', id: 'icon-account' %}
@@ -208,13 +218,11 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
       <div id="ssw-topauth" class="ssw-topauth site-header-button site-header-account-button">
         {% if customer %}
         <div class="ssw-tprofile ssw-dropdown">
-      <p>2</p>
-        <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#"
-          onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal"
-          onclick="trackShopStats('login_popup_view', 'all')">
-          {% include 'icon-library', id: 'icon-account' %}
-          <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
-        </a>
+          <a class="ssw-dropdown-toggle site-header-icon site-header-account-icon" data-toggle="ssw-dropdown"
+            href="javascript:void(0);">
+            {% include 'icon-library', id: 'icon-account' %}
+            <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+          </a>
           <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
             {% render 'ssw-widget-dropdown' %}
@@ -259,7 +267,12 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
   blocks: section.blocks,
   %}
 </header>
-
+<h1>
+  Aqui estoy!
+</h1>
+<h1>
+  {{shop.customer_accounts_enabled}}
+</h1>
 {% schema %}
 {
   "name": "Header",
