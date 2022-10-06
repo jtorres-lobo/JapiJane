@@ -8,9 +8,9 @@
 {% assign paginate_by = section.settings.posts_per_page_range | times: 1 %}
 
 {% assign show_featured = false %}
-
 {% if featured_post != '' and featured_post != blank %}
   {% assign show_featured = true %}
+
   {% comment %}
     Don't show highlighted post if is not first page, or if tags are active
   {% endcomment %}
@@ -22,17 +22,10 @@
 <section class="blog--container">
   <header class="blog-title">
     <h1>{{ blog.title }}</h1>
-
     {% if section.settings.show_rss_link %}
       <a href="{{ blog.url }}.atom">
-        {%
-          include 'icon-library',
-          id: 'icon-rss'
-        %}
-
-        <span class="visually-hidden">
-          {{ 'general.accessibility.rss' | t: platform: title | escape }}
-        </span>
+        {% include 'icon-library', id: 'icon-rss' %}
+        <span class="visually-hidden">{{ 'general.accessibility.rss' | t: platform: title | escape }}</span>
       </a>
     {% endif %}
   </header>
@@ -51,7 +44,7 @@
         {%
           include 'article-excerpt',
           article: article
-        %}
+          %}
       {% else %}
         <article class="blog--no-results">
           <h2 class="blog--no-results-title">
@@ -106,7 +99,7 @@
       "min": 6,
       "max": 12,
       "step": 3,
-      "default": 6
+      "default": 9
     }
   ]
 }

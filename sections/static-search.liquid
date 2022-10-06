@@ -71,22 +71,6 @@
         %}
       </div>
 
-      {% if section.settings.enable_filters and search.filters.size > 0 %}
-        {% include 'search-filters' %}
-      {% endif %}
-
-      {% assign active_filters = false %}
-      {% for filter in search.filters %}
-        {% if filter.active_values.size > 0 or filter.max_value.value or filter.min_value.value %}
-          {% assign active_filters = true %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-
-      {% if active_filters %}
-        {% include 'search-filters-active' %}
-      {% endif %}
-
 
       {% if product_count > 0 %}
         <h2 class="visually-hidden">{{ 'general.accessibility.search_products' | t }}</h2>
@@ -106,7 +90,7 @@
             {% endfor %}
           </ul>
         {% else %}
-          <div class="productgrid--no-results">
+          <div class="productgrid--no-results" data-html>
             {% assign title = 'search.general.no_search_performed' | t %}
 
             {% if search.performed %}
@@ -184,22 +168,6 @@
       "id": "enable_search_articles_pages",
       "type": "checkbox",
       "label": "Show blog posts and pages in search results",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Search filtering"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_filters",
-      "label": "Enable search filtering",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_product_counts",
-      "label": "Show product counts",
       "default": true
     }
   ]

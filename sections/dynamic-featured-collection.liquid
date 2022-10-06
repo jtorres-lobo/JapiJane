@@ -61,7 +61,7 @@
   {% assign collection_product_remainder = collection.products.size | modulo: 5 %}
   {% assign banner_position = block.settings.banner_position %}
   {% if collection.products.size > 5 and collection_product_remainder == 0 %}
-    {% assign product_limit = product_limit %}
+    {% assign product_limit = product_limit | minus: 1 %}
   {% elsif collection.products.size == 5 and collection_product_remainder == 0 %}
     {% assign product_limit = 4 %}
   {% endif %}
@@ -203,16 +203,16 @@
         {{ banner }}
       {% endif %}
 
-      {% if banner != blank %}
-        {% assign product_limit = product_limit | minus: 1 %}
-      {% endif %}
-
       {% for product in products limit: product_limit %}
         {%
           include 'product-grid-item',
           product: product
         %}
       {% else %}
+
+        {% if banner != blank %}
+          {% assign product_limit = product_limit | minus: 1 %}
+        {% endif %}
         {% for i in (1..product_limit) %}
           {% capture current %}{% cycle 1, 2, 3, 4 %}{% endcapture %}
 
@@ -556,11 +556,6 @@
         }
       ]
     }
-  ],
-  "templates": [
-    "index",
-    "product",
-    "page"
   ]
 }
 

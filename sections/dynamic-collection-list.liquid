@@ -154,7 +154,7 @@
     {{ desktop_button_active }}
     {{ mobile_button_active }}
   ">
-    {{ 'product.buttons.show_more' | t }}
+    Show more
   </button>
 </section>
 
@@ -212,8 +212,8 @@
       "default": 36
     },
     {
-      "type": "header",
-      "content": "Appearance"
+      "type":      "header",
+      "content":   "Appearance"
     },
     {
       "type": "select",
@@ -252,17 +252,17 @@
       "default": "center"
     },
     {
-      "type": "header",
-      "content": "Desktop"
+      "type":      "header",
+      "content":   "Desktop"
     },
     {
       "type": "range",
       "id": "desktop_collections_per_row",
       "label": "Collections per row",
-      "min": 3,
-      "max": 6,
-      "step": 1,
-      "default": 3
+      "min":       3,
+      "max":       6,
+      "step":      1,
+      "default":   3
     },
     {
       "type": "select",
@@ -291,56 +291,50 @@
         }
       ],
       "default": "2",
-      "info": "Customers can reveal hidden collections by clicking “Show More.”"
+      "info": "Customers can reveal hidden collections by clicking “Show All.”"
     },
     {
-      "type": "radio",
-      "id": "desktop_collection_width",
-      "label": "Layout",
+      "type":      "radio",
+      "id":        "desktop_collection_width",
+      "label":     "Layout",
       "options": [
-        {
-          "value": "desktop-full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "desktop-custom-width",
-          "label": "Custom width"
-        }
+        { "value": "desktop-full-width", "label": "Full width" },
+        { "value": "desktop-custom-width", "label": "Custom width" }
       ],
-      "default": "desktop-full-width"
+      "default":   "desktop-full-width"
     },
     {
-      "type": "range",
-      "id": "layout_collection_max_width",
-      "label": "Custom layout max width",
-      "min": 700,
-      "max": 1600,
-      "step": 10,
-      "unit": "px",
-      "default": 1000
+      "type":      "range",
+      "id":        "layout_collection_max_width",
+      "label":     "Custom layout max width",
+      "min":       700,
+      "max":       1600,
+      "step":      10,
+      "unit":      "px",
+      "default":   1000
     },
     {
-      "type": "range",
-      "id": "desktop_collection_max_width",
-      "label": "Custom collection max width",
-      "min": 75,
-      "max": 500,
-      "step": 5,
-      "unit": "px",
-      "default": 300
+      "type":      "range",
+      "id":        "desktop_collection_max_width",
+      "label":     "Custom collection max width",
+      "min":       75,
+      "max":       500,
+      "step":      5,
+      "unit":      "px",
+      "default":   300
     },
     {
-      "type": "header",
-      "content": "Mobile"
+      "type":      "header",
+      "content":   "Mobile"
     },
     {
       "type": "range",
       "id": "mobile_collections_per_row",
       "label": "Collections per row",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "default": 3
+      "min":       1,
+      "max":       3,
+      "step":      1,
+      "default":   3
     },
     {
       "type": "select",
@@ -369,33 +363,27 @@
         }
       ],
       "default": "2",
-      "info": "Customers can reveal hidden collections by clicking “Show More.”"
+      "info": "Customers can reveal hidden collections by clicking “Show All.”"
     },
     {
-      "type": "radio",
-      "id": "mobile_collection_width",
-      "label": "Layout",
+      "type":      "radio",
+      "id":        "mobile_collection_width",
+      "label":     "Layout",
       "options": [
-        {
-          "value": "mobile-full-width",
-          "label": "Full width"
-        },
-        {
-          "value": "mobile-custom-width",
-          "label": "Custom width"
-        }
+        { "value": "mobile-full-width", "label": "Full width" },
+        { "value": "mobile-custom-width", "label": "Custom width" }
       ],
-      "default": "mobile-full-width"
+      "default":   "mobile-full-width"
     },
     {
-      "type": "range",
-      "id": "mobile_collection_max_width",
-      "label": "Custom collection max width",
-      "min": 50,
-      "max": 500,
-      "step": 5,
-      "unit": "px",
-      "default": 80
+      "type":      "range",
+      "id":        "mobile_collection_max_width",
+      "label":     "Custom collection max width",
+      "min":       50,
+      "max":       500,
+      "step":      5,
+      "unit":      "px",
+      "default":   80
     }
   ],
   "blocks": [
@@ -451,11 +439,6 @@
         }
       ]
     }
-  ],
-  "templates": [
-    "index",
-    "product",
-    "page"
   ]
 }
 
