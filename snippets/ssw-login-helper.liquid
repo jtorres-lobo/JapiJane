@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{ 'socialshopwave-custom.css' | asset_url }}">
-
 {% assign gwSettings = shop.metafields.ssw['settings'] %}
 {% if gwSettings.type == 'json' %}
   {% assign gwSettings = shop.metafields.ssw['settings'].value %}
@@ -246,4 +244,5 @@
   .ssw-modal-content{
     background-color: red;
   }
+  @import url("{{ 'socialshopwave-custom.css' | asset_url }}");
 </style>
