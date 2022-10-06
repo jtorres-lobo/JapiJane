@@ -34,46 +34,23 @@
 
     @param alt (optional)
       Alt text for the image.
-      Defaults to the img's alt property or an empty string if none exists.
+      Defaults to the img's alt property or a blank string if none exists.
 
     @param class (optional)
       CSS class names to add to the image tag's `class` attribute.
-      Defaults to blank.
 
     @param style (optional)
       CSS styles to apply to the image tag's `style` attribute.
-      Defaults to blank.
 
     @param attr (optional)
       Extra attributes to add to the image tag. For example: `id="example"`.
-      Defaults to blank.
 
     @param canvas (optional)
-      Add an extra element, useful for styling loaders.
-      Defaults to false.
+      Add an extra element, useful for styling loaders. Defaults to false.
 
     @param disable_noscript (optional)
-      Eliminates noscript tags, saving data in the cases when they aren't required.
-      Defaults to false.
+      Eliminates noscript tags, saving data in the cases when they aren't required. Defaults to false.
   {% endcomment %}
-
-  {% comment %}
-    Defaults
-  {% endcomment %}
-  {% assign lazy = lazy | default: false %}
-  {% assign background = background | default: false %}
-  {% assign size_default = img.width | append: 'x' | append: img.height %}
-  {% assign size = size | default: size_default %}
-  {% assign crop = crop | default: false %}
-  {% assign scale = scale | default: 1 %}
-  {% assign format = format | default: '' %}
-  {% assign placeholder = placeholder | default: false %}
-  {% assign alt = alt | default: img.alt | default: '' %}
-  {% assign class = class | default: blank %}
-  {% assign style = style | default: blank %}
-  {% assign attr = attr | default: blank %}
-  {% assign canvas = canvas | default: false %}
-  {% assign disable_noscript = disable_noscript | default: false %}
 
   {% comment %}
     Parse size parameter and force to numbers.
@@ -155,17 +132,21 @@
   {% comment %}
     Set the scale, default to 1.
   {% endcomment %}
-  {% assign rimg_scale = scale %}
+  {% assign rimg_scale = scale | default: 1 %}
 
   {% comment %}
     Set the format
   {% endcomment %}
-  {% assign rimg_format = format %}
+  {% assign rimg_format = format | default: '' %}
 
   {% comment %}
     Try to guess the alt text based off the image if none is provided.
   {% endcomment %}
-  {% assign rimg_alt = alt | escape %}
+  {% assign rimg_alt = alt
+    | default: img.alt
+    | default: ''
+    | escape
+  %}
 
   {% comment %}
     Define a URL template. We use this to generate exact-size URLs in JS.
@@ -333,22 +314,6 @@
 {% endif %}
 
 {%- capture _ -%}
-  {% comment %}
-    Unset all parameters so they don't leak between snippet calls.
-  {% endcomment %}
-  {% assign lazy = nil %}
-  {% assign background = nil %}
-  {% assign size = nil %}
-  {% assign crop = nil %}
-  {% assign scale = nil %}
-  {% assign format = nil %}
-  {% assign placeholder = nil %}
-  {% assign alt = nil %}
-  {% assign class = nil %}
-  {% assign style = nil %}
-  {% assign attr = nil %}
-  {% assign canvas = nil %}
-  {% assign disable_noscript = nil %}
   {% comment %}
     Unset all local variables so they don't pollute the global scope.
   {% endcomment %}

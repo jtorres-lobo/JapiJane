@@ -18,8 +18,13 @@
 {% endcomment %}
 
 {%- if product_available != true -%}
-  <span class="{{ class_root }}--badge badge--soldout">
+  <span class="{{ class_root }}--badge badge--soldout no_product_desktop">
+<br class="no_product_desktop">
     {{ 'product.item.badges.sold_out' | t }}
+  </span>
+
+  <span style="font-size:11px;" class="{{ class_root }}--badge badge--soldout no_product_mobile">
+    Sin Stock
   </span>
 {%- elsif settings.product_sales_badge -%}
   {% assign sales_saved = compare_at_price | minus: price %}
@@ -36,6 +41,7 @@
     data-badge-sales
     {% if on_sale != true %}style="display: none;"{% endif %}
   >
+<br class="no_product_desktop">
     {% if settings.product_sales_badge_style == 'percentile' and show_saved %}
       {{ 'product.item.badges.sale_percentile_html' | t: saved: percent_saved | strip_newlines }}
     {% elsif settings.product_sales_badge_style == 'money' and show_saved %}

@@ -50,7 +50,7 @@
       product: product,
       selected_media: selected_media,
       aspect_ratio: aspect_ratio,
-      image_crop: image_crop,
+      image_crop: image_crop
     %}
   {% endif %}
 
@@ -60,7 +60,7 @@
     selected_media: selected_media,
     aspect_ratio: aspect_ratio,
     image_crop: image_crop,
-    hover_zoom: hover_zoom,
+    hover_zoom: hover_zoom
   %}
 
   {% assign first_model = product.media | where: "media_type", "model" | first %}
@@ -78,10 +78,7 @@
       data-shopify-title="{{ product.title }}"
       data-shopify-xr-hidden
     >
-      {%
-        include 'icon-library',
-        id: 'icon-3D',
-      %}
+      {% include 'icon-library', id: 'icon-3D' %}
       {{ 'product.media.view_in_your_space' | t }}
     </button>
   {% endif %}
@@ -93,7 +90,7 @@
       selected_media: selected_media,
       aspect_ratio: aspect_ratio,
       image_crop: image_crop,
-      hover_zoom: hover_zoom,
+      hover_zoom: hover_zoom
     %}
   {% endif %}
 </div>

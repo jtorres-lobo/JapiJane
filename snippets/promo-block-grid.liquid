@@ -76,9 +76,9 @@
     {% endif %}
 
     {% if block_text != blank %}
-      <div class="promo-block-grid--text">
-        {{ block_text }}
-      </div>
+      <p class="promo-block-grid--text">
+        {{ block_text | escape | truncate: 120 }}
+      </p>
     {% endif %}
 
     {% if block.settings.button_text != blank and block.settings.block_link != blank %}

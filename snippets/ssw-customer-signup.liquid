@@ -5,4 +5,5 @@
       {% assign customer_locale = published_locale.iso_code | prepend: 'lang_' %}
     {% endif %}
   {% endfor %}
-{% endunless %}<div class="ssw-h3">{{ shop.metafields.ssw[customer_locale].value.create_your_account }}</div>
+{% endunless %}
+<div class="ssw-h3">{{ shop.metafields.ssw[customer_locale].value.create_your_account }}</div>

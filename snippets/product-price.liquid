@@ -24,29 +24,11 @@
     Show original price if is consistent across all variants
 {% endcomment %}
 <div class="{{ class_root }}--price {% if compare_at_price_varies %}price--varies{% endif %}">
-  <div
-    class="price--compare-at {% if emphasize_price or on_sale and show_original %}visible{% endif %}"
-    data-price-compare-at
-  >
-    {%- capture price_html -%}
-      <span class="visually-hidden">{{ 'product.item.price.original' | t }}</span>
-      <span class="money">
-        {{ compare_at_price | money }}
-      </span>
-    {%- endcapture -%}
+  
 
-    {% if compare_at_price_varies and on_sale and show_original %}
-      {{ 'product.item.price.range_html' | t: price: price_html | strip_newlines }}
-    {% elsif on_sale and show_original %}
-      {{ price_html }}
-    {% elsif emphasize_price %}
-      <span class="price--spacer"></span>
-    {% elsif show_original %}
-      <span class="money"></span>
-    {% endif %}
-  </div>
-
-  <div class="price--main" data-price>
+  <div style="
+    display: inline-flex;
+" class="price--main" data-price>
     {%- capture price_html -%}
       <span class="money">
         {{ price | money }}
@@ -60,6 +42,28 @@
         <span class="visually-hidden">{{ 'product.item.price.current' | t }}</span>
       {% endif %}
       {{ price_html }}
+    {% endif %}
+  </div>
+  
+  <div
+    class="price--compare-at {% if emphasize_price or on_sale and show_original %}visible{% endif %}"
+    data-price-compare-at
+  >
+    {%- capture price_html -%}
+      <span class="visually-hidden">{{ 'product.item.price.original' | t }}</span>
+      <span style="margin-left: 10px; " class="money">
+        {{ compare_at_price | money }}
+      </span>
+    {%- endcapture -%}
+
+    {% if compare_at_price_varies and on_sale and show_original %}
+      {{ 'product.item.price.range_html' | t: price: price_html | strip_newlines }}
+    {% elsif on_sale and show_original %}
+      {{ price_html }}
+    {% elsif emphasize_price %}
+      <span class="price--spacer"></span>
+    {% elsif show_original %}
+      <span class="money"></span>
     {% endif %}
   </div>
 
@@ -86,22 +90,18 @@
     {{ 'product.item.price.price_per_unit_html' | t: total_quantity: total_quantity, unit_price: unit_price, unit_measure: unit_measure | strip_newlines }}
   </div>
 
-  {% unless class_root == 'productitem' %}
-    {%- capture tax_text -%}
-      {{ 'product.item.price.tax_line_html' | t }}
-    {%- endcapture -%}
+  {%- capture tax_text -%}
+    {{ 'product.item.price.tax_line_html' | t }}
+  {%- endcapture -%}
 
-    {%- if tax_text != blank -%}
-      <div class="
-          product__tax
-          {% unless variant.taxable %}hidden{% endunless %}
-        "
-        data-tax-line
-      >
-        {{ tax_text }}
-      </div>
-    {%- endif -%}
-
-    <form data-payment-terms-target style="display: none;"></form>
-  {% endunless %}
+  {%- if tax_text != blank and class_root != 'productitem' -%}
+    <div class="
+        product__tax
+        {% unless variant.taxable %}hidden{% endunless %}
+      "
+      data-tax-line
+    >
+      {{ tax_text }}
+    </div>
+  {%- endif -%}
 </div>

@@ -5,7 +5,7 @@
 {% assign og_image_tags = '' %}
 
 {% if default_image == blank %}
-  {% assign og_default_image = page_image %}
+  {% assign og_default_image = settings.social_default_image %}
 {% else %}
   {% assign og_default_image = default_image %}
 {% endif %}
@@ -97,7 +97,7 @@
 {% endif %}
 
 {% if default_image == blank %}
-  {% assign twitter_default_image = page_image %}
+  {% assign twitter_default_image = settings.social_default_image %}
 {% else %}
   {% assign twitter_default_image = default_image %}
 {% endif %}

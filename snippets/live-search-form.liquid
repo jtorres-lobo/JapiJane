@@ -46,6 +46,7 @@
             include 'search-sanitizer',
             search_terms: search.terms
           %}
+          value="{{ sanitized_terms }}"
         {% endif %}
         autocomplete="off"
         data-live-search-input>
