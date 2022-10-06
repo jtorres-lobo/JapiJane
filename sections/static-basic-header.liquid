@@ -196,14 +196,12 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
       {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
       {% if the_snippet_auth contains 'Liquid error' %}
       {% if shop.customer_accounts_enabled %}
-
       <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
         <div class="site-header-icon site-header-account-icon">
           {% include 'icon-library', id: 'icon-account' %}
           <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
         </div>
       </a>
-      
       {% endif %}
       {% else %}
       <div id="ssw-topauth" class="ssw-topauth site-header-button site-header-account-button">
