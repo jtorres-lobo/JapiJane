@@ -48,56 +48,155 @@
       <div class="site-footer-credits">
         {{ section.settings.small_text }}
       </div>
+    </div>
 
-    {%- assign currency_selector = section.settings.show_currency_selector -%}
+    {%- assign country_selector = section.settings.show_currency_selector -%}
     {%- assign locale_selector = section.settings.show_locale_selector -%}
 
-    {%- if section.settings.payment_icons or currency_selector or locale_selector -%}
+    {%- if section.settings.payment_icons or country_selector or locale_selector -%}
       <div class="site-footer-information__payment-icons-cross-border">
-        {% comment %}cross-border{% endcomment %}
-        {% form 'localization' %}
-          {% if locale_selector and form.available_locales.size > 1 %}
-            {% comment %}multi-language{% endcomment %}
-            <div class="selectors-form__item">
-              <div class="disclosure" data-disclosure-locale>
-                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="lang-list" aria-describedby="lang-heading" data-disclosure-toggle>
-                  {{ form.current_locale.endonym_name }}
-                </button>
-                <ul id="lang-list" class="disclosure-list" data-disclosure-list>
-                  {% for locale in form.available_locales %}
-                    <li>
-                      <a class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
-                        <span class="disclosure-list__option">{{ locale.endonym_name }}</span>
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="locale_code" id="LocaleSelector" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+        {% comment %}Inject @pixelunion/shopify-cross-border/cross-border begin{% endcomment %}
+        <div class="shopify-cross-border">
+          {% if locale_selector and localization.available_languages.size > 1 %}
+            {% comment %}Inject @pixelunion/shopify-cross-border/multi-language begin{% endcomment %}
+            {% comment %} Generate a "random" number so ids are unique {% endcomment %}
+            {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
+            <noscript>
+              {%- form 'localization' -%}
+                <details class="disclosure">
+                  <summary>
+                    <span class="disclosure__toggle">
+                      {{ form.current_locale.endonym_name | capitalize }}
+                    </span>
+                  </summary>
+                  <div class="disclosure-list disclosure-list--visible">
+                    {% for locale in form.available_locales %}
+                      <div class="disclosure-list__item-wrapper disclosure-list__item">
+                        <input
+                          type="radio"
+                          id="{{ locale.iso_code }}"
+                          name="locale_code"
+                          value="{{ locale.iso_code }}"
+                          {% if locale.iso_code == form.current_locale.iso_code %}checked{% endif %}
+                        >
+                        <label class="disclosure-list__item--label" for="{{ locale.iso_code }}">{{ locale.endonym_name | capitalize }}</label>
+                      </div>
+                    {% endfor %}
+                    <button class="disclosure__submit" type="submit">{{ 'general.language.submit_button_label' | t }}</button>
+                  </div>
+                </details>
+              {%- endform -%}
+            </noscript>
+            
+            {%- form 'localization' -%}
+              <div class="selectors-form__item selectors-form--no-js-hidden">
+                <div class="disclosure" data-disclosure-locale>
+                  <h2 class="visually-hidden" id="lang-heading-{{ unique_id }}">
+                    {{ 'general.language.dropdown_label' | t }}
+                  </h2>
+            
+                  <button
+                    type="button"
+                    class="disclosure__toggle"
+                    aria-expanded="false"
+                    aria-controls="lang-list-{{ unique_id }}"
+                    aria-describedby="lang-heading-{{ unique_id }}"
+                    data-disclosure-toggle
+                  >
+                    {{ form.current_locale.endonym_name | capitalize }}
+                  </button>
+                  <ul id="lang-list-{{ unique_id }}" class="disclosure-list" data-disclosure-list>
+                    {% for locale in form.available_locales %}
+                      <li>
+                        <a class="disclosure-list__item {% if locale.iso_code == form.current_locale.iso_code %}disclosure-list__item--current{% endif %}" href="#" lang="{{ locale.iso_code }}" {% if locale.iso_code == form.current_locale.iso_code %}aria-current="true"{% endif %} data-value="{{ locale.iso_code }}" data-disclosure-option>
+                          <span class="disclosure-list__option">{{ locale.endonym_name | capitalize }}</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="locale_code" id="LocaleSelector-{{ unique_id }}" value="{{ form.current_locale.iso_code }}" data-disclosure-input/>
+                </div>
               </div>
-            </div>
+            {%- endform -%}
+            {% comment %}Inject @pixelunion/shopify-cross-border/multi-language end{% endcomment %}
+        
           {% endif %}
         
-          {% if currency_selector and form.available_currencies.size > 1 %}
-            {% comment %}multi-currency{% endcomment %}
-            <div class="selectors-form__item">
-              <div class="disclosure" data-disclosure-currency>
-                <button type="button" class="disclosure__toggle" aria-expanded="false" aria-controls="currency-list" aria-describedby="currency-heading" data-disclosure-toggle>
-                  {{ form.current_currency.iso_code }} {%- if form.current_currency.symbol -%}{{ form.current_currency.symbol }}{%- endif -%}
-                </button>
-                <ul id="currency-list" class="disclosure-list" data-disclosure-list>
-                  {% for currency in form.available_currencies %}
-                    <li>
-                      <a class="disclosure-list__item {% if currency.iso_code == form.current_currency.iso_code %}disclosure-list__item--current{% endif %}" href="#" {% if currency.iso_code == form.current_currency.iso_code %}aria-current="true"{% endif %} data-value="{{ currency.iso_code }}" data-disclosure-option>
-                        <span class="disclosure-list__option">{{ currency.iso_code }} {%- if currency.symbol -%}{{ currency.symbol }}{%- endif -%}</span>
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="currency_code" id="CurrencySelector" value="{{ form.current_currency.iso_code }}" data-disclosure-input/>
+          {% if country_selector and localization.available_countries.size > 1 %}
+            {% comment %}Inject @pixelunion/shopify-cross-border/multi-country begin{% endcomment %}
+            {% comment %} Generate a "random" number so ids are unique {% endcomment %}
+            {% assign unique_id = "now" | date: "%N" | modulo: 1000 %}
+            <noscript>
+              {%- form 'localization' -%}
+                <details class="disclosure">
+                  <summary>
+                    <span class="disclosure__toggle">
+                      {{ localization.country.name }} ({{ localization.country.currency.iso_code }}{% if localization.country.currency.symbol %}{{ localization.country.currency.symbol }}{% endif %})
+                    </span>
+                  </summary>
+                  <div class="disclosure-list disclosure-list--visible">
+                    {% for country in localization.available_countries %}
+                      <div class="disclosure-list__item-wrapper disclosure-list__item">
+                        <input
+                          type="radio"
+                          id="{{ country.iso_code }}"
+                          name="country_code"
+                          value="{{ country.iso_code }}"
+                          {% if country.iso_code == localization.country.iso_code %}checked{% endif %}
+                        >
+                        <label class="disclosure-list__item--label" for="{{ country.iso_code }}">{{ country.name }} ({{ country.currency.iso_code }}{%- if country.currency.symbol -%} {{ country.currency.symbol }}{%- endif -%})</label>
+                      </div>
+                    {% endfor %}
+                    <button class="disclosure__submit" type="submit">{{ 'general.country.submit_button_label' | t }}</button>
+                  </div>
+                </details>
+              {%- endform -%}
+            </noscript>
+            
+            {%- form 'localization' -%}
+              <div class="selectors-form__item selectors-form--no-js-hidden">
+                <div class="disclosure" data-disclosure-country>
+                  <h2 class="visually-hidden" id="country-heading-{{ unique_id }}">
+                    {{ 'general.country.dropdown_label' | t }}
+                  </h2>
+            
+                  <button
+                    type="button"
+                    class="disclosure__toggle"
+                    aria-expanded="false"
+                    aria-controls="country-list-{{ unique_id }}"
+                    aria-describedby="country-heading-{{ unique_id }}"
+                    data-disclosure-toggle
+                  >
+                    {{ localization.country.name }}
+                    <span class="disclosure-list__option-code"> 
+                      ({{ localization.country.currency.iso_code }}
+                      {% if localization.country.currency.symbol %} {{ localization.country.currency.symbol }}{% endif %})
+                    </span>
+                  </button>
+                  <ul id="country-list-{{ unique_id }}" class="disclosure-list" data-disclosure-list>
+                    {% for country in localization.available_countries %}
+                      <li>
+                        <a class="disclosure-list__item {% if country.iso_code == localization.country.iso_code %}disclosure-list__item--current{% endif %}" href="#" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %} data-value="{{ country.iso_code }}" data-disclosure-option>
+                          <span class="disclosure-list__option">{{ country.name }}</span>
+                          <span class="disclosure-list__option-code">
+                            ({{ country.currency.iso_code }}
+                            {% if country.currency.symbol %} {{ country.currency.symbol }}{%- endif -%})
+                          </span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="country_code" id="CountrySelector-{{ unique_id }}" value="{{ localization.country.iso_code }}" data-disclosure-input/>
+                </div>
               </div>
-            </div>
+            {%- endform -%}
+            {% comment %}Inject @pixelunion/shopify-cross-border/multi-country end{% endcomment %}
+        
           {% endif %}
-        {% endform %}
+        </div>
+        {% comment %}Inject @pixelunion/shopify-cross-border/cross-border end{% endcomment %}
+
 
         {% if section.settings.payment_icons and shop.enabled_payment_types.size > 0 %}
           <ul class="payment-icons">
@@ -157,13 +256,13 @@
     },
     {
       "type": "header",
-      "content": "Currency Selector",
-      "info": "To add a currency, go to your [payment settings.](/admin/settings/payments)"
+      "content": "Country Selector",
+      "info": "To add a country, go to your [payment settings.](/admin/settings/payments)"
     },
     {
       "type": "checkbox",
       "id": "show_currency_selector",
-      "label": "Show currency selector",
+      "label": "Show country selector",
       "default": true
     },
     {
@@ -185,8 +284,8 @@
       "type": "richtext",
       "id": "small_text",
       "label": "This text appears below the copyright line.",
-      "default": "<p><a href=\"https://www.pixelunion.net/shopify-themes/\">Superstore Theme by Pixel Union.</a> <a href=\"https://www.shopify.ca/?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore\">Powered by Shopify</a></p>"
-   }
+      "default": "<p><a href=\"https://outofthesandbox.com/collections/themes\">Superstore Theme by Out of the Sandbox.</a> <a href=\"https://www.shopify.ca/?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore\" rel=\"nofollow\">Powered by Shopify</a></p>"
+    }
   ],
   "blocks": [
     {
@@ -225,10 +324,10 @@
       "name": "Social accounts",
       "limit": 1,
       "settings": [
-       {
-         "type": "paragraph",
-         "content": "Social links can be managed in your General settings."
-       }
+        {
+          "type": "paragraph",
+          "content": "Social links can be managed in your General settings."
+        }
       ]
     },
     {
@@ -249,9 +348,9 @@
           "default": "<p>Invite customers to join your mailing list.</p>"
         },
         {
-          "type":      "select",
-          "id":        "button_style",
-          "label":     "Button style",
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
           "options": [
             {
               "value": "primary",
@@ -262,8 +361,8 @@
               "label": "Secondary"
             }
           ],
-          "default":   "primary"
-       }
+          "default": "primary"
+        }
       ]
     }
   ],

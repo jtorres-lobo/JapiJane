@@ -80,6 +80,12 @@
         {% endfor %}
       {% endunless %}
 
+      {% if item.selling_plan_allocation.selling_plan %}
+        <span class="cart-item__selling-plan">
+          {{ item.selling_plan_allocation.selling_plan.name }}
+        </span>
+      {% endif %}
+
       {% if settings.product_show_stock_level != 'hidden' %}
         {% if item.variant.inventory_quantity > 0 and item.variant.inventory_quantity <= settings.product_low_stock_threshold %}
           {%
@@ -163,6 +169,7 @@
           href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0"
           class="cart-item--remove-link"
           data-cartitem-remove
+          data-no-instant
           aria-label="remove {{ item.product.title }}"
         >
           {% include 'icon-library', id: 'icon-remove' %}

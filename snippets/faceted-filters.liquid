@@ -1,0 +1,172 @@
+{% comment %}
+Loop through filter groups
+{% endcomment %}
+
+{%- capture tag_icon -%}
+<span class="filter-icon--checkbox">
+  {% include 'icon-library', id: 'icon-checkbox' %}
+</span>
+{%- endcapture -%}
+
+<form
+  id="faceted-filter-form"
+  class="faceted-filter__form"
+  data-filter-form
+>
+  {% for filter in collection.filters %}
+    <h3 class="productgrid--sidebar-title--small">
+      {{ filter.label }}
+    </h3>
+    {% case filter.type %}
+    {% when 'list' %}
+      <ul
+        class="
+          productgrid--sidebar-item
+          filter-group
+        "
+      >
+        {% for value in filter.values %}
+          <li
+            class="
+              filter-item
+              {% if value.active %}
+               filter-item--active
+              {% else %}
+               filter-item--inactive
+              {% endif %}
+              {% if forloop.index > tag_limit %}
+               filter-item--hidden
+             {% endif %}
+
+            {% if value.count == 0 and value.active == false %}filter-item--disabled{% endif %}
+            "
+            {% if forloop.index > tag_limit %}
+              data-hidden-default
+            {% endif %}
+            data-filter-item
+          >
+            <label
+              for="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+              class="
+                filter-item__label
+                {% if value.count == 0 and value.active == false %}filter-item__label--disabled{% endif %}
+              "
+              data-filter-label
+            >
+              <input
+                type="checkbox"
+                class="faceted-filter__checkbox"
+                name="{{ value.param_name }}"
+                value="{{ value.value }}"
+                id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                data-filter-checkbox
+                {% if value.active %}checked{% endif %}
+                {% if value.count == 0 and value.active == false %}disabled{% endif %}
+              >
+              {{ tag_icon }}
+              <span class="faceted-filter__label-text">
+                {{ value.label }} {% if filter_block.settings.show_product_counts %}({{ value.count }}){% endif %}
+              </span>
+            </label>
+          </li>
+        {% endfor %}
+        {% if filter.values.size > tag_limit %}
+          <li class="filter-item filter-item--toggle-more">
+            <a class="filter-text--link" href="#" data-filter-toggle="false">
+              {{ 'general.general.see_more' | t }}
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    {% when 'price_range' %}
+      <div
+        class="
+          collection-filters__price-range-form
+          productgrid--sidebar-item
+          filter-group
+        "
+      >
+        <div
+          class="
+            collection-filters__filter
+            collection-filters__filter-range
+          "
+          data-filter-group-range
+        >
+          <div class="collection-filters__filter-range--from">
+            <span class="collection-filters__filter-range-currency">
+              {{ cart.currency.symbol }}
+            </span>
+            <div class="form-field">
+              <input
+                class="
+                  collection-filters__filter-range-input
+                  form-field-input
+                  form-field-text
+                  {% if filter.min_value.value %}
+                    form-field-filled
+                  {% endif %}
+                "
+                name="{{ filter.min_value.param_name }}"
+                id="Filter-{{ filter.label }}-{{ forloop.index }}-from"
+                {% if filter.min_value.value -%}
+                  value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                {%- endif %}
+                type="number"
+                placeholder="0"
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                data-filter-range
+              >
+              <label
+                class="
+                  form-field-title
+                  collection-filters__filter-range-label
+                "
+                for="filter-{{ filter.label }}-{{ forloop.index0 }}-from"
+              >
+                {{ 'product_grid.filters.price_from' | t }}
+              </label>
+            </div>
+          </div>
+          <div class="collection-filters__filter-range--to">
+            <span class="collection-filters__filter-range-currency">
+              {{ cart.currency.symbol }}
+            </span>
+            <div class="form-field">
+              <input
+                class="
+                  collection-filters__filter-range-input
+                  form-field-input
+                  form-field-text
+                  {% if filter.max_value.value %}
+                    form-field-filled
+                  {% endif %}
+                "
+                name="{{ filter.max_value.param_name }}"
+                id="Filter-{{ filter.label }}-{{ forloop.index }}-to"
+                {% if filter.max_value.value -%}
+                  value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                {%- endif %}
+                type="number"
+                placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                min="0"
+                max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                data-filter-range
+              >
+              <label
+                class="
+                  form-field-title
+                  collection-filters__filter-range-label
+                "
+                for="filter-{{ filter.label }}-{{ forloop.index0 }}-to"
+              >
+                {{ 'product_grid.filters.price_to' | t }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endcase %}
+  {% endfor %}
+</form>

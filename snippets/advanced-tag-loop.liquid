@@ -18,7 +18,7 @@ out any tag categories from our tags (E.g. remove BRAND_ from BRAND_tag)
   {%- endfor -%}
   {% assign base_cat_array = categories | remove_first: '|' | split: '|' | uniq %}
 
-  {%- assign custom_ordered_categories = section.settings.custom_ordered_categories | split: ',' -%}
+  {%- assign custom_ordered_categories = filter_block.settings.custom_ordered_categories | split: ',' -%}
   {%- assign custom_categories = blank -%}
 
   {%- for custom_ordered_category in custom_ordered_categories -%}

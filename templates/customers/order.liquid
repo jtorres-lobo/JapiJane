@@ -52,17 +52,20 @@
                 </a>
               <span class="order-item-title">
                 <a href="{{ line_item.url }}">
-                  {%- if line_item.gift_card -%}
-                    {{ line_item.title }}
-                  {%- else -%}
-                    {{ line_item.product.title }}
-                  {%- endif -%}
+                  {{ line_item.product.title }}
                 </a>
+
                 {%- unless line_item.variant.title == 'Default Title' or line_item.gift_card -%}
                   <span class="order-item-options">
                     {{ line_item.variant.title }}
                   </span>
                 {%- endunless -%}
+
+                {% if line_item.selling_plan_allocation.selling_plan %}
+                  <span class="cart-item__selling-plan">
+                    {{ line_item.selling_plan_allocation.selling_plan.name }}
+                  </span>
+                {% endif %}
               </span>
               </td>
               <td class="order-item-price">

@@ -28,7 +28,7 @@
       target="_blank"
       href="//www.facebook.com/sharer.php?u={{ share_url }}">
       {%-
-        include 'social-icon',
+        render 'social-icon',
         id: 'facebook'
       -%}
       <span class="visually-hidden">{{ 'general.accessibility.share_on_facebook' | t }}</span>
@@ -39,7 +39,7 @@
       target="_blank"
       href="//twitter.com/share?url={{ share_url }}">
       {%-
-        include 'social-icon',
+        render 'social-icon',
         id: 'twitter'
       -%}
       <span class="visually-hidden">{{ 'general.accessibility.share_on_twitter' | t }}</span>
@@ -50,7 +50,7 @@
       target="_blank"
       href="//www.linkedin.com/shareArticle?mini=true&url={{ share_url }}&title={{ share_title }}">
       {%-
-        include 'social-icon',
+        render 'social-icon',
         id: 'linkedin'
       -%}
       <span class="visually-hidden">{{ 'general.accessibility.share_on_linkedin' | t }}</span>
@@ -62,7 +62,7 @@
         target="_blank"
         href="//pinterest.com/pin/create/button/?url={{ share_url }}&amp;media={{ share_image }}&amp;description={{ share_title }}">
         {%-
-          include 'social-icon',
+          render 'social-icon',
           id: 'pinterest'
         -%}
         <span class="visually-hidden">{{ 'general.accessibility.share_on_pinterest' | t }}</span>

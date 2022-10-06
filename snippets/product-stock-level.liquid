@@ -52,7 +52,7 @@
           </span>
         {% endif %}
         {% unless container == 'product_card' %}
-          {% include 'icon-library', id: 'icon-check-circle' %}
+          {% render 'icon-library', id: 'icon-check-circle' %}
         {% endunless %}
         <span class="stock-level--text" >
           {{ stock_badge_text }}

@@ -9,7 +9,7 @@
 {%- endcapture -%}
 
 {% comment %} Custom tag ordering {% endcomment %}
-{%- assign custom_ordered_tags = section.settings.custom_ordered_tags | split: ',' -%}
+{%- assign custom_ordered_tags = filter_block.settings.custom_ordered_tags | split: ',' -%}
 {%- assign custom_tags = blank -%}
 
 {%- for custom_ordered_tag in custom_ordered_tags -%}
@@ -29,7 +29,7 @@
 {% assign sorted_tags = custom_tags | remove_first: '|' | split:  '|' | concat: collection.all_tags | uniq %}
 
 {% comment %} Grid layout groups {% endcomment %}
-{%- assign grid_categories_input = section.settings.grid_categories | split: ',' -%}
+{%- assign grid_categories_input = filter_block.settings.grid_categories | split: ',' -%}
 {%- assign grid_categories = blank -%}
 
 {%- for category in grid_categories_input -%}
@@ -128,6 +128,9 @@
             <span class="filter-text">
               {{ tag | remove_first: cat | remove_first: '_' }}
             </span>
+            {% if filter_block.settings.show_product_counts == true %}
+              <span class="filtered-product-count" data-filtered-product-count></span>
+            {% endif %}
           {%- endif -%}
         {%- endcapture -%}
 

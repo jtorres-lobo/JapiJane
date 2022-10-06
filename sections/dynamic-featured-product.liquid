@@ -30,6 +30,12 @@
   product: product
 %}
 
+{% assign show_stock_level = true %}
+
+{% if settings.product_show_stock_level == 'hidden' %}
+  {% assign show_stock_level = false %}
+{% endif %}
+
 <script
   type="application/json"
   data-section-type="dynamic-featured-product"
@@ -48,7 +54,8 @@
       "lazy_load": {{ settings.lazy_load | json }},
       "enableHistory": false,
       "section_id": {{ section.id | json }},
-      "enableSwatches": {{ settings.swatches_enable | json }}
+      "enableSwatches": {{ settings.swatches_enable | json }},
+      "enableStockBadge": {{ show_stock_level | json }}
     },
     "context": {
       "product_available": {{ 'product.buttons.add_to_cart' | t | json }},
@@ -70,9 +77,9 @@
   <div class="featured-product--inner">
     {%
       include 'product',
-      show_description: section.settings.show_description,
+      context: 'featured-product',
       onboarding: onboarding,
-      featured: true,
+      show_dcb: section.settings.show_dcb,
       gallery_aspect_ratio: section.settings.gallery_aspect_ratio,
       gallery_thumbnail_position: section.settings.gallery_thumbnail_position,
       gallery_image_crop: section.settings.gallery_image_crop,
@@ -123,12 +130,6 @@
     },
     {
       "type": "checkbox",
-      "id": "show_description",
-      "label": "Show description",
-      "default": false
-    },
-    {
-      "type": "checkbox",
       "id": "show_dcb",
       "label": "Show dynamic checkout button",
       "info": "Customers will be shown their preferred payment method, based on their device, shopping history and the options you've enabled. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
@@ -154,10 +155,22 @@
       "id": "gallery_aspect_ratio",
       "label": "Aspect ratio",
       "options": [
-        { "value": "natural", "label": "Natural" },
-        { "value": "short", "label": "Short (4:3)" },
-        { "value": "square", "label": "Square (1:1)" },
-        { "value": "tall", "label": "Tall (2:3)" }
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "short",
+          "label": "Short (4:3)"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "tall",
+          "label": "Tall (2:3)"
+        }
       ],
       "default": "natural"
     },
@@ -218,11 +231,133 @@
       "content": "For the best zoom results, make sure your images are larger than 1600px."
     }
   ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations."
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1
+    },
+    {
+      "type": "form",
+      "name": "Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Customize form features for the product in the products portion of the theme settings."
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Product rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/product-reviews)"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Text block</p>"
+        }
+      ]
+    },
+    {
+      "type": "view-product-link",
+      "name": "View product link",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "View full details"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Featured product",
-      "category": "Product"
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "vendor"
+        },
+        {
+          "type": "rating"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "form"
+        },
+        {
+          "type": "view-product-link"
+        },
+        {
+          "type": "share"
+        }
+      ]
     }
+  ],
+  "templates": [
+    "index",
+    "page"
   ]
 }
 

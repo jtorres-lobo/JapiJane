@@ -138,18 +138,15 @@
         {% endif %}
 
         {% if section.settings.button_text != blank %}
-          <span class="image-with-text-button">
+          <a class="image-with-text-button" {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% endif %}>
             {{ section.settings.button_text | escape }}
-          </span>
+          </a>
         {% endif %}
 
-        {% if section.settings.link != blank %}
-          <a
-            class="image-with-text-link"
-            href="{{ section.settings.link }}"
-          ></a>
+        {% if section.settings.link != blank and section.settings.button_text == blank %}
+          <a class="image-with-text-link" href="{{ section.settings.link }}"></a>
         {% endif %}
-        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -323,9 +320,9 @@
       "default": "center-center"
     },
     {
-      "type":      "select",
-      "id":        "overlay_style",
-      "label":     "Overlay style",
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
       "options": [
         {
           "value": "none",
@@ -340,7 +337,7 @@
           "label": "Gradient"
         }
       ],
-      "default":   "solid"
+      "default": "solid"
     },
     {
       "type": "color",
@@ -381,6 +378,11 @@
       "category": "Image",
       "name": "Image with text overlay"
     }
+  ],
+  "templates": [
+    "index",
+    "product",
+    "page"
   ]
 }
 

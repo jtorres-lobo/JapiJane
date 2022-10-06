@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Superstore",
-    "theme_author": "Pixel Union",
-    "theme_version": "3.1.1",
-    "theme_documentation_url": "https://support.pixelunion.net/hc/en-us/sections/360003942994-Superstore",
-    "theme_support_url": "https://support.pixelunion.net/hc/en-us/requests/new"
+    "theme_author": "Out of the Sandbox",
+    "theme_version": "4.1.1",
+    "theme_documentation_url": "https://help.outofthesandbox.com/hc/en-us/categories/115001735708-Superstore",
+    "theme_support_url": "https://help.outofthesandbox.com/hc/en-us/requests/new"
   },
   {
     "name": "Layout",
@@ -256,9 +256,9 @@
         "default": "#222222"
       },
       {
-        "type":      "text",
-        "id":        "header_navigation_sale_link_label",
-        "label":     "Sale link label"
+        "type": "text",
+        "id": "header_navigation_sale_link_label",
+        "label": "Sale link label"
       },
       {
         "type": "color",
@@ -502,7 +502,7 @@
       {
         "type": "header",
         "content": "Product reviews",
-        "info": "Requires a product review app such as [Product Reviews](https://support.pixelunion.net/hc/en-us/articles/360022104354) (by Shopify)."
+        "info": "Requires a product review app such as [Product Reviews](https://help.outofthesandbox.com/hc/en-us/articles/360008549274) (by Shopify)."
       },
       {
         "type": "color",
@@ -528,8 +528,7 @@
       },
       {
         "type": "header",
-        "content": "Content containers",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360021987814#content-containers)"
+        "content": "Content containers"
       },
       {
         "type": "color",
@@ -537,11 +536,9 @@
         "label": "Background",
         "default": "#ffffff"
       },
-
       {
         "type": "header",
-        "content": "Layout",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360021987814#layout)"
+        "content": "Layout"
       },
       {
         "type": "color",
@@ -564,8 +561,7 @@
       },
       {
         "type": "header",
-        "content": "Popups",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360021987814#popups)"
+        "content": "Popups"
       },
       {
         "type": "color",
@@ -737,7 +733,7 @@
         "type": "textarea",
         "id": "type_heading_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_heading_size",
@@ -779,7 +775,7 @@
         "type": "textarea",
         "id": "type_section_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_section_heading_size",
@@ -846,7 +842,7 @@
         "type": "textarea",
         "id": "type_body_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_body_underline_links",
@@ -878,7 +874,7 @@
         "type": "textarea",
         "id": "type_menu_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_menu_size",
@@ -920,7 +916,7 @@
         "type": "textarea",
         "id": "type_highlights_bar_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_highlights_size",
@@ -961,7 +957,7 @@
         "type": "textarea",
         "id": "type_button_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_button_sizing",
@@ -999,7 +995,7 @@
         "type": "textarea",
         "id": "type_signpost_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_signpost_sizing",
@@ -1025,7 +1021,7 @@
         "type": "textarea",
         "id": "type_product_price_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "type": "header",
@@ -1041,7 +1037,7 @@
         "type": "textarea",
         "id": "type_product_vendor_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_product_capitalize",
@@ -1072,7 +1068,7 @@
         "type": "textarea",
         "id": "type_product_card_title_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_product_card_size",
@@ -1098,7 +1094,7 @@
         "type": "textarea",
         "id": "type_footer_heading_custom",
         "label": "Custom font",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360035550694-Using-custom-fonts-in-Superstore)"
+        "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412263547411)"
       },
       {
         "id": "type_footer_heading_size",
@@ -1163,18 +1159,6 @@
       },
       {
         "type": "checkbox",
-        "id": "product_show_sku",
-        "label": "Show SKU",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "product_social_sharing",
-        "label": "Show social sharing",
-        "default": true
-      },
-      {
-        "type": "checkbox",
         "id": "product_sales_badge",
         "label": "Show sale badges",
         "default": true
@@ -1198,13 +1182,6 @@
           }
         ],
         "default": "percentile"
-      },
-      {
-        "type": "checkbox",
-        "id": "product_ratings_reviews",
-        "label": "Enable product reviews and ratings",
-        "info": "[Learn more](https://support.pixelunion.net/hc/en-us/articles/360022104354)",
-        "default": true
       },
       {
         "id": "product_option_style",
@@ -1260,8 +1237,14 @@
         "id": "in_stock_notification_form",
         "label": "“Back in stock” request form",
         "options": [
-          { "value": "disabled", "label": "Disabled" },
-          { "value": "inline", "label": "Show below product options" }
+          {
+            "value": "disabled",
+            "label": "Disabled"
+          },
+          {
+            "value": "inline",
+            "label": "Show below product options"
+          }
         ],
         "default": "inline"
       },
@@ -1270,18 +1253,171 @@
         "content": "Product reviews"
       },
       {
-        "type": "radio",
-        "id": "product_ratings_star_display",
-        "label": "Display star ratings",
-        "options": [
-          { "label": "Product page and product grid", "value": "all" },
-          { "label": "Product page only", "value": "prod-page" }
-        ],
-        "default": "all"
+        "type": "checkbox",
+        "id": "product_ratings_reviews",
+        "label": "Enable product reviews and ratings",
+        "info": "[Learn more](https://apps.shopify.com/product-reviews)",
+        "default": true
       },
       {
         "type": "header",
-        "content": "Product grid"
+        "content": "Color swatches"
+      },
+      {
+        "type": "checkbox",
+        "id": "swatches_enable",
+        "label": "Enable color swatches",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "swatches_product_page_only",
+        "label": "Show color swatches on product pages only",
+        "info": "Includes product quickshop and the homepage featured product.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "swatches_swatch_trigger",
+        "label": "Swatch trigger",
+        "default": "Color"
+      },
+      {
+        "type": "radio",
+        "id": "swatches_shape",
+        "label": "Swatch shape",
+        "options": [
+          {
+            "value": "square",
+            "label": "Square"
+          },
+          {
+            "value": "circle",
+            "label": "Circle"
+          }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "radio",
+        "id": "swatches_product_card_hover",
+        "label": "Product card swatches style",
+        "options": [
+          {
+            "value": "always",
+            "label": "Always visible"
+          },
+          {
+            "value": "on-hover",
+            "label": "Appear when hovered"
+          }
+        ],
+        "default": "always"
+      },
+      {
+        "type": "radio",
+        "id": "swatches_sidebar_filter_style",
+        "label": "Filter sidebar swatches style",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid"
+          },
+          {
+            "value": "list",
+            "label": "List"
+          }
+        ],
+        "default": "grid",
+        "info": "Requires collection page filters to be displayed “By group”."
+      },
+      {
+        "type": "range",
+        "id": "swatches_product_card_size",
+        "min": 16,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "label": "Product card swatch size",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "swatches_product_page_size",
+        "min": 16,
+        "max": 64,
+        "step": 1,
+        "unit": "px",
+        "label": "Product page swatch size",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "swatches_sidebar_filter_size",
+        "min": 24,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Filters sidebar swatch size",
+        "default": 40
+      },
+      {
+        "type": "select",
+        "id": "swatches_option_style",
+        "label": "Color option style",
+        "info": "Applies to product page and product card swatches.",
+        "options": [
+          {
+            "value": "color_swatch",
+            "label": "Color swatch"
+          },
+          {
+            "value": "variant_image",
+            "label": "Variant image"
+          }
+        ],
+        "default": "color_swatch"
+      },
+      {
+        "type": "textarea",
+        "id": "swatches_custom_colors",
+        "label": "Custom colors",
+        "info": "Like “Deep Purple: #7000AA” - one color per line, with names that exactly match your variants."
+      }
+    ]
+  },
+  {
+    "name": "Product grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product cards"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_grid_show_star_ratings",
+        "label": "Show star ratings",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_grid_show_second_image",
+        "label": "Show secondary product image on hover.",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_grid_emphasize_price",
+        "label": "Emphasize price",
+        "info": "Shows the product's price above the title.",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_product_card_spacing",
+        "label": "Enable product card spacing",
+        "info": "Adds space around product grid tiles, forming a \"card\" around the tile.",
+        "default": true
       },
       {
         "type": "range",
@@ -1324,38 +1460,26 @@
         "default": 10
       },
       {
-        "type": "checkbox",
-        "id": "enable_product_card_spacing",
-        "label": "Enable product card spacing",
-        "info": "Adds space around product grid tiles, forming a \"card\" around the tile.",
-        "default": true
-      },
-      {
-        "type": "header",
-        "content": "Product cards"
-      },
-      {
-        "type": "checkbox",
-        "id": "product_grid_show_second_image",
-        "label": "Show secondary product image on hover.",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "product_grid_emphasize_price",
-        "label": "Emphasize price",
-        "info": "Shows the product's price above the title.",
-        "default": true
-      },
-      {
         "type": "select",
         "id": "product_grid_image_style",
         "label": "Media aspect ratio",
         "options": [
-          { "value": "natural", "label": "Natural" },
-          { "value": "small", "label": "Short (4:3)" },
-          { "value": "medium", "label": "Square (1:1)" },
-          { "value": "large", "label": "Tall (2:3)" }
+          {
+            "value": "natural",
+            "label": "Natural"
+          },
+          {
+            "value": "small",
+            "label": "Short (4:3)"
+          },
+          {
+            "value": "medium",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "large",
+            "label": "Tall (2:3)"
+          }
         ],
         "default": "natural"
       },
@@ -1367,13 +1491,26 @@
         "info": "If disabled, white space will be applied around the image. Has no effect when media aspect ratio is set to natural."
       },
       {
+        "type": "header",
+        "content": "Quick shop"
+      },
+      {
         "type": "select",
         "id": "product_grid_show_quickshop",
         "label": "\"Quick shop\" button",
         "options": [
-          { "value": "disabled", "label": "Disabled" },
-          { "value": "desktop", "label": "Enable on desktop only" },
-          { "value": "always", "label": "Enable on desktop and mobile" }
+          {
+            "value": "disabled",
+            "label": "Disabled"
+          },
+          {
+            "value": "desktop",
+            "label": "Enable on desktop only"
+          },
+          {
+            "value": "always",
+            "label": "Enable on desktop and mobile"
+          }
         ],
         "default": "always"
       },
@@ -1382,208 +1519,20 @@
         "id": "product_grid_show_atc",
         "label": "\"Add to cart\" button",
         "options": [
-          { "value": "disabled", "label": "Disabled" },
-          { "value": "desktop", "label": "Enable on desktop only" },
-          { "value": "always", "label": "Enable on desktop and mobile" }
-        ],
-        "default": "desktop"
-      },
-      {
-        "type": "checkbox",
-        "id": "quickshop_show_dcb",
-        "label": "Show dynamic checkout button",
-        "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "quickshop_product_cart_redirect",
-        "label": "Enable cart redirection",
-        "info": "Automatically sends users to the Cart page after adding a product through the \"Add to cart\" buttons on product cards and in the quickshop modal.",
-        "default": false
-      },
-      {
-        "type": "header",
-        "content": "Quickshop media"
-      },
-      {
-        "type": "paragraph",
-        "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media/product-media-types)"
-      },
-      {
-        "type": "select",
-        "id": "quickshop_gallery_aspect_ratio",
-        "label": "Aspect ratio",
-        "options": [
-          { "value": "natural", "label": "Natural" },
-          { "value": "short", "label": "Short (4:3)" },
-          { "value": "square", "label": "Square (1:1)" },
-          { "value": "tall", "label": "Tall (2:3)" }
-        ],
-        "default": "natural"
-      },
-      {
-        "type": "checkbox",
-        "id": "quickshop_gallery_image_crop",
-        "label": "Enable image crop",
-        "info": "If disabled, white space will be applied around the image. Has no effect when media aspect ratio is set to natural.",
-        "default": false
-      },
-      {
-        "id": "quickshop_gallery_thumbnail_position",
-        "type": "select",
-        "label": "Thumbnails position",
-        "options": [
-          {
-            "value": "below",
-            "label": "Below main image"
-          },
-          {
-            "value": "left",
-            "label": "Left of main image"
-          }
-        ],
-        "default": "below"
-      },
-      {
-        "type": "checkbox",
-        "id": "quickshop_gallery_video_autoplay",
-        "label": "Enable video autoplay",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "quickshop_gallery_video_looping",
-        "label": "Enable video looping",
-        "default": true
-      },
-      {
-        "id": "quickshop_gallery_hover_zoom",
-        "type": "select",
-        "label": "Roll-over image zoom",
-        "options": [
           {
             "value": "disabled",
             "label": "Disabled"
           },
           {
-            "value": "replace",
-            "label": "Enabled (replace main image)"
-          }
-        ],
-        "info": "Only applies to desktop screen sizes.",
-        "default": "disabled"
-      },
-      {
-        "type": "paragraph",
-        "content": "For the best zoom results, make sure your images are larger than 1600px."
-      },
-      {
-        "type": "header",
-        "content": "Color swatches"
-      },
-      {
-        "type": "checkbox",
-        "id": "swatches_enable",
-        "label": "Enable color swatches",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "swatches_product_page_only",
-        "label": "Show color swatches on product pages only",
-        "info": "Includes product quickshop and the homepage featured product.",
-        "default": false
-      },
-      {
-        "type":      "text",
-        "id":        "swatches_swatch_trigger",
-        "label":     "Swatch trigger",
-        "default":   "Color"
-      },
-      {
-        "type":      "radio",
-        "id":        "swatches_shape",
-        "label":     "Swatch shape",
-        "options": [
-          { "value": "square", "label": "Square" },
-          { "value": "circle", "label": "Circle" }
-        ],
-        "default":   "square"
-      },
-      {
-        "type":      "radio",
-        "id":        "swatches_product_card_hover",
-        "label":     "Product card swatches style",
-        "options": [
-          { "value": "always", "label": "Always visible" },
-          { "value": "on-hover", "label": "Appear when hovered" }
-        ],
-        "default":   "always"
-      },
-      {
-        "type":      "radio",
-        "id":        "swatches_sidebar_filter_style",
-        "label":     "Filter sidebar swatches style",
-        "options": [
-          { "value": "grid", "label": "Grid" },
-          { "value": "list", "label": "List" }
-        ],
-        "default":   "grid",
-        "info": "Requires collection page filters to be displayed “By group”."
-      },
-      {
-        "type":   "range",
-        "id":     "swatches_product_card_size",
-        "min":       16,
-        "max":       32,
-        "step":      1,
-        "unit":      "px",
-        "label":     "Product card swatch size",
-        "default":   20
-      },
-      {
-        "type":   "range",
-        "id":     "swatches_product_page_size",
-        "min":       16,
-        "max":       64,
-        "step":      1,
-        "unit":      "px",
-        "label":     "Product page swatch size",
-        "default":   20
-      },
-      {
-        "type":   "range",
-        "id":     "swatches_sidebar_filter_size",
-        "min":       24,
-        "max":       50,
-        "step":      1,
-        "unit":      "px",
-        "label":     "Filters sidebar swatch size",
-        "default":   40
-      },
-      {
-        "type": "select",
-        "id": "swatches_option_style",
-        "label": "Color option style",
-        "info": "Applies to product page and product card swatches.",
-        "options": [
-          {
-            "value": "color_swatch",
-            "label": "Color swatch"
+            "value": "desktop",
+            "label": "Enable on desktop only"
           },
           {
-            "value": "variant_image",
-            "label": "Variant image"
+            "value": "always",
+            "label": "Enable on desktop and mobile"
           }
         ],
-        "default": "color_swatch"
-      },
-      {
-        "type":      "textarea",
-        "id":        "swatches_custom_colors",
-        "label":     "Custom colors",
-        "info":      "Like “Deep Purple: #7000AA” - one color per line, with names that exactly match your variants."
+        "default": "desktop"
       }
     ]
   },
@@ -1592,71 +1541,162 @@
     "settings": [
       {
         "type": "header",
-        "content": "Settings"
-      },
-      {
-        "type": "image_picker",
-        "id": "social_default_image",
-        "label": "Default social sharing image",
-        "info": "Displays when a page-specific image isn't available."
-      },
-      {
-        "type": "header",
         "content": "Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_behance",
+        "label": "Behance",
+        "info": "https://behance.net/"
+      },
+      {
+        "type": "text",
+        "id": "social_clubhouse",
+        "label": "Clubhouse",
+        "info": "https://www.clubhouse.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_discord",
+        "label": "Discord",
+        "info": "https://discord.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_dribbble",
+        "label": "Dribbble",
+        "info": "https://dribbble.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_email",
+        "label": "Email"
       },
       {
         "type": "text",
         "id": "social_facebook",
         "label": "Facebook",
-        "info": "https://facebook.com/pixelunion"
+        "info": "https://facebook.com/shopify"
       },
       {
         "type": "text",
-        "id": "social_twitter",
-        "label": "Twitter",
-        "info": "https://twitter.com/pixelunion"
+        "id": "social_flickr",
+        "label": "Flickr",
+        "info": "https://www.flickr.com/"
       },
       {
         "type": "text",
-        "id": "social_pinterest",
-        "label": "Pinterest",
-        "info": "https://pinterest.com/pixelunion"
+        "id": "social_houzz",
+        "label": "Houzz",
+        "info": "https://www.houzz.com/"
       },
       {
         "type": "text",
         "id": "social_instagram",
         "label": "Instagram",
-        "info": "https://instagram.com/pixelunion"
+        "info": "https://instagram.com/shopify"
       },
       {
         "type": "text",
-        "id": "social_tumblr",
-        "label": "Tumblr",
-        "info": "http://shopify.tumblr.com"
-      },
-      {
-        "type": "text",
-        "id": "social_vimeo",
-        "label": "Vimeo",
-        "info": "https://vimeo.com/shopify"
-      },
-      {
-        "type": "text",
-        "id": "social_youtube",
-        "label": "YouTube",
-        "info": "https://www.youtube.com/shopify"
+        "id": "social_kickstarter",
+        "label": "Kickstarter",
+        "info": "https://www.kickstarter.com/"
       },
       {
         "type": "text",
         "id": "social_linkedin",
         "label": "LinkedIn",
-        "info": "https://www.linkedin.com/company/pixelunion/"
+        "info": "https://linkedin.com/company/shopify"
       },
       {
         "type": "text",
-        "id": "social_email",
-        "label": "Email address",
-        "info": "info@example.com"
+        "id": "social_medium",
+        "label": "Medium",
+        "info": "https://medium.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_messenger",
+        "label": "Messenger",
+        "info": "https://www.messenger.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_opensea",
+        "label": "OpenSea",
+        "info": "https://opensea.io/"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest",
+        "info": "https://pinterest.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_reddit",
+        "label": "Reddit",
+        "info": "https://www.reddit.com/r/shopify/"
+      },
+      {
+        "type": "text",
+        "id": "social_rss",
+        "label": "RSS",
+        "info": "https://www.shopify.com/content-services/feeds/ecommerce.atom"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat",
+        "label": "Snapchat",
+        "info": "https://www.snapchat.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_spotify",
+        "label": "Spotify",
+        "info": "https://www.spotify.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok",
+        "info": "https://tiktok.com/@shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr",
+        "label": "Tumblr",
+        "info": "https://shopify.tumblr.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_twitch",
+        "label": "Twitch",
+        "info": "https://www.twitch.tv/"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter",
+        "info": "https://twitter.com/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo",
+        "label": "Vimeo",
+        "info": "https://vimeo.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_whatsapp",
+        "label": "WhatsApp",
+        "info": "https://www.whatsapp.com/"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube",
+        "info": "https://youtube.com/user/shopify"
       }
     ]
   },
@@ -1686,6 +1726,12 @@
         "type": "checkbox",
         "id": "enable_checkout_lock_icon",
         "label": "Show lock icon on checkout buttons",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_sku",
+        "label": "Show SKU",
         "default": false
       }
     ]
@@ -1752,13 +1798,6 @@
         "content": "Loading options"
       },
       {
-        "id": "use_minified_js",
-        "type": "checkbox",
-        "label": "Use minified javascript",
-        "info": "Reduces load times by using a compressed version of the theme's files. ([?](https://en.wikipedia.org/wiki/Minification_(programming%29))",
-        "default": true
-      },
-      {
         "id": "lazy_load",
         "type": "checkbox",
         "default": true,
@@ -1822,30 +1861,30 @@
         "info": "Controls text visibility while fonts are loading. [(?)](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)"
       },
       {
-        "type":      "checkbox",
-        "id":        "font_family_override",
-        "label":     "Use system font",
-        "default":   false,
-        "info":      "Overrides typography settings for a generic system font. Improves load time, but can create inconsistency across devices and browsers."
+        "type": "checkbox",
+        "id": "font_family_override",
+        "label": "Use system font",
+        "default": false,
+        "info": "Overrides typography settings for a generic system font. Improves load time, but can create inconsistency across devices and browsers."
       },
       {
         "type": "header",
         "content": "Media and metrics"
       },
       {
-        "type":      "checkbox",
-        "id":        "preconnect_facebook",
-        "label":     "Preconnect to Facebook Pixel",
-        "default":   false,
-        "info":      "Improves page load speed for Facebook Pixel users."
-     },
-     {
-       "type":      "checkbox",
-       "id":        "preconnect_google",
-       "label":     "Preconnect to Google Analytics",
-       "default":   false,
-       "info":      "Improves page load speed for Google Analytics users."
-     }
+        "type": "checkbox",
+        "id": "preconnect_facebook",
+        "label": "Preconnect to Facebook Pixel",
+        "default": false,
+        "info": "Improves page load speed for Facebook Pixel users."
+      },
+      {
+        "type": "checkbox",
+        "id": "preconnect_google",
+        "label": "Preconnect to Google Analytics",
+        "default": false,
+        "info": "Improves page load speed for Google Analytics users."
+      }
     ]
   }
 ]

@@ -93,7 +93,7 @@
           >
             {{ option.name }}
           </label>
-          {% include 'icon-library', id: 'icon-chevron-down-small' %}
+          {% render 'icon-library', id: 'icon-chevron-down-small' %}
         </div>
       </div>
     {% elsif style == 'radio' or show_swatches == true %}
@@ -157,7 +157,7 @@
                       {% endif %}
                       {% capture swatch_styles %}
                         {%
-                          include 'swatch-styles',
+                          render 'swatch-styles',
                           color_name: value,
                           use_variant_images: use_variant_images,
                           swatch_product: product,

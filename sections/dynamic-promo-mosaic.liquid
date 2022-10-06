@@ -242,11 +242,10 @@
           "default": "Mosaic"
         },
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "Use this section to welcome customers to your store, say a bit about your brand, or share news.",
-          "info": "120-character limit"
+          "default": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news.</p>"
         },
         {
           "type": "color",
@@ -293,9 +292,9 @@
           "content": "Overlay"
         },
         {
-          "type":      "select",
-          "id":        "overlay_style",
-          "label":     "Overlay style",
+          "type": "select",
+          "id": "overlay_style",
+          "label": "Overlay style",
           "options": [
             {
               "value": "none",
@@ -310,7 +309,7 @@
               "label": "Gradient"
             }
           ],
-          "default":   "none"
+          "default": "none"
         },
         {
           "id": "background",
@@ -346,6 +345,11 @@
         }
       ]
     }
+  ],
+  "templates": [
+    "index",
+    "product",
+    "page"
   ]
 }
 

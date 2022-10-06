@@ -1,0 +1,26 @@
+<script type="application/json" data-cross-sell-data>
+  {
+    {% comment %}This product data should use the API but cannot because its within a render tag{% endcomment %}
+    "product": {{ product | json }},
+    "settings": {
+      "enableSwatches": {{ settings.swatches_enable | json }}
+    },
+    "context": {
+      "product_available": {{ 'product.buttons.add_to_cart' | t | json }},
+      "product_unavailable": {{ 'product.buttons.sold_out' | t | json }}
+    }
+  }
+</script>
+
+<div class="cross-sell" data-cross-sell>
+  <h2 class="cross-sell__title">{{ 'general.cross_sell.title_html' | t: product: product.title }}</h2>
+  <div class="cross-sell__description rte" data-cross-sell-description>{{ product.description }}</div>
+
+  {%
+    render 'product-form',
+    product: product,
+    selected_variant: variant,
+    is_cross_sell: true,
+    show_quantity: show_quantity,
+  %}
+</div>

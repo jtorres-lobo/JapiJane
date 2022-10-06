@@ -21,7 +21,7 @@
     {% unless cat == tag %}
       {% if cat_array contains cat %}
         {% assign is_advanced_tag = true %}
-        {% if section.settings.filter_style == "groups" %}
+        {% if filter_block.settings.filter_style == "groups" %}
           {% assign group_tags = true %}
         {% endif %}
       {% endif %}

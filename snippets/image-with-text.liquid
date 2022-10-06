@@ -81,7 +81,10 @@
 
     {%- capture desktop_background_style -%}
       {% unless onboarding %}
-        {%- if block.settings.img_height_desktop == 'natural' -%}
+        width:{{- block.settings.img_width_desktop -}}%;
+        {%- if block.settings.img_height_desktop == 'custom' -%}
+          height:{{- block.settings.custom_height_desktop -}}px;
+        {%- else if block.settings.img_height_desktop == 'natural' -%}
           {% assign ratio = block.settings.img_width_desktop | divided_by: 100.00 %}
           padding-bottom: {{- 100 | divided_by: block.settings.img_desktop.aspect_ratio | times: ratio -}}%;
         {%- endif -%}
@@ -90,7 +93,9 @@
 
     {%- capture mobile_background_style -%}
       {% unless onboarding %}
-        {%- if block.settings.img_height_mobile == 'natural' -%}
+        {% if block.settings.img_height_mobile == 'custom' %}
+          height:{{- block.settings.custom_height_mobile -}}px
+        {%- else if block.settings.img_height_mobile == 'natural' -%}
           {%- if block.settings.img_mobile -%}
             padding-bottom: {{- 100 | divided_by: block.settings.img_mobile.aspect_ratio -}}%;
           {%- else -%}
@@ -235,12 +240,6 @@
             height-{{ block.settings.img_height_desktop }}
             alt-img-with-text--image
             image-desktop"
-        style="width:{{- block.settings.img_width_desktop -}}%;
-        {%- if block.settings.img_height_desktop == 'custom' -%}
-          height:{{- block.settings.custom_height_desktop -}}px;
-        {% else %}
-          {{ desktop_background_style }}
-        {%- endif -%}
 
         {%- if onboarding -%}
           {%- capture placeholder -%}
@@ -249,7 +248,11 @@
               placeholder: 'image'
             -%}
           {%- endcapture -%}
-          background-image: url('{{ placeholder | strip_newlines }}')
+          style="background-image: url('{{ placeholder | strip_newlines }}');
+          width:{{- block.settings.img_width_desktop -}}%;
+          {%- if block.settings.img_height_desktop == 'custom' -%}
+            height:{{- block.settings.custom_height_desktop -}}px;
+          {% endif %}
         {%- endif -%}"
 
         {% unless onboarding %}
@@ -267,21 +270,18 @@
           height-{{ block.settings.img_height_mobile }}
           alt-img-with-text--image
           image-mobile"
+        {%- if onboarding -%}
         style="
         {% if block.settings.img_height_mobile == 'custom' %}
-          height:{{- block.settings.custom_height_mobile -}}px
-        {% else %}
-          {{ mobile_background_style }}
+          height:{{- block.settings.custom_height_mobile -}}px;
         {% endif %}
-
-        {%- if onboarding -%}
           {%- capture placeholder -%}
             {%-
               include 'placeholder_svg_uri'
               placeholder: 'image'
             -%}
           {%- endcapture -%}
-          background-image: url('{{ placeholder | strip_newlines }}')
+          background-image: url('{{ placeholder | strip_newlines }}');
         {%- endif -%}"
 
         {% unless onboarding %}
