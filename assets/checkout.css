@@ -1,0 +1,4 @@
+.shypgenius__input-disabled {
+    pointer-events: none;
+    opacity: 0.9;
+}
