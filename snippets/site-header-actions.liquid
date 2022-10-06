@@ -1,16 +1,13 @@
-<div>hola!1</div>
 {% if mobile %}
   {% assign mobile = mobile %}
 {% else %}
   {% assign mobile = false %}
 {% endif %}
 {% if mobile == true %}
-{% assign logout_class = 'mobile-logout' %}
+  {% assign logout_class = 'mobile-logout' %}
 {% endif %}
 <ul class="site-header-actions" data-header-actions>
-  {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
-  {% if the_snippet_auth contains 'Liquid error' %}
-   {% if shop.customer_accounts_enabled %}
+  {% if shop.customer_accounts_enabled %}
     {% unless customer %}
       <li class="site-header-account-link">
         <a href="{{ routes.account_login_url }}">
@@ -24,36 +21,13 @@
           {% include 'icon-library', id: 'icon-account' %}
           {{ 'header.account.title' | t }}
         </a>
-  </li>
+      </li>
 
-  <li class="site-header-account-link">
-    <a href="{{ routes.account_logout_url }}" data-no-instant class="{{ logout_class }}" >
-      ({{ 'header.account.logout' | t }})
-    </a>
-  </li>
-  {% endunless %}
+      <li class="site-header-account-link">
+        <a href="{{ routes.account_logout_url }}" data-no-instant class="{{ logout_class }}" >
+          ({{ 'header.account.logout' | t }})
+        </a>
+      </li>
+    {% endunless %}
   {% endif %}
-  {% else %}
-  <li id="ssw-topauth" class="ssw-topauth site-header-account-link">
-    {% if customer %}
-    <div class="ssw-tprofile ssw-dropdown">
-      <a class="ssw-dropdown-toggle account-link" data-toggle="ssw-dropdown" href="javascript:void(0);">
-        {% include 'icon-library', id: 'icon-account' %}
-        {{ 'header.account.title' | t }}
-      </a>
-      <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
-        {% render 'ssw-widget-dropdown' %}
-        <li class="ssw-divider"></li>
-        <li><a id="customer_logout_link" tabindex="-1" href='#' data-href="/account/logout">{{ 'socialshopwave.logout' | t }}</a></li>
-      </ul>
-    </div>
-    {% else %}
-    <a id="customer_login_link" href="#" onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal" onclick="trackShopStats('login_popup_view', 'all')">
-      {% include 'icon-library', id: 'icon-account' %}
-      {{ 'header.account.login' | t }}
-    </a>    {% endif %}
-  </li>
-  {% endif %}    
- 
 </ul>
