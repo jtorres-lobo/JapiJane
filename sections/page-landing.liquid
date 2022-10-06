@@ -1,0 +1,312 @@
+<div class="page-landing">
+  <div class="clear">
+    <div class="sec-01">
+      <h3 class="product-title">{{section.settings.preTitle}}</h3>
+      <h2>{{section.settings.title}}</h2>
+      <div class="text">
+        {{section.settings.text}}
+      </div>
+    </div>
+
+    <div class="sec-02">
+      {{section.settings.textSec2}}
+    </div>
+
+    <div class="sec-03">
+      <h3>{{section.settings.titleSec3}}</h3>
+      {{section.settings.textSec3}}
+    </div>
+
+    <div class="sec-04 box-sec">
+      <img src="{{ section.settings.imageBox | img_url: 'master' }}"
+        alt="{{section.settings.imageBox.alt | escape }}" />
+      {{section.settings.boxText}}
+    </div>
+
+    <div class="sec-05">
+      <h3>{{section.settings.titleSec5}}</h3>
+      <div class="container">
+        <div class="card">
+          <div class="text">
+            {{section.settings.text1}}
+          </div>
+          <div class="ico">
+            <img src="{{ section.settings.ico1 | img_url: 'master' }}" alt="{{section.settings.ico1.alt | escape }}" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="text">
+            {{section.settings.text2}}
+          </div>
+          <div class="ico">
+            <img src="{{ section.settings.ico2 | img_url: 'master' }}" alt="{{section.settings.ico2.alt | escape }}" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="text">
+            {{section.settings.text3}}
+          </div>
+          <div class="ico">
+            <img src="{{ section.settings.ico3 | img_url: 'master' }}" alt="{{section.settings.ico3.alt | escape }}" />
+          </div>
+        </div>
+        <div class="card">
+          <div class="text">
+            {{section.settings.text4}}
+          </div>
+          <div class="ico">
+            <img src="{{ section.settings.ico4 | img_url: 'master' }}" alt="{{section.settings.ico4.alt | escape }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-06">
+      <h3>{{section.settings.titleSec6}}</h3>
+      <div class="container">
+        <div class="card">
+          <h3>{{section.settings.titleCard1}}</h3>
+          <p>{{section.settings.textCard1}}</p>
+          <span>{{section.settings.punto1}}</span>
+        </div>
+        <div class="card">
+          <h3>{{section.settings.titleCard2}}</h3>
+          <p>{{section.settings.textCard2}}</p>
+          <span>{{section.settings.punto2}}</span>
+        </div>
+        <div class="card">
+          <h3>{{section.settings.titleCard3}}</h3>
+          <p>{{section.settings.textCard3}}</p>
+          <span>{{section.settings.punto3}}</span>
+        </div>
+        <div class="card">
+          <h3>{{section.settings.titleCard4}}</h3>
+          <p>{{section.settings.textCard4}}</p>
+          <span>{{section.settings.punto4}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-bottom">
+    {{section.settings.textBottom}}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Page Landing",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section 01"
+      },
+      {
+        "type": "text",
+        "id": "preTitle",
+        "label": "pre Title",
+        "default": "Puntos Japi Jane"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "¡Atrévete y punto!"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Section 02"
+      },
+      {
+        "type": "richtext",
+        "id": "textSec2",
+        "label": "Text Sec 2",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Section 03"
+      },
+      {
+        "type": "text",
+        "id": "titleSec3",
+        "label": "Title Sec 3",
+        "default": "¿Cómo funciona?"
+      },
+      {
+        "type": "richtext",
+        "id": "textSec3",
+        "label": "Text Sec 3",
+        "default": "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.</p>"
+      },
+      {
+        "type": "header",
+        "content": "Section 04"
+      },
+      {
+        "type": "image_picker",
+        "id": "imageBox",
+        "label": "Image Box"
+      },
+      {
+        "type": "text",
+        "id": "boxText",
+        "label": "Box Text",
+        "default": "Un peso= un punto"
+      },
+      {
+        "type": "header",
+        "content": "Section 05"
+      },
+      {
+        "type": "text",
+        "id": "titleSec5",
+        "label": "Title Sec 5",
+        "default": "También acumulas puntos cuando:"
+      },
+      {
+        "type": "text",
+        "id": "text1",
+        "label": "Text 1",
+        "default": "Te suscribes a nuestro newsletter"
+      },
+      {
+        "type": "image_picker",
+        "id": "ico1",
+        "label": "Icon 1"
+      },
+      {
+        "type": "text",
+        "id": "text2",
+        "label": "Text 2",
+        "default": "Armas tu lista de deseos en japijane.cl"
+      },
+      {
+        "type": "image_picker",
+        "id": "ico2",
+        "label": "Icon 2"
+      },
+      {
+        "type": "text",
+        "id": "text3",
+        "label": "Text 3",
+        "default": "Nos compartes en tu Instagram"
+      },
+      {
+        "type": "image_picker",
+        "id": "ico3",
+        "label": "Icon 3"
+      },
+      {
+        "type": "text",
+        "id": "text4",
+        "label": "Text 4",
+        "default": "Gana el doble de puntos al comprar el día de tu cumpleaños"
+      },
+      {
+        "type": "image_picker",
+        "id": "ico4",
+        "label": "Icon 4"
+      },
+      {
+        "type": "header",
+        "content": "Section 06"
+      },
+      {
+        "type": "text",
+        "id": "titleSec6",
+        "label": "Title Sec 6",
+        "default": "Niveles"
+      },
+      {
+        "type": "text",
+        "id": "titleCard1",
+        "label": "Title Card 1",
+        "default": "Deseo"
+      },
+      {
+        "type": "text",
+        "id": "textCard1",
+        "label": "Text Card 1",
+        "default": "Desde 790 puntos"
+      },
+      {
+        "type": "text",
+        "id": "punto1",
+        "label": "Puntos 1",
+        "default": "1 punto por $1"
+      },
+      {
+        "type": "text",
+        "id": "titleCard2",
+        "label": "Title Card 2",
+        "default": "Buenas Vibras        "
+      },
+      {
+        "type": "text",
+        "id": "textCard2",
+        "label": "Text Card 2",
+        "default": "Desde 200.000 puntos"
+      },
+      {
+        "type": "text",
+        "id": "punto2",
+        "label": "Puntos 2",
+        "default": "1.2 puntos por $1"
+      },
+      {
+        "type": "text",
+        "id": "titleCard3",
+        "label": "Title Card 3",
+        "default": "Orgásmico        "
+      },
+      {
+        "type": "text",
+        "id": "textCard3",
+        "label": "Text Card 3",
+        "default": "Desde 500.000 puntos"
+      },
+      {
+        "type": "text",
+        "id": "punto3",
+        "label": "Puntos 3",
+        "default": "1.3 puntos por $1"
+      },
+      {
+        "type": "text",
+        "id": "titleCard4",
+        "label": "Title Card 4",
+        "default": "Multiorgásmico        "
+      },
+      {
+        "type": "text",
+        "id": "textCard4",
+        "label": "Text Card 4",
+        "default": "Desde 1.000.000 de puntos"
+      },
+      {
+        "type": "text",
+        "id": "punto4",
+        "label": "Puntos 4",
+        "default": "1.5 puntos por $1"
+      },
+      {
+        "type": "header",
+        "content": "footer"
+      },
+      {
+        "type": "richtext",
+        "id": "textBottom",
+        "label": "Text Footer",
+        "default": "<p>Revisa términos y condiciones acá</p>"
+      }
+    ]
+  }
+{% endschema %}
+

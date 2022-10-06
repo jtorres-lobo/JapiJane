@@ -1,0 +1,260 @@
+{%
+  include 'api' with 'product:json',
+  product: product
+%}
+
+{% assign hover_zoom = section.settings.quickshop_gallery_hover_zoom %}
+
+{% assign show_stock_level = true %}
+
+{% if settings.product_show_stock_level == 'hidden' %}
+  {% assign show_stock_level = false %}
+{% endif %}
+
+<template data-data>
+{
+  "settings": {
+    "money_format": {{ shop.money_format | strip_html | json }},
+    "cart_redirection": {{ settings.quickshop_product_cart_redirect | json }},
+    "thumbnail_position": {{ settings.quickshop_gallery_thumbnail_position | json }},
+    "gallery_video_autoplay": {{ settings.quickshop_gallery_video_autoplay | json }},
+    "gallery_video_looping": {{ settings.quickshop_gallery_video_looping | json }},
+    "hover_zoom": {{ hover_zoom | json }},
+    "click_to_zoom": "disabled",
+    "enableSwatches": {{ settings.swatches_enable | json }},
+    "lazy_load": {{ settings.lazy_load | json }},
+    "enableStockBadge": {{ show_stock_level | json }}
+  },
+  "context": {
+    "product_available": {{ 'product.buttons.add_to_cart' | t | json }},
+    "product_unavailable": {{ 'product.buttons.sold_out' | t | json }}
+  },
+  "product": {{ json }},
+  "models": {{ product.media | where: 'media_type', 'model' | json }}
+}
+</template>
+
+<div data-html>
+  {%
+    include 'product',
+    is_product_modal: true,
+    onboarding: false,
+    show_dcb: section.settings.quickshop_show_dcb,
+    gallery_aspect_ratio: section.settings.quickshop_gallery_aspect_ratio,
+    gallery_thumbnail_position: section.settings.quickshop_gallery_thumbnail_position,
+    gallery_image_crop: section.settings.quickshop_gallery_image_crop,
+    gallery_click_to_zoom: 'disabled',
+    gallery_hover_zoom: section.settings.quickshop_gallery_hover_zoom,
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Quick shop",
+  "class": "product--section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Visit product grid in the theme settings to enable the quick shop. [customizing the quick shop](https://help.outofthesandbox.com/hc/en-us/articles/4412231686291)"
+    },
+    {
+      "type": "checkbox",
+      "id": "quickshop_show_dcb",
+      "label": "Show dynamic checkout button",
+      "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "quickshop_product_cart_redirect",
+      "label": "Enable cart redirection",
+      "info": "Automatically sends users to the Cart page after adding a product through the \"Add to cart\" buttons on product cards and in the quickshop modal.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "paragraph",
+      "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media/product-media-types)"
+    },
+    {
+      "type": "select",
+      "id": "quickshop_gallery_aspect_ratio",
+      "label": "Aspect ratio",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "short",
+          "label": "Short (4:3)"
+        },
+        {
+          "value": "square",
+          "label": "Square (1:1)"
+        },
+        {
+          "value": "tall",
+          "label": "Tall (2:3)"
+        }
+      ],
+      "default": "natural"
+    },
+    {
+      "type": "checkbox",
+      "id": "quickshop_gallery_image_crop",
+      "label": "Enable image crop",
+      "info": "If disabled, white space will be applied around the image. Has no effect when media aspect ratio is set to natural.",
+      "default": false
+    },
+    {
+      "id": "quickshop_gallery_thumbnail_position",
+      "type": "select",
+      "label": "Thumbnails position",
+      "options": [
+        {
+          "value": "below",
+          "label": "Below main image"
+        },
+        {
+          "value": "left",
+          "label": "Left of main image"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "checkbox",
+      "id": "quickshop_gallery_video_autoplay",
+      "label": "Enable video autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "quickshop_gallery_video_looping",
+      "label": "Enable video looping",
+      "default": true
+    },
+    {
+      "id": "quickshop_gallery_hover_zoom",
+      "type": "select",
+      "label": "Roll-over image zoom",
+      "options": [
+        {
+          "value": "disabled",
+          "label": "Disabled"
+        },
+        {
+          "value": "replace",
+          "label": "Enabled (replace main image)"
+        }
+      ],
+      "info": "Only applies to desktop screen sizes.",
+      "default": "disabled"
+    },
+    {
+      "type": "paragraph",
+      "content": "For the best zoom results, make sure your images are larger than 1600px."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid",
+      "name": "Custom liquid",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations."
+        }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Text block</p>"
+        }
+      ]
+    },
+    {
+      "type": "form",
+      "name": "Form",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Customize form features for the product in the products portion of the theme settings."
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Product rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/product-reviews)"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1
+    },
+    {
+      "type": "view-product-link",
+      "name": "View product link",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "View full details"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

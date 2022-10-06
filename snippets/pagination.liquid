@@ -1,0 +1,109 @@
+{%- liquid
+  if pagination_type == 'infinite_scroll' or pagination_type == 'click_to_load'
+    assign pagination_classes = 'visually-hidden'
+  endif
+-%}
+
+{% if pagination_type == 'infinite_scroll' %}
+  <div class="pagination__wrapper infinite-scroll" data-pagination-wrapper data-html="pagination">
+    {%- unless paginate.current_page == paginate.pages -%}
+        <div
+          data-infinite-scroll
+          data-to-page="{{ paginate.current_page | plus: 1 }}"
+        >
+          {% include 'icon-library' id: 'icon-loading' %}
+        </div>
+    {%- endunless -%}
+  </div>
+{% elsif pagination_type == 'click_to_load' %}
+  <div class="pagination__wrapper click-to-load" data-pagination-wrapper data-html="pagination">
+    {%- unless paginate.current_page == paginate.pages -%}
+      <button
+        class='button-primary'
+        data-click-to-load
+        data-to-page="{{ paginate.current_page | plus: 1 }}"
+      >
+        {{ 'general.pagination.load' | t }}
+      </button>
+
+      {% include 'icon-library' id: 'icon-loading' %}
+    {%- endunless -%}
+  </div>
+{% endif %}
+
+{% if paginate.previous or paginate.next %}
+  <nav class="pagination__wrapper {{ pagination_classes }}" aria-label="Pagination">
+    <ul class="pagination">
+      {% comment %}
+        We need to decode the pagination URLs to fetch via AJAX.
+        AsyncView encodes the URL, which was causing double-encoding.
+      {% endcomment %}
+
+      {% if paginate.previous %}
+        <li class="pagination__previous">
+          <a
+            class="pagination__item pagination__item--link"
+            href="{{ paginate.previous.url | url_decode }}"
+            data-to-page="{{ paginate.current_page | minus: 1 }}"
+            aria-label="Go to previous page"
+          >
+            <span class="pagination__previous-chevron" aria-hidden="true">
+              {% include 'icon-library', id: 'icon-chevron-down-small' %}
+            </span>
+
+            <span class="pagination__previous-text">{{ 'general.pagination.prev' | t }}</span>
+          </a>
+        </li>
+      {% endif %}
+
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li class="pagination__page">
+            <a
+              class="pagination__item pagination__item--link"
+              href="{{ part.url | url_decode }}"
+              data-to-page="{{ part.title }}"
+              aria-label="Go to page {{ part.title }}"
+            >
+           {{ part.title }}
+            </a>
+          </li>
+        {% else %}
+          {% if part.title == '&hellip;' %}
+            <li class="pagination__ellipsis">
+              <span class="pagination__item">
+                {{ part.title }}
+              </span>
+            </li>
+          {% else %}
+            <li
+              class="pagination__page"
+              aria-label="Page {{ part.title }}"
+              aria-current="true"
+            >
+              <span class="pagination__item pagination__item--active">
+                {{ part.title }}
+              </span>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+      {% if paginate.next %}
+        <li class="pagination__next">
+          <a
+            class="pagination__item pagination__item--link"
+            href="{{ paginate.next.url | url_decode }}"
+            data-to-page="{{ paginate.current_page | plus: 1 }}"
+            aria-label="Go to next page"
+          >
+            <span class="pagination__next-text">{{ 'general.pagination.next' | t }}</span>
+
+            <span class="pagination__next-chevron" aria-hidden="true">
+              {% include 'icon-library', id: 'icon-chevron-down-small' %}
+            </span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

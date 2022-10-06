@@ -1,0 +1,517 @@
+{%liquid
+  assign show_sidebar = false
+  assign show_filters = false
+  assign filter_block = nil
+  assign menu_block = false
+  assign filter_type = nil
+  assign show_filter_trigger = false
+
+  for block in section.blocks
+    if block.type == 'filter'
+      assign filter_block = block
+      assign filter_type = block.settings.filter_option
+
+      if filter_type == 'tag' and collection.all_tags.size > 0
+        assign show_filters = true
+      elsif filter_type == 'faceted' and collection.filters.size > 0
+        assign show_filters = true
+      endif
+
+      if show_filters
+        comment
+          Sidebar toggle is used on mobile only, and will only show Filters
+        endcomment
+        assign show_filter_trigger = true
+      endif
+    else
+      assign menu_block = true
+    endif
+  endfor
+
+  if show_filters or menu_block
+    comment
+      Sidebar to show only if there are tags in the collection, or there are menus
+    endcomment
+    assign show_sidebar = true
+  endif
+
+  assign paginate_by = section.settings.products_per_page_range
+  assign show_product_counts = filter_block.settings.show_product_counts | default: false
+
+  assign collection_type = 'static-collection'
+  if filter_type == 'faceted'
+    assign collection_type = 'static-collection-faceted-filters'
+  endif
+%}
+
+<script
+  type="application/json"
+  data-section-type="{{ collection_type }}"
+  data-section-id="{{ section.id }}"
+  data-section-data
+  data-data
+>
+{
+    "show_product_counts": {{ show_product_counts }},
+    "product_count" : {{ collection.products_count }},
+    "pagination" : "{{ section.settings.pagination }}",
+    "context": {
+      "see_more": {{ 'general.general.see_more' | t | json }},
+      "see_less": {{ 'general.general.see_less' | t | json }}
+    }
+  }
+</script>
+
+{%- capture collection_classes -%}
+  {% if show_sidebar %}
+    layout--has-sidebar
+  {% else %}
+    layout--no-sidebar
+  {% endif %}
+{%- endcapture -%}
+
+{% paginate collection.products by paginate_by %}
+  <div class="productgrid--outer {{ collection_classes | strip_newlines }}">
+    {% if show_sidebar %}
+      {%
+        include 'product-grid-sidebar',
+        filter_style: filter_block.settings.filter_style,
+        filter_position: filter_block.settings.filter_position,
+        filter_limit: filter_block.settings.filter_limit,
+        filter_block: filter_block,
+        menu_block: menu_block,
+        menu_depth: section.settings.menu_depth_range
+      %}
+    {% endif %}
+
+    <div class="productgrid--wrapper">
+      {%- if section.settings.show_breadcrumbs -%}
+        {% include 'breadcrumbs' %}
+      {%- endif -%}
+
+      <div
+        class="
+          productgrid--masthead
+          {% unless section.settings.show_breadcrumbs %}no-breadcrumbs{% endunless %}
+        "
+      >
+        {% if section.settings.show_collection_image and collection.image %}
+          <figure class="collection--image">
+            {%
+              include 'rimg',
+              img: collection.image,
+              size: '1350x',
+              lazy: settings.lazy_load,
+              canvas: settings.lazy_load
+            %}
+          </figure>
+        {% endif %}
+
+        <div class="collection--information">
+          <h1 class="collection--title">
+            {{ collection.title }}
+          </h1>
+
+          {% if collection.description != blank %}
+            <div class="collection--description rte">
+              {{ collection.description }}
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+      <div
+        class="results--container"
+        data-results-container
+        data-html="productgrid"
+        data-product-count="{{ collection.products_count }}"
+      >
+      <div class='processing-overlay'>
+      </div>
+
+      {% if filter_block %}
+        {% if filter_type == 'tag' %}
+          {% if current_tags.size > 0 %}
+            <div class="productgrid--filters">
+              {%- include 'product-grid-tags-active' %}
+            </div>
+          {% endif %}
+        {% else %}
+          {% assign active_filters = false %}
+          {% for filter in collection.filters %}
+            {% if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value %}
+              {% assign active_filters = true %}
+            {% endif %}
+          {% endfor %}
+          {% if active_filters %}
+            <div class="productgrid--filters">
+              {%- include 'faceted-filters-active' %}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+
+      {% if show_filter_trigger or section.settings.sort_by or section.settings.grid_list %}
+        {% capture utility_class %}
+          productgrid--utils
+
+          {% if show_filter_trigger or section.settings.sort_by or section.settings.grid_list %}
+            productgrid--utils--visible-mobile
+          {% endif %}
+
+          {% unless section.settings.sort_by or section.settings.grid_list %}
+            productgrid--utils--hidden-desktop
+          {% endunless %}
+        {% endcapture %}
+        <nav
+          class="{{ utility_class | strip_newlines }}"
+          aria-label="{{ 'general.accessibility.nav_collection_utilities' | t }}"
+        >
+          {% if show_filter_trigger %}
+            {% liquid
+              assign filter_count = 0
+              if filter_block.settings.filter_option == 'faceted'
+                for filter in collection.filters
+                  if filter.type == 'price_range' and filter.min_value.value or filter.max_value.value
+                    assign filter_count = filter_count | plus: 1
+                  elsif filter.type == 'list'
+                    assign filter_count = filter_count | plus: filter.active_values.size
+                  endif
+                endfor
+              else
+                if current_tags.size > 0
+                  assign filter_count = current_tags.size
+                endif
+              endif
+            %}
+            
+            <div class="productgrid--utils utils-filter">
+              <button
+                class="utils-filter-button"
+                type="button"
+                aria-label="{{ 'product_grid.filters.title_count' | t: count: filter_count }}"
+                data-productgrid-trigger-filters
+              >
+                <span class="utils-filter-icon">
+                  {%- include 'icon-library', id: 'icon-filters' -%}
+                </span>
+                <span class="utils-filter-text">
+                  {{- 'product_grid.filters.title_count' | t: count: filter_count -}}
+                </span>
+              </button>
+            </div>
+          {% endif %}
+
+          {%- if section.settings.sort_by -%}
+            {%-
+              include 'product-grid-sortby',
+              type: 'select',
+            -%}
+          {%- endif -%}
+
+          {%- if section.settings.grid_list -%}
+            <div
+              class="
+                productgrid--utils
+                utils-view
+                {% if section.settings.grid_list == false %}
+                  utils-hide
+                {% endif %}
+              "
+            >
+              <div class="utils-view-container">
+                {% if section.settings.grid_list %}
+                  <div class="utils-viewtoggle">
+                    <span class="utils-viewtoggle-label">
+                      {{ 'product_grid.view_as.title' | t }}
+                    </span>
+
+                    <button
+                      class="utils-viewtoggle-button active"
+                      data-collection-view="grid-view"
+                      aria-label="grid view"
+                    >
+                      {% include 'icon-library', id: 'icon-grid' %}
+                    </button>
+
+                    <button
+                      class="utils-viewtoggle-button"
+                      data-collection-view="list-view"
+                      aria-label="list view"
+                    >
+                      {% include 'icon-library', id: 'icon-list' %}
+                    </button>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {%- endif -%}
+        </nav>
+      {% endif %}
+
+      {% include 'icon-library', id: 'icon-loading' %}
+
+      {% if collection.products.size > 0 %}
+        <ul
+          class="
+            productgrid--items
+            {% if settings.enable_product_card_spacing == false %}productgrid--no-spacing{% endif %}
+          "
+          data-product-grid
+          data-html="productgridItems"
+        >
+          {% for product in collection.products %}
+            {%
+              include 'product-grid-item',
+              product: product
+            %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="productgrid--no-results">
+          <h2 class="productgrid--no-results-title">
+            {%- if collection.all_products_count == 0 -%}
+              {{ 'product_grid.no_results.empty' | t }}
+            {%- else -%}
+              {{ 'product_grid.no_results.tags_empty' | t }}
+            {%- endif -%}
+          </h2>
+
+          <a class="productgrid--no-results-button" href="{{ routes.all_products_collection_url }}">
+            {{ 'search.general.view_all_products' | t }}
+          </a>
+        </div>
+      {% endif %}
+
+      {%
+        include 'pagination',
+        pagination_type: section.settings.pagination
+      %}
+    </div>
+  </div>
+  {% endpaginate %}
+  </div>
+
+{%- if section.settings.sort_by -%}
+  {%-
+    include 'product-grid-sortby',
+    type: 'modal',
+  -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "class": "collection--section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show breadcrumb navigation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Show collection image",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "products_per_page_range",
+      "label": "Products per page",
+      "min": 24,
+      "max": 48,
+      "step": 12,
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "pagination",
+      "label": "Pagination method",
+      "options": [
+        {
+          "value": "click_to_load",
+          "label": "Click-to-load"
+        },
+        {
+          "value": "infinite_scroll",
+          "label": "Infinite scroll"
+        },
+        {
+          "value": "traditional",
+          "label": "Jump-to-page"
+        }
+      ],
+      "default": "traditional"
+    },
+    {
+      "type": "header",
+      "content": "Utility bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "sort_by",
+      "label": "Show \"Sort by\" dropdown",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "grid_list",
+      "label": "Show grid/list view toggle",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Sidebar"
+    },
+    {
+      "type": "range",
+      "id": "menu_depth_range",
+      "label": "Menu depth visibility",
+      "info": "[Learn more](https://help.shopify.com/manual/sell-online/online-store/menus-and-links#create-a-drop-down-menu)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "id": "menu",
+          "type": "link_list",
+          "label": "Menu",
+          "info": "This menu will show as many drop-down items as specified above under \"Menu depth visibility.\""
+        }
+      ],
+      "limit": 10
+    },
+    {
+      "type": "filter",
+      "name": "Filters",
+      "settings": [
+        {
+          "type": "select",
+          "id": "filter_option",
+          "label": "Filter type",
+          "options": [
+            {
+              "value": "faceted",
+              "label": "Faceted filtering"
+            },
+            {
+              "value": "tag",
+              "label": "Tag filtering"
+            }
+          ],
+          "default": "faceted"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_counts",
+          "label": "Show product counts",
+          "default": true
+        },
+        {
+          "id": "filter_limit",
+          "type": "select",
+          "label": "Hide additional filters after",
+          "options": [
+            {
+              "value": "5",
+              "label": "5 filters"
+            },
+            {
+              "value": "6",
+              "label": "6 filters"
+            },
+            {
+              "value": "8",
+              "label": "8 filters"
+            },
+            {
+              "value": "10",
+              "label": "10 filters"
+            },
+            {
+              "value": "15",
+              "label": "15 filters"
+            },
+            {
+              "value": "20",
+              "label": "20 filters"
+            },
+            {
+              "value": "999",
+              "label": "Show all filters"
+            }
+          ],
+          "default": "999"
+        },
+        {
+          "type": "select",
+          "id": "filter_position",
+          "label": "Filters position",
+          "options": [
+            {
+              "value": "above_menus",
+              "label": "Above menus"
+            },
+            {
+              "value": "below_menus",
+              "label": "Below menus"
+            }
+          ],
+          "default": "above_menus"
+        },
+        {
+          "type": "header",
+          "content": "Tag Filters",
+          "info": "All of the following options apply to tag filtering only."
+        },
+        {
+          "type": "select",
+          "id": "filter_style",
+          "label": "Filters",
+          "info": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412231703571)",
+          "options": [
+            {
+              "value": "tags",
+              "label": "By tag"
+            },
+            {
+              "value": "groups",
+              "label": "By group"
+            }
+          ],
+          "default": "tags"
+        },
+        {
+          "type": "text",
+          "id": "grid_categories",
+          "label": "Display filters as grid",
+          "info": "List groups to display in an alternate grid format, like “Size, Price”. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412231703571)"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_ordered_categories",
+          "label": "Group order",
+          "info": "Define a custom order for groups, like “Color, Brand, Size”. Other groups will appear at the bottom."
+        },
+        {
+          "type": "textarea",
+          "id": "custom_ordered_tags",
+          "label": "Tag order",
+          "info": "Define a custom order for tags, like “Size_S, Size_M, Size_L”. Items must exactly match tag name, including group prefix. Other tags will appear at the bottom."
+        }
+      ],
+      "limit": 1
+    }
+  ]
+}
+
+{% endschema %}

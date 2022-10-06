@@ -1,0 +1,73 @@
+{% assign tag_limit = filter_limit | times: 1 %}
+
+{% comment %}
+  Collection filters
+{% endcomment %}
+
+{% if filter_block.settings.filter_option == 'tag' %}
+  {% comment %}
+    Tag filters
+  {% endcomment %}
+  {% if collection.all_tags.size > 0 %}
+    {% include 'advanced-tag-loop' %}
+    <div class="productgrid--sidebar-section" data-productgrid-filters-content>
+      <h2 class="productgrid--sidebar-title">
+        {{ 'product_grid.filters.title_count' | t: count: 0 }}
+      </h2>
+      <nav
+        aria-label="Collection filters"
+      >
+        {% if current_tags.size > 0 %}
+          <div class="productgrid--sidebar-item productgrid--sidebar-filters--current">
+            {%- include 'product-grid-tags-active' -%}
+          </div>
+        {% endif %}
+
+        {% if filter_style == 'groups' %}
+          {%
+            include 'product-grid-tag-groups',
+            tag_limit: tag_limit
+          %}
+        {% endif %}
+
+        {% if filter_style == 'tags' %}
+          {%
+            include 'product-grid-tags',
+            tag_limit: tag_limit
+          %}
+        {% endif %}
+      </nav>
+    </div>
+  {% endif %}
+{% else %}
+  {% comment %}
+    Faceted filters
+  {% endcomment %}
+
+  <div
+    class="productgrid--sidebar-section"
+    data-productgrid-filters-content
+    data-faceted-filters
+  >
+    <h2 class="productgrid--sidebar-title">
+      {{ 'product_grid.filters.title_count' | t: count: 0 }}
+    </h2>
+    <nav
+      aria-label="Collection filters"
+    >
+     {% assign active_filters = false %}
+      {% for filter in collection.filters %}
+        {% if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value %}
+          {% assign active_filters = true %}
+        {% endif %}
+      {% endfor %}
+      {% if active_filters %}
+        <div class="productgrid--sidebar-item productgrid--sidebar-filters--current">
+          {%- include 'faceted-filters-active' %}
+        </div>
+      {% endif %}
+
+      {% include 'faceted-filters' %}
+    </nav>
+  </div>
+{% endif %}
