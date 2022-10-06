@@ -195,7 +195,7 @@ border-bottom: {{ section.settings.border_width }}px solid {{ section.settings.b
       </button>
       {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
       {% if the_snippet_auth contains 'Liquid error' %}
-      {% assign shop.customer_accounts_enabled == false %}
+      {% assign shop.customer_accounts_enabled = false %}
       {% if shop.customer_accounts_enabled %}
       <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
         <div class="site-header-icon site-header-account-icon">
