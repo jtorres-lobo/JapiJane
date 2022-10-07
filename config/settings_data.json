@@ -117,7 +117,7 @@
     "in_stock_notification_form": "disabled",
     "product_ratings_reviews": false,
     "swatches_enable": true,
-    "swatches_product_page_only": true,
+    "swatches_product_page_only": false,
     "swatches_shape": "circle",
     "swatches_product_card_hover": "on-hover",
     "swatches_product_card_size": 16,
