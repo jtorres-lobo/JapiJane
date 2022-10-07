@@ -1,0 +1,477 @@
+{% assign is_customer = false %}
+{% if shop.customer_accounts_enabled and customer %}
+  {% assign is_customer = true %}
+{% endif %}
+
+{% assign has_sidebar = false %}
+{% assign has_items = false %}
+{% assign show_continue_link = false %}
+
+{% if section.blocks.size > 0 %}
+  {% assign has_sidebar = true %}
+{% endif %}
+
+{% if cart.items.size > 0 %}
+  {% assign has_items = true %}
+{% endif %}
+
+{% assign continue_url = "/collections/all" %}
+{% if settings.continue_shopping_url != blank %}
+  {% assign continue_url = settings.continue_shopping_url %}
+{% endif %}
+
+{% if settings.continue_url_cart %}
+  {% assign show_continue_link = true %}
+  {%- capture continue_link_html -%}
+    <a class="cart-continue" href="{{ continue_url }}">
+      {{ 'cart.general.continue_shopping' | t }}
+      {% include 'icon-library', id: 'icon-chevron-down-small' %}
+    </a>
+  {%- endcapture -%}
+{% endif %}
+
+<script
+  type="application/json"
+  data-section-type="static-cart"
+  data-section-id="{{ section.id }}"
+  data-section-data>
+  {
+    "cart": {{ cart | json }},
+    "settings": {
+      "shipping": {{ section.settings.enable_shipping_calc | json }},
+      "stock_limit": {{ 'cart.general.stock_limit' | t: quantity: '** quantity **', title: '** title **' | json }},
+      "money_format": {{ shop.money_format | strip_html | json }},
+      "currency_symbol": "{{ cart.currency.symbol }}"
+    },
+    "shipping": {
+      "calculate_shipping": {{ 'cart.shipping.calculate_shipping' | t | json }},
+      "calculating": {{ 'cart.shipping.calculating' | t | json }},
+      "customer": {{ is_customer | default: false | json }},
+      "multiple_rates": {{ 'cart.shipping.multiple_rates' | t: number_of_rates: '*number_of_rates*', address: '*address*', rate: '*rate*' | json }},
+      "one_rate": {{ 'cart.shipping.one_rate' | t: address: '*address*' | json }},
+      "no_rates": {{ 'cart.shipping.no_rates' | t | json }},
+      "rate_value": {{ 'cart.shipping.rate_value' | t: rate_title: '*rate_title*', rate: '*rate*'  | json }},
+      "zip": {{ 'cart.shipping.zip' | t | json }},
+      "shipment_too_heavy": {{ 'cart.shipping.shipment_too_heavy' | t | json }},
+      "error_general": {{ 'cart.shipping.error_general' | t | json }}
+    }
+  }
+</script>
+
+<section
+  class="cart {% if has_sidebar %}has-sidebar{% endif %}"
+  aria-label="cart checkout"
+>
+  <header class="cart-title">
+    <div class="cart-title-left">
+      <h1>{{ 'cart.general.your_cart' | t }}</h1>
+
+      {% if has_items %}
+        <div class="cart-title-total--small"></div>
+      {% endif %}
+    </div>
+
+    {% if has_items or show_continue_link %}
+      <div class="cart-title-right">
+        {% if has_items %}
+          <div class="cart-title-total--large">
+            <div class="cart-title-total" data-cart-title-total>
+              {{ 'cart.general.subtotal' | t }}
+
+              <span class="money" data-cart-total="{{ cart.total_price }}">
+                {{ cart.total_price | money }}
+              </span>
+            </div>
+          </div>
+
+          <button
+            class="button-primary cart-title-button"
+            name="checkout"
+            type="submit"
+            form="cart-form"
+            aria-label="{{ 'cart.general.checkout' | t }}"
+          >
+            {% if settings.enable_checkout_lock_icon %}
+              {% include 'icon-library', id: 'icon-checkout-lock' %}
+            {% else %}
+              {% include 'icon-library', id: 'icon-cart' %}
+            {% endif %}
+            {{ 'cart.general.checkout' | t }}
+          </button>
+        {% elsif show_continue_link %}
+          {{ continue_link_html }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="cart-flow">
+    {% if has_items %}
+      <form
+        class="cart-form"
+        id="cart-form"
+        action="{{ routes.cart_url }}"
+        method="post"
+        data-cart-form
+      >
+        {% if has_items %}
+          <ul
+            class="cart-items-wrapper {% if settings.enable_product_card_spacing == false %}cartitems--no-spacing{% endif %}"
+          >
+            {% for item in cart.items %}
+              {%
+                include 'cart-item',
+                item: item,
+              %}
+            {% endfor %}
+          </ul>
+
+          {% if section.settings.enable_order_notes %}
+            <div class="cart-ordernote">
+              <span class="cart-ordernote-heading">{{ 'cart.general.enter_order_note' | t }}</span>
+              <div class="form-field">
+                <textarea
+                  class="
+                    form-field-input
+                    form-field-textarea
+                  "
+                  id="cart-note"
+                  name="note"
+                >
+                  {{- cart.note -}}
+                </textarea>
+                <label class="form-field-title" for="cart-note">{{ 'cart.general.special_instructions' | t }}</label>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </form>
+
+      {% comment %}
+        Because cross-sell does significant tag iteration,
+        it's important to ensure the logic does not run
+        unless the store has the flag set for the feature.
+
+        NOTE: Enabling this feature on a store with many
+              tags may cause performance issues
+      {% endcomment %}
+      {% if shop.metafields.cross_sell.enabled == 1 %}
+        {% comment %}Inject cart-cross-sell begin{% endcomment %}
+        {% assign cross_sell_priority = '0' %}
+        {% assign cross_sell_product = nil %}
+        {% assign cross_sell_variant = nil %}
+        {% assign cross_sell_show_quantity = true %}
+        {% assign cross_sell_cart_products = '' %}
+        
+        {% comment %}
+          Turn all cart items into an array of strings for faster comparison
+          when determining whether a cross-sell product is already in the cart
+        {% endcomment %}
+        {% for item in cart.items %}
+          {% assign cross_sell_cart_products = cross_sell_cart_products | append: item.product.handle %}
+          {% unless forloop.last %}
+            {% assign cross_sell_cart_products = cross_sell_cart_products | append: ',' %}
+          {% endunless %}
+        {% endfor %}
+        {% assign cross_sell_cart_products = cross_sell_cart_products | split: ',' %}
+        
+        {% for item in cart.items %}
+          {% assign cross_sell_tmp_priority = '0' %}
+          {% assign cross_sell_tmp_product_handle = nil %}
+          {% assign cross_sell_tmp_variant_id = nil %}
+          {% assign cross_sell_tmp_quantity_disabled = false %}
+        
+          {% for tag in item.product.tags %}
+            {% comment %}
+              Cross sell tags are of the format cross-sell:<attribute>:<value>
+            {% endcomment %}
+            {% assign split_on_delimeter = tag | split: ':' %}
+            {% if split_on_delimeter.size != 3 or split_on_delimeter[0] != 'cross-sell' %}
+              {% continue %}
+            {% endif %}
+        
+            {% comment %}
+              A tag with the format cross-sell:product:<handle> determines the
+              product to cross sell with this cart item
+            {% endcomment %}
+            {% if split_on_delimeter[1] == 'product' %}
+              {% comment %}
+                If the cross-sell product is already in the cart
+                we can safely ignore this and move on
+              {% endcomment %}
+              {% if cross_sell_cart_products contains split_on_delimeter[2] %}
+                {% break %}
+              {% endif %}
+        
+              {% assign cross_sell_tmp_product_handle = split_on_delimeter[2] %}
+        
+              {% comment %}
+                When multiple cart items have products that should be cross sold,
+                we need to determine whether one cross sell product has priority of another.
+                This checks the cross sold product for a priority tag of the format
+                cross-sell:priority:<value> where a higher number takes precedence.
+              {% endcomment %}
+              {% for cross_sell_tmp_tag in all_products[cross_sell_tmp_product_handle].tags %}
+                {% assign cross_sell_tmp_split_on_delimeter = cross_sell_tmp_tag | split: ':' %}
+                {% if cross_sell_tmp_split_on_delimeter.size != 3 or cross_sell_tmp_split_on_delimeter[0] != 'cross-sell' %}
+                  {% continue %}
+                {% endif %}
+                {% if cross_sell_tmp_split_on_delimeter[1] == 'priority' %}
+                  {% assign cross_sell_tmp_priority = cross_sell_tmp_split_on_delimeter[2] %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+        
+            {% comment %}
+              A tag with the format cross-sell:variant:<variant-id> determines
+              the product's variant that should be selected by default. Otherwise
+              it defaults to the selected or first available variant.
+            {% endcomment %}
+            {% if split_on_delimeter[1] == 'variant' %}
+              {% assign cross_sell_tmp_variant_id = split_on_delimeter[2] %}
+            {% endif %}
+        
+            {% comment %}
+              A tag with the format cross-sell:quantity:disabled determines whether
+              to show the quantity selector. This allows us to display a cross sold product
+              with only the availability information and the add to cart button in cases
+              where the product has no variants.
+            {% endcomment %}
+            {% if split_on_delimeter[1] == 'quantity' and split_on_delimeter[2] == 'disabled' %}
+              {% assign cross_sell_tmp_show_quantity = false %}
+            {% endif %}
+          {% endfor %}
+        
+          {% comment %}
+            After iterating through the tags, if this product's cross sold product isn't
+            of a higher priority than the currently found one, we ignore it.
+            This means in situations where cross sold products are of the same priority,
+            it works on a first-come-first-serve basis.
+          {% endcomment %}
+          {% if cross_sell_tmp_priority < cross_sell_priority %}
+            {% continue %}
+          {% endif %}
+        
+          {% comment %}
+            Finally, we set all the variables to the values we found iterating through the tags.
+            We set the default variant if no variant information is supplied.
+          {% endcomment %}
+          {% if cross_sell_tmp_product_handle %}
+            {% assign cross_sell_priority = cross_sell_tmp_priority %}
+            {% assign cross_sell_product = all_products[cross_sell_tmp_product_handle] %}
+            {% assign cross_sell_show_quantity = cross_sell_tmp_show_quantity %}
+            {% if cross_sell_tmp_variant_id %}
+              {% for variant in cross_sell_product.variants %}
+                {% if cross_sell_tmp_variant_id == variant.id %}
+                  {% assign cross_sell_variant = variant %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% assign cross_sell_variant = cross_sell_product.selected_or_first_available_variant %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        
+        {% comment %}
+          As long as we have both a product and variant,
+          display the cross sell information
+        {% endcomment %}
+        {% if cross_sell_product and cross_sell_variant %}
+          {%
+            render 'cross-sell',
+            product: cross_sell_product,
+            variant: cross_sell_variant,
+            show_quantity: cross_sell_show_quantity,
+          %}
+        {% endif %}
+        {% comment %}Inject cart-cross-sell end{% endcomment %}
+
+      {% endif %}
+    {% else %}
+      <div class="cartitems-empty">
+        <div class="cartitems-empty--inner">
+          <p>{{ 'cart.general.cart_empty' | t }}</p>
+
+          {% if show_continue_link %}
+            <a class="button-primary" href="{{ continue_url }}">
+              {% include 'icon-library', id: 'icon-cart' %}
+              {{ 'cart.general.continue_shopping' | t }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if has_items %}
+      <div class="cart-total" data-cart-totals>
+        <div class="cart-subtotal">
+          <span aria-live="polite">{{ 'cart.general.subtotal' | t }}</span>
+          <span class="money" aria-live="polite" data-cart-total>{{ cart.total_price | money }}</span>
+        </div>
+      </div>
+
+      <div class="rte cart-notifications" data-cart-notifications></div>
+      <div class="rte cart-tools" data-cart-tools></div>
+
+      {%- capture taxes_shipping_checkout -%}
+        {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+          {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+        {%- elsif cart.taxes_included -%}
+          {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+        {%- elsif shop.shipping_policy.body != blank -%}
+          {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+        {%- else -%}
+          {{ 'cart.general.tax_and_shipping' | t }}
+        {%- endif -%}
+      {%- endcapture -%}
+
+      <div class="cart-shipping">
+        <p class="cart-message">{{ taxes_shipping_checkout }}</p>
+
+        {% comment %}
+          snippets/cart-shipping.liquid has an internal check to see if shipping is required
+        {% endcomment %}
+        {% if section.settings.enable_shipping_calc %}
+          {% include 'cart-shipping' %}
+        {% endif %}
+      </div>
+
+      <div class="cart-checkout">
+        <button
+          class="button-primary"
+          type="submit"
+          name="checkout"
+          form="cart-form"
+          aria-label="{{ 'cart.general.checkout' | t }}"
+        >
+          {% if settings.enable_checkout_lock_icon %}
+            {% include 'icon-library', id: 'icon-checkout-lock' %}
+          {% else %}
+            {% include 'icon-library', id: 'icon-cart' %}
+          {% endif %}
+          {{ 'cart.general.checkout' | t }}
+        </button>
+
+        {% if additional_checkout_buttons %}
+          <div class="additional-checkout-buttons">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        {% endif %}
+
+        {% if show_continue_link %}
+          {{ continue_link_html }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if has_sidebar %}
+    <div class="cart-sidebar">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          {% assign image = block.settings.image %}
+
+          <article class="cart-sidebar-item">
+            {% if image %}
+              {%
+                include 'rimg',
+                img: image,
+                class: 'cart-sidebar-item-image',
+                size: '445x',
+                lazy: settings.lazy_load,
+                canvas: settings.lazy_load
+              %}
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder--image cart-sidebar-item-image' }}
+            {% endif %}
+          </article>
+        {% endif %}
+
+        {% if block.type == 'richtext' %}
+          <article class="cart-sidebar-item cart-sidebar-item--text rte">
+            {{ block.settings.richtext }}
+          </article>
+        {% endif %}
+
+        {% if block.type == 'page' %}
+          <article class="cart-sidebar-item cart-sidebar-item--text rte">
+            {{ pages[block.settings.page].content }}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "class": "cart--section",
+  "max_blocks": 2,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_order_notes",
+      "label": "Enable order notes text box",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Shipping estimator"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shipping_calc",
+      "label": "Enable shipping estimator",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_calc_default_country",
+      "label": "Default country",
+      "default": "United States"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "richtext",
+      "name": "Rich text",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "richtext",
+          "type": "richtext",
+          "label": "Rich text",
+          "default": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news and seasonal promotions.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "page",
+          "type": "page",
+          "label": "Choose page"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

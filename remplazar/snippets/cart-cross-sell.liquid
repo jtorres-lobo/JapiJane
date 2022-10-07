@@ -1,0 +1,130 @@
+{% assign cross_sell_priority = '0' %}
+{% assign cross_sell_product = nil %}
+{% assign cross_sell_variant = nil %}
+{% assign cross_sell_show_quantity = true %}
+{% assign cross_sell_cart_products = '' %}
+
+{% comment %}
+  Turn all cart items into an array of strings for faster comparison
+  when determining whether a cross-sell product is already in the cart
+{% endcomment %}
+{% for item in cart.items %}
+  {% assign cross_sell_cart_products = cross_sell_cart_products | append: item.product.handle %}
+  {% unless forloop.last %}
+    {% assign cross_sell_cart_products = cross_sell_cart_products | append: ',' %}
+  {% endunless %}
+{% endfor %}
+{% assign cross_sell_cart_products = cross_sell_cart_products | split: ',' %}
+
+{% for item in cart.items %}
+  {% assign cross_sell_tmp_priority = '0' %}
+  {% assign cross_sell_tmp_product_handle = nil %}
+  {% assign cross_sell_tmp_variant_id = nil %}
+  {% assign cross_sell_tmp_quantity_disabled = false %}
+
+  {% for tag in item.product.tags %}
+    {% comment %}
+      Cross sell tags are of the format cross-sell:<attribute>:<value>
+    {% endcomment %}
+    {% assign split_on_delimeter = tag | split: ':' %}
+    {% if split_on_delimeter.size != 3 or split_on_delimeter[0] != 'cross-sell' %}
+      {% continue %}
+    {% endif %}
+
+    {% comment %}
+      A tag with the format cross-sell:product:<handle> determines the
+      product to cross sell with this cart item
+    {% endcomment %}
+    {% if split_on_delimeter[1] == 'product' %}
+      {% comment %}
+        If the cross-sell product is already in the cart
+        we can safely ignore this and move on
+      {% endcomment %}
+      {% if cross_sell_cart_products contains split_on_delimeter[2] %}
+        {% break %}
+      {% endif %}
+
+      {% assign cross_sell_tmp_product_handle = split_on_delimeter[2] %}
+
+      {% comment %}
+        When multiple cart items have products that should be cross sold,
+        we need to determine whether one cross sell product has priority of another.
+        This checks the cross sold product for a priority tag of the format
+        cross-sell:priority:<value> where a higher number takes precedence.
+      {% endcomment %}
+      {% for cross_sell_tmp_tag in all_products[cross_sell_tmp_product_handle].tags %}
+        {% assign cross_sell_tmp_split_on_delimeter = cross_sell_tmp_tag | split: ':' %}
+        {% if cross_sell_tmp_split_on_delimeter.size != 3 or cross_sell_tmp_split_on_delimeter[0] != 'cross-sell' %}
+          {% continue %}
+        {% endif %}
+        {% if cross_sell_tmp_split_on_delimeter[1] == 'priority' %}
+          {% assign cross_sell_tmp_priority = cross_sell_tmp_split_on_delimeter[2] %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% comment %}
+      A tag with the format cross-sell:variant:<variant-id> determines
+      the product's variant that should be selected by default. Otherwise
+      it defaults to the selected or first available variant.
+    {% endcomment %}
+    {% if split_on_delimeter[1] == 'variant' %}
+      {% assign cross_sell_tmp_variant_id = split_on_delimeter[2] %}
+    {% endif %}
+
+    {% comment %}
+      A tag with the format cross-sell:quantity:disabled determines whether
+      to show the quantity selector. This allows us to display a cross sold product
+      with only the availability information and the add to cart button in cases
+      where the product has no variants.
+    {% endcomment %}
+    {% if split_on_delimeter[1] == 'quantity' and split_on_delimeter[2] == 'disabled' %}
+      {% assign cross_sell_tmp_show_quantity = false %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %}
+    After iterating through the tags, if this product's cross sold product isn't
+    of a higher priority than the currently found one, we ignore it.
+    This means in situations where cross sold products are of the same priority,
+    it works on a first-come-first-serve basis.
+  {% endcomment %}
+  {% if cross_sell_tmp_priority < cross_sell_priority %}
+    {% continue %}
+  {% endif %}
+
+  {% comment %}
+    Finally, we set all the variables to the values we found iterating through the tags.
+    We set the default variant if no variant information is supplied.
+  {% endcomment %}
+  {% if cross_sell_tmp_product_handle %}
+    {% assign cross_sell_priority = cross_sell_tmp_priority %}
+    {% assign cross_sell_product = all_products[cross_sell_tmp_product_handle] %}
+    {% assign cross_sell_show_quantity = cross_sell_tmp_show_quantity %}
+    {% if cross_sell_tmp_variant_id %}
+      {% for variant in cross_sell_product.variants %}
+        {% if cross_sell_tmp_variant_id == variant.id %}
+          {% assign cross_sell_variant = variant %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% assign cross_sell_variant = cross_sell_product.selected_or_first_available_variant %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% comment %}
+  As long as we have both a product and variant,
+  display the cross sell information
+{% endcomment %}
+{% if cross_sell_product and cross_sell_variant %}
+  {%
+    render 'cross-sell',
+    product: cross_sell_product,
+    variant: cross_sell_variant,
+    show_quantity: cross_sell_show_quantity,
+  %}
+{% endif %}
+
+

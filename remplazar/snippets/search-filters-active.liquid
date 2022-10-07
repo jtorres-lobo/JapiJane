@@ -1,0 +1,65 @@
+{% assign filter_count = 0 %}
+
+{%- capture tag_icon -%}
+  <span class="filter-icon--remove">
+    {% render 'icon-remove-circled' %}
+    <span class="visually-hidden">
+      {{ 'product_grid.filters.remove_filter' | t }}
+    </span>
+  </span>
+{%- endcapture -%}
+
+<ul class="filter-group--grid search-filters__active">
+{%- for filter in search.filters -%}
+  {% if filter.type == 'price_range' and filter.min_value.value or filter.max_value.value %}
+    {% assign filter_count = filter_count | plus: 1 %}
+    {% assign range_min = filter.min_value.value | default: 0 %}
+    {% assign range_max = filter.max_value.value | default: filter.range_max %}
+
+    {%- capture tag_text -%}
+      <span class="filter-text">
+        {{ range_min | money }} - {{ range_max | money }}
+      </span>
+
+      {{- tag_icon -}}
+    {%- endcapture -%}
+
+      <li class="filter-item--grid">
+        <a href="{{ filter.url_to_remove }}" data-filter-remove>
+          {{ tag_text }}
+        </a>
+      </li>
+
+  {% else %}
+    {% if filter.active_values.size > 0 %}
+      {%- for value in filter.active_values -%}
+        {% assign filter_count = filter_count | plus: 1 %}
+        <li class="filter-item--grid">
+          {%- capture tag_text -%}
+            <span class="filter-text">
+              {{ value.label | escape }}
+            </span>
+
+            {{- tag_icon -}}
+          {%- endcapture -%}
+
+          <a href="{{ value.url_to_remove }}" data-filter-remove>
+            {{ tag_text }}
+          </a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if filter_count > 0 %}
+  <li class="filter-item--grid-simple">
+    {% capture clear_url %}
+      {{ routes.search_url }}?q={{ search.terms }}
+    {% endcapture %}
+    <a href="{{ clear_url }}" data-filter-remove>
+      {{ 'product_grid.filters.remove_all' | t }}
+    </a>
+  </li>
+{% endif %}
+</ul>

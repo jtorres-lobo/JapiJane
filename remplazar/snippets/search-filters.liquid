@@ -1,0 +1,195 @@
+{% capture checkbox %}
+  <span class="filter-icon--checkbox">
+    {% 
+      include 'icon-library', 
+      id: 'icon-checkbox',
+    %}
+  </span>
+{% endcapture %}
+
+{%- capture search_href -%}
+  {{ routes.search_url }}?q={{ search.terms }}
+{%- endcapture -%}
+<form
+  id="search-filter-form"
+  class="search-filter__form faceted-filter__form"
+  data-search-filter-form
+>
+  {% for filter in search.filters %}
+    <div class="search-filters__details-wrapper">
+      <details
+        class="
+          search-filters__filter-group
+        "
+        aria-label="{{ filter.label }}"
+        data-filter-group
+      >
+        <summary
+          class="search-filters__filter-group-title"
+          data-filter-group-summary
+          data-filter-group-index="{{ forloop.index0 }}"
+        >
+          <span class="search-filters__filter-title">
+            {{ filter.label }}
+            {%- if filter.type == 'list' and filter.active_values.size > 0 -%}
+              ({{ filter.active_values.size | strip }})
+            {% elsif filter.type == 'price_range' %}
+              {%- if filter.max_value.value or filter.min_value.value -%}
+                {% comment %}
+                  If there are any price filters applied, just indicate that there is a single
+                  active filter in this dropdown
+                {% endcomment %}
+                (1)
+              {%- endif -%}
+            {%- endif -%}
+          </span>
+        </summary>
+
+        {% case filter.type %}
+          {% when 'list' %}
+            <ul
+              class="
+                search-filters__filter-list
+                search-filters__filters
+              "
+              data-filter-container
+            >
+              {% for value in filter.values %}
+                <li
+                    class="
+                    filter-item
+                    search-filters__filter-item
+                    {% if value.active %}
+                     filter-item--active
+                    {% else %}
+                     filter-item--inactive
+                    {% endif %}
+                    {% if value.count == 0 and value.active == false %}
+                      filter-item--disabled
+                    {% endif %}
+                  "
+                  data-filter-item
+                >
+                  <label
+                    for="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                    class="
+                      search-filter-item__label
+                      {% if value.count == 0 and value.active == false %}filter-item__label--disabled{% endif %}
+                    "
+                    data-filter-label
+                  >
+                    <input
+                      type="checkbox"
+                      class="faceted-filter__checkbox"
+                      name="{{ value.param_name }}"
+                      value="{{ value.value }}"
+                      id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                      data-filter-checkbox
+                      data-href="{{ search_href }}"
+                      {% if value.active %}checked{% endif %}
+                      {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                    >
+                    {{ checkbox }}
+                    <span class="faceted-filter__label-text">
+                      {{ value.label }} {% if section.settings.show_product_counts %}({{ value.count }}){% endif %}
+                    </span>
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          {% when 'price_range' %}
+            <div
+              class="
+                search-filters__filters
+                search-filters__price-range-form
+              "
+              data-filter-container
+            >
+              <div
+                class="
+                  search-filters__filter
+                  search-filters__filter-range
+                "
+                data-filter-group-range
+              >
+                <div class="search-filters__filter-range--from">
+                  <span class="search-filters__filter-range-currency">
+                    {{ cart.currency.symbol }}
+                  </span>
+                  <div class="form-field">
+                    <input
+                      class="
+                        search-filters__filter-range-input
+                        form-field-input
+                        form-field-text
+                        {% if filter.min_value.value %}
+                          form-field-filled
+                        {% endif %}
+                      "
+                      name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.label }}-{{ forloop.index }}-from"
+                      {% if filter.min_value.value -%}
+                        value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      data-href="{{ search_href }}"
+                      data-filter-range
+                    >
+                    <label
+                      class="
+                        form-field-title
+                        search-filters__filter-range-label
+                      "
+                      for="filter-{{ filter.label }}-{{ forloop.index0 }}-from"
+                    >
+                      {{ 'product_grid.filters.price_from' | t }}
+                    </label>
+                  </div>
+                </div>
+                <div class="search-filters__filter-range--to">
+                  <span class="search-filters__filter-range-currency">
+                    {{ cart.currency.symbol }}
+                  </span>
+                  <div class="form-field">
+                    <input
+                      class="
+                        search-filters__filter-range-input
+                        form-field-input
+                        form-field-text
+                        {% if filter.max_value.value %}
+                          form-field-filled
+                        {% endif %}
+                      "
+                      name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.label }}-{{ forloop.index }}-to"
+                      {% if filter.max_value.value -%}
+                        value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                      {%- endif %}
+                      type="number"
+                      placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      data-href="{{ search_href }}"
+                      data-filter-range
+                    >
+                    <label
+                      class="
+                        form-field-title
+                        search-filters__filter-range-label
+                      "
+                      for="filter-{{ filter.label }}-{{ forloop.index0 }}-to"
+                    >
+                      {{ 'product_grid.filters.price_to' | t }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      </details>
+    </div>
+  {% endfor %}
+</form>

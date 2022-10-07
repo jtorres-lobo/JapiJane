@@ -1,0 +1,337 @@
+{% comment %}
+  @param layout {String}
+  Layout type
+
+  @param show_description {Bool}
+  If false, hide the product description
+
+  @param gallery_aspect_ratio {string}
+  This is the gallery aspect ratio, can be one of 'natural', 'short', 'square', 'long'
+
+  @param gallery_thumbnail_position {string}
+  This is the gallery thumbnail position, can be one of 'below', or 'left'
+
+  @param gallery_image_crop {boolean}
+  Whether to crop images
+
+  @param gallery_hover_zoom {String}
+  This is the hover zoom setting, which is either 'disabled', 'separate', or 'replace'
+
+  @param gallery_click_to_zoom {String}
+  This is the click to zoom setting, which is either 'disabled', 'mobile', 'desktop', or 'always'{% endcomment %}
+
+{% unless show_description %}
+  {% assign show_description = true %}
+{% endunless %}
+{% assign selected_variant = product.selected_or_first_available_variant %}
+{% assign selected_image = selected_variant.image | default: product.featured_image %}
+{% assign compare_at_price = selected_variant.compare_at_price %}
+{% assign price = selected_variant.price %}
+{% assign sku = selected_variant.sku %}
+{% assign product_available = product.available %}
+
+{%
+      include 'api' with 'variant:price',
+      product: product,
+      variant: selected_variant,
+    %}
+
+{% if onboarding %}
+  {% assign compare_at_price = 2999 %}
+  {% assign price = 1999 %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if compare_at_price > price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{%- capture share_buttons -%}
+  {% assign social_image = false %}
+  {% if product.featured_image %}
+    {% assign social_image = product.featured_image | img_url: '1024x' %}
+  {% endif %}
+  {% assign social_url = shop.url | append: product.url %}
+  {%-
+        include 'share-buttons',
+        snippet_title: 'general.share_buttons.title',
+        social_image: social_image,
+        social_title: product.title,
+        social_url: social_url
+      -%}
+{%- endcapture  -%}
+
+<article class="product--outer">
+  {% comment %}
+    Product slideshow, never moves
+  {% endcomment %}
+  {%
+        include 'product-gallery',
+        selected_image: selected_image,
+        is_product_modal: false,
+        aspect_ratio: gallery_aspect_ratio,
+        thumbnail_position: gallery_thumbnail_position,
+        image_crop: gallery_image_crop,
+        click_to_zoom: gallery_click_to_zoom,
+        hover_zoom: gallery_hover_zoom,
+        onboarding: onboarding,
+      %}
+  <div class="product-main">
+    <div class="product-details" data-product-details>
+
+      {% for block in section.blocks %}
+
+        <div class="
+            product-block
+            product-block--{{ block.type }}
+            {% if forloop.first %}
+                product-block--first
+            {% endif %}
+            " {{ block.shopify_attributes }}>
+          {% case block.type %}
+            {% when '@app' %}
+              <div class="product-app">
+                {% render block %}
+              </div>
+
+            {% when 'title' %}
+              {% if template == 'index' %}
+                <h2 class="product-title">
+                {% else %}
+                  <h1 class="product-title">
+                  {% endif %}
+                  {% unless onboarding %}
+                    {{ product.title }}
+                  {% else %}
+                    {{ 'onboarding.product.title' | t }}
+                  {% endunless %}
+                  {% if template == 'index' %}
+                  </h2>
+              {% else %}
+                </h1>
+              {% endif %}
+
+            {% when 'text' %}
+              <div class="product-text">
+                {{ block.settings.text }}
+              </div>
+
+
+
+            {% when 'vendor' %}
+              {% if product.vendor != blank or onboarding %}
+                <div class="product-vendor">
+                  {% unless onboarding %}
+                    {%- capture vendor_link -%}
+                      {{ product.vendor | link_to_vendor }}
+                    {%- endcapture -%}
+                    {{ 'product.general.by_vendor_html' | t: vendor_link: vendor_link }}
+                  {% else %}
+                    {{ 'onboarding.product.by_vendor' | t }}
+                  {% endunless %}
+                </div>
+              {% endif %}
+
+            {% when 'rating' %}
+              {% if settings.product_ratings_reviews and product.metafields.reviews.rating.value != blank %}
+                <div class="product-ratings">
+                  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}">
+                    <span class="spr-badge">
+                      <span class="spr-starrating spr-badge-starrating">
+                        <i class="spr-icon spr-icon-star-empty"></i>
+                        <i class="spr-icon spr-icon-star-empty"></i>
+                        <i class="spr-icon spr-icon-star-empty"></i>
+                        <i class="spr-icon spr-icon-star-empty"></i>
+                        <i class="spr-icon spr-icon-star-empty"></i>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              {% endif %}
+
+
+            {% when 'price' %}
+{% if product.tags contains 'No agregar' %}
+{% else %}
+              <div class="product-pricing" aria-live="polite">
+                {%
+                      include 'product-badge',
+                      class_root: 'product',
+                      product_available: product_available,
+                      on_sale: on_sale,
+                      price: price,
+                      compare_at_price: compare_at_price,
+                      show_saved: true
+                    %}
+
+                {%
+                      include 'product-price',
+                      class_root: 'product',
+                      price: price,
+                      price_varies: false,
+                      compare_at_price: compare_at_price,
+                      compare_at_price_varies: false,
+                      on_sale: on_sale,
+                      emphasize_price: false,
+                      show_original: true
+                    %}
+              </div>
+{% endif %}
+
+            {% when 'sku' %}
+{% if product.tags contains 'No agregar' %}
+{% else %}
+              {% unless onboarding %}
+                <div class="
+                                                                                                    product-sku
+                                                                                                    {% if sku == empty %}product-sku--empty{% endif %}
+                                                                                                  ">
+                  {{ 'product.general.sku_html' | t: sku: sku | strip_newlines }}
+                </div>
+              {% endunless %}
+{% endif %}
+
+            {% when 'form' %}
+{% if product.tags contains 'No agregar' %}
+
+{% else %}
+              {%- assign product_sold_out = false -%}
+              {%- if settings.in_stock_notification_form != 'disabled' and product.available == false -%}
+                {%- assign product_sold_out = true -%}
+              {%- endif -%}
+              <div class="product-form--regular" data-product-form>
+                <div {% if product_sold_out %}class="product-sold-out"{% endif %} data-product-form-area>
+                  {% if is_product_modal %}
+                    <div data-product-quickshop-message class="product-message--container"></div>
+                  {% endif %}
+                  {% unless onboarding %}
+                    {%
+                          include 'product-form',
+                          product: product,
+                          show_dcb: show_dcb,
+                          selected_variant: selected_variant,
+                          is_product_modal: false,
+                        %}
+
+                    {% if settings.in_stock_notification_form != 'disabled' %}
+                      {%
+                            include 'product-in-stock-notification-form',
+                            product: product,
+                          %}
+                    {% endif %}
+                  {% endunless %}
+                </div>
+              </div>
+{% endif %}
+            {% when 'view-product-link' %}
+              <a class="product-link" href="{{ product.url | within: collection }}" data-product-details-link>
+                {{ block.settings.text | escape }}
+              </a>
+
+            {% when 'custom-liquid' %}
+              {% if block.settings.custom_liquid != blank %}
+                <div class="custom-liquid">
+                  {{ block.settings.custom_liquid }}
+                </div>
+              {% endif %}
+            {% when 'share' %}
+              {{ share_buttons | strip_newlines }}
+
+            {% when 'description' %}
+              {% capture product_description %}
+                {%- include 'shortcode-readmore', text: product.description, before_readmore: true -%}
+              {% endcapture %}
+              {% if product_description != blank and show_description %}
+                <div class="product-description rte" data-product-description>{{ product_description }}
+                </div>
+              {% endif %}
+{% if product.tags contains 'No agregar' %}
+<div class="mg-fix">
+    <a class="btn--consultar-chat" href="https://japijane.cl/pages/chat?gs_open_chat">
+    Consulta en nuestro chat
+    </a>
+</div>
+{% endif %}
+
+
+
+
+          {% endcase %}
+        </div>
+      {% endfor %}
+
+      {% if layout == 'layout--three-col' %}
+        {%- assign product_sold_out = false -%}
+        {%- if settings.in_stock_notification_form != 'disabled' and product.available == false -%}
+          {%- assign product_sold_out = true -%}
+        {%- endif -%}
+        <div class="product-form--regular" data-product-form-regular>
+          <div {% if product_sold_out %}class="product-sold-out"{% endif %} data-product-form-area>
+            {% unless onboarding %}
+              {%
+                    include 'product-form',
+                    product: product,
+                    selected_variant: selected_variant,
+                    is_product_modal: false,
+                  %}
+              {%- if settings.in_stock_notification_form != 'disabled' -%}
+                {%
+                      include 'product-in-stock-notification-form',
+                      product: product,
+                    %}
+              {%- endif -%}
+            {% endunless %}
+          </div>
+        </div>
+      {% endif%}
+
+    </div>
+    {% comment %}
+      end product-details
+    {% endcomment %}
+
+  </div>
+
+  {% comment %}
+    end product-main
+  {% endcomment %}
+
+  {% comment %}
+    If is a 3 column layout, the form will move here at $bp-large (layout.isBreakpoint('L'))
+  {% endcomment %}
+  {% if layout == 'layout--three-col' %}
+    <div class="product-form--alt" data-product-form-alt></div>
+  {% endif %}
+
+  {% capture product_readmore %}
+    {%- include 'shortcode-readmore', text: product.description -%}
+  {% endcapture %}
+  {% unless product_readmore == blank %}
+    <div class="product-readmore rte">{{ product_readmore }}
+    </div>
+  {% endunless %}
+</article>
+
+{% assign show_description = blank %}
+{% assign layout = blank %}
+
+
+<style>
+    .btn--consultar-chat{
+    margin: .5rem 0;
+    color: #ffffff;
+    background-color: #ff94a2;
+    border: 1px solid #ffcac0;
+    font-size: .8rem;
+    cursor: pointer;
+    text-decoration: none;
+    padding: .5rem 1rem;
+    }
+    .btn--consultar-chat:hover{
+    text-decoration: none;
+    background-color: #ffcac0;
+    }
+    .mg-fix{
+        margin-top:1rem;
+    }
+</style>

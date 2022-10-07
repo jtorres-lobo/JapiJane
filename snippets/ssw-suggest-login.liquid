@@ -5,9 +5,4 @@
       {% assign customer_locale = published_locale.iso_code | prepend: 'lang_' %}
     {% endif %}
   {% endfor %}
-{% endunless %}
-<div id="ssw-suggest-login" data-show-time="0">
-  <button class="ssw-close">&times;</button>
-  <span class="ssw-suggest-text ssw-control-group"></span>
-  <span><a class="btn button ssw-login-btn" href="/account/login">{{ shop.metafields.ssw[customer_locale].value.log_in }}</a></span>
-</div>
+{% endunless %}<div id="ssw-suggest-login" data-show-time="0"><button class="ssw-close">&times;</button><span class="ssw-suggest-text ssw-control-group"></span><span><a class="btn button ssw-login-btn" href="/account/login">{{ shop.metafields.ssw[customer_locale].value.log_in }}</a></span></div>
