@@ -1,4 +1,6 @@
-
+.nocareignoreit{
+  color: red;
+}
   
 @font-face {
   font-family: Zurich;
