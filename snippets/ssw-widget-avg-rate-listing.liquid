@@ -48,18 +48,32 @@
       {% endif %}
     {% endif %}
 
-    {% assign review_listing = shop.metafields.ssw[customer_locale].value.review_listing | replace: "{{ ssw_avg_rate }}", ssw_avg_rate %} <div class="ssw-widget-avg-rate-listing ssw-stars ssw-stars-large {% if ssw_count_rate == 0 %}ssw-hide{% endif %}" data-rate="{{ ssw_avg_rate }}" tabindex="0" aria-label="{{ review_listing }}">{% assign ssw_j = ssw_avg_rate | floor %}
-      {% for i in (1..ssw_j) %} <i class="ssw-icon-star"></i> {% endfor %}
+    {% assign review_listing = shop.metafields.ssw[customer_locale].value.review_listing | replace: "{{ ssw_avg_rate }}", ssw_avg_rate %}
+
+    <div class="ssw-widget-avg-rate-listing ssw-stars ssw-stars-large {% if ssw_count_rate == 0 %}ssw-hide{% endif %}" data-rate="{{ ssw_avg_rate }}" tabindex="0" aria-label="{{ review_listing }}">
+      {% assign ssw_j = ssw_avg_rate | floor %}
+      {% for i in (1..ssw_j) %}
+        <i class="ssw-icon-star"></i>
+      {% endfor %}
       {% assign ssw_rate_last_star = 5 | minus:ssw_avg_rate %}
       {% assign ssw_y = ssw_rate_last_star | floor %}
       {% assign ssw_x = ssw_avg_rate | minus:ssw_j %}
-      {% if ssw_x > 0.74 %} <i class="ssw-icon-star"></i> {% else %}
-        {% if ssw_x > 0.24 %} <i class="ssw-icon-star-half-alt"></i> {% else %}
+      {% if ssw_x > 0.74 %}
+        <i class="ssw-icon-star"></i>
+      {% else %}
+        {% if ssw_x > 0.24 %}
+          <i class="ssw-icon-star-half-alt"></i>
+        {% else %}
           {% if ssw_x > 0 %}
             {% assign ssw_y = ssw_y | plus:1 %}
           {% endif %}
         {% endif %}
       {% endif %}
-      {% for i in (1..ssw_y) %} <i class="ssw-icon-star-empty"></i> {% endfor %} <span class="ssw-review-count" tabindex="0" aria-label=" {{ssw_count_rate}}">({{ssw_count_rate}})</span></div> {% endif %}
+      {% for i in (1..ssw_y) %}
+        <i class="ssw-icon-star-empty"></i>
+      {% endfor %}
+      <span class="ssw-review-count" tabindex="0" aria-label=" {{ssw_count_rate}}"> ({{ssw_count_rate}}) </span>
+    </div>
+  {% endif %}
   {% endif %}
 {% endif %}

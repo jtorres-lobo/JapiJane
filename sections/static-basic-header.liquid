@@ -210,15 +210,41 @@
           </span>
         </div>
       </button>
+      {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
+      {% if the_snippet_auth contains 'Liquid error' %}
+        {% if shop.customer_accounts_enabled %}
+          <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
+            <div class="site-header-icon site-header-account-icon">
+              {% include 'icon-library', id: 'icon-account' %}
+              <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+            </div>
+          </a>
+        {% endif %}
+      {% else %}
+        <div class="ssw-topauth site-header-button site-header-account-button">
+          {% if customer %}
+            <div class="ssw-tprofile ssw-dropdown">
+              <a class="ssw-dropdown-toggle site-header-icon site-header-account-icon" data-toggle="ssw-dropdown" href="javascript:void(0);">
+                {% include 'icon-library', id: 'icon-account' %}
+                <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+              </a>
+              <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
+                {% render 'ssw-widget-dropdown' %}
+                <li class="ssw-divider"></li>
+                <li><a id="customer_logout_link" tabindex="-1" href="/account/logout">{{ 'socialshopwave.logout' | t }}</a></li>
+              </ul>
+            </div>
+          {% else %}
+            <a class="site-header-icon site-header-account-icon" id="customer_login_link" href="#" onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal" onclick="trackShopStats('login_popup_view', 'all')">
+              {% include 'icon-library', id: 'icon-account' %}
+              <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
+            </a>        
+          {% endif %}
+        </div>
+      {% endif %}    
 
-      {% if shop.customer_accounts_enabled %}
-        <a class="site-header-button site-header-account-button" href="{{ routes.account_url }}">
-          <div class="site-header-icon site-header-account-icon">
-            {% include 'icon-library', id: 'icon-account' %}
-            <span class="visually-hidden">{{ 'general.accessibility.account' | t }}</span>
-          </div>
-        </a>
-      {% endif %}
+
 
       <a class="site-header-button site-header-cart-button" href="{{ routes.cart_url }}">
         <div class="site-header-icon site-header-cart-icon">
@@ -235,15 +261,7 @@
   </div>
 
   {%- if section.settings.navigation_layout == 'below' -%}
-    <div 
-      class="
-        site-navigation-wrapper
-        
-        {% if section.settings.full_width_header %}
-          site-header--full-width
-        {% endif %}  
-      "
-    >
+    <div class="site-navigation-wrapper">
       {{ header_nav }}
     </div>
   {%- endif -%}
@@ -261,7 +279,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "This is the Basic header. If you want to change the header layout, go to the Layout section in the Theme settings tab. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412215709971)"
+      "content": "This is the Basic header. If you want to change the header layout, go to the Layout section in the Theme settings tab. [Learn more](https://support.pixelunion.net/hc/en-us/articles/360022060854-Header-Layout-options)"
     },
     {
       "id": "sticky_header",
@@ -310,7 +328,7 @@
       "id": "desktop_logo",
       "type": "image_picker",
       "label": "Desktop",
-      "info": "Square or landscape images recommended. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412223529747)"
+      "info": "Square or landscape images recommended. [Learn more](https://support.pixelunion.net/hc/en-us/articles/360022033634)"
     },
     {
       "id": "desktop_logo_height",
@@ -342,7 +360,7 @@
       "id": "mobile_logo",
       "type": "image_picker",
       "label": "Mobile",
-      "info": "Square or landscape images recommended. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/4412223529747)"
+      "info": "Square or landscape images recommended. [Learn more](https://support.pixelunion.net/hc/en-us/articles/360022033634)"
     },
     {
       "id": "mobile_logo_height",
