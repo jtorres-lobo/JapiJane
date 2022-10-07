@@ -1,9 +1,672 @@
-.ssw-fave-btn.ssw-faveappbtn.ssw-faveappbtn-counter.ssw-faveappbtn2.ssw-fave-btn-default,
-.ssw-fave-btn.ssw-faveappbtn.ssw-faveappbtn-counter.ssw-faveappbtn2.ssw-fave-btn-default.ssw-active,
-button.btn.button.ssw-fave-btn-content {
+#widget-fave-html {
+  margin-top: 0.9375rem;
   width: 100%;
 }
 
-div#widget-fave-html {
-  margin-top: 14px;
+#widget-fave-html .ssw-fave-btn {
+  width: 100%;
+  line-height: 42px;
 }
+
+#widget-fave-html .ssw-fave-btn-content,
+.ssw-product-btns .ssw-fave-btn-content{
+  width: 100%;
+  font-size: var(--font-size-button-large);
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  font-family: Muli,sans-serif;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+#widget-fave-html .ssw-fave-btn-counter,
+#widget-fave-html .ssw-fave-btn-counter:before {
+  border-radius: 0;
+}
+
+.ssw-product-btns .ssw-fave-btn-content i {
+  color: #fff;
+}
+
+.ssw-product-btns .ssw-fave-btn-content,
+.ssw-product-btns .ssw-fave-btn-counter:before,
+.ssw-product-btns .ssw-fave-btn-counter {
+  background:#928ebd;
+  color: #fff;
+}
+
+
+.site-header-main-actions #ssw-topauth > div > .ssw-dropdown-toggle {
+  display: block;
+}
+
+#hesy-login-submit,
+#hesy-sign-up-submit {
+  padding: 8px 14px;
+  background-color: #928ebd;
+  color: #fff;
+}
+
+#login_modal a, #signup_modal a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Login modal customization start */
+
+#login_modal .ssw-modal-content,
+#signup_modal .ssw-modal-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 580px;
+  background: #FAE0DA;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
+}
+
+#login_modal input#hesy-login-submit,
+#signup_modal input#hesy-sign-up-submit{
+  width: 100%;
+  font-size: 20px;
+  padding: 5px;
+}
+
+#login_modal + .ssw-modal-backdrop.ssw-fade.ssw-in,
+#signup_modal + .ssw-modal-backdrop.ssw-fade.ssw-in{
+  background: #fff;
+}
+
+#login_modal .ssw-modal-body,
+#signup_modal .ssw-modal-body{
+  overflow: unset;
+}
+
+#login_modal  .ssw-modal-footer {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+#login_modal  .ssw-modal-footer,
+#signup_modal .ssw-modal-footer{
+  text-align: center;
+  border: none;
+}
+
+#login_modal .ssw-modal-content *,
+#signup_modal .ssw-modal-content *{
+  color: #3E3D54;
+}
+
+#login_modal .ssw-close,
+#signup_modal .ssw-close{
+  position: absolute;
+  bottom: -80px;
+  left: calc(50% - 40px);
+  display: flex;
+  opacity: 1;
+  font-weight: 800;
+
+}
+
+#login_modal .ssw-gconnect > a ,
+#signup_modal .ssw-gconnect  > a{
+  background: #fff;
+}
+
+
+
+#login_modal .ssw-close:after,
+#signup_modal .ssw-close:after{
+  content: 'cerrar';
+  margin-left: 5px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+#signup_modal .ssw-close {
+  bottom: -130px;
+}
+
+#login_modal .ssw-modal-body .ssw-h3 {
+  font-weight: 800;
+}
+
+#signup_modal .ssw-modal-body .ssw-h3 {
+  max-width: 75%;
+  margin: 15px auto 0 auto;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+#signup_modal .ssw-socialconnect {
+  margin: 10px 0;
+}
+
+#signup_modal .login-failed {
+  margin: 0;
+}
+
+#signup_modal .ssw-modal-footer {
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0 auto;
+  font-size: 0;
+}
+
+#signup_modal .ssw-modal-footer .ssw-gdpr-subscribe-notify.ssw-muted {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+#signup_modal .ssw-modal-footer a {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#signup_modal .ssw-modal-footer a:before {
+  content: "Ya tienes una cuenta? ";
+}
+
+@media all and (max-width: 767px) {
+  #login_modal .ssw-modal-content,
+  #signup_modal .ssw-modal-content{
+    height: calc(100vw - 20px);
+  }
+}
+
+@media all and (max-width: 600px) {
+
+  #signup_modal .ssw-login form input {
+    padding: 7px;
+    line-height: 15px;
+  }
+  
+    #signup_modal .ssw-socialconnect {
+      margin: 0;
+    }
+
+  #signup_modal .ssw-socialconnect > div > a {
+    line-height: 38px;
+  }
+
+  #signup_modal .ssw-close {
+    bottom: -110px;
+  }
+  
+  #signup_modal .ssw-close,
+  #signup_modal .ssw-close:after{
+    font-size:15px;
+  }
+
+  #login_modal .ssw-control-group,
+  #signup_modal .ssw-control-group {
+    margin-bottom: 5px;
+  }
+
+  #signup_modal .ssw-modal-body .ssw-h3 {
+    max-width: 65%;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  #signup_modal  .ssw-modal-footer {
+    padding-top: 0;
+  }
+  
+   #signup_modal  .ssw-modal-footer,
+   #signup_modal  .ssw-modal-body {
+     zoom: 0.9;
+     -moz-transform: scale(0.9);
+   }
+
+  #signup_modal .ssw-modal-footer .ssw-gdpr-subscribe-notify.ssw-muted {
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 0 25px;
+  }
+    #signup_modal .ssw-modal-footer{
+    font-size: 13px;
+  }
+  
+   #signup_modal input#hesy-sign-up-submit {
+      font-size: 17px;
+  }
+  
+   #signup_modal .ssw-socialconnect > div > a {
+     line-height: 38px;
+     margin: 5px 0;
+  }
+
+  #signup_modal form input {
+    padding: 5px 10px;
+    line-height: 15px !important;
+  }
+  
+  #signup_modal input#hesy-sign-up-submit,
+  #signup_modal .ssw-modal-footer a,
+  #signup_modal .ssw-modal-footer a:before {
+    font-size: 15px;
+  }
+}
+
+@media all (max-width: 450px) {
+  #signup_modal .ssw-modal-body .ssw-h3 {
+    max-width: 51%;
+    margin-top: 52px;
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  #login_modal .ssw-socialconnect > div > a  {
+    line-height: 38px;
+    margin: 5px 0;
+  }
+  
+  #login_modal .ssw-socialconnect {
+    margin: 0;
+  }
+
+  #signup_modal .ssw-modal-body .ssw-h3 {
+    max-width: 60%;
+    margin-top: 20px;
+    font-size: 17px;
+  }
+
+  #signup_modal  .ssw-modal-footer {
+    padding: 0 10px;
+  }
+
+  #signup_modal .ssw-modal-footer .ssw-gdpr-subscribe-notify.ssw-muted {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+
+
+}
+
+@media all and (max-width: 430px) {
+  #login_modal  .ssw-modal-footer ,
+  #login_modal .ssw-modal-body,
+  #signup_modal  .ssw-modal-footer ,
+  #signup_modal .ssw-modal-body{
+    padding-bottom: 10px;
+    padding-top: 0;
+  }
+  
+  #login_modal .ssw-socialconnect {
+    margin: 5px 0;
+  }
+
+  #login_modal .ssw-close,
+  #signup_modal .ssw-close{
+    left: calc(50% - 30px);
+    bottom: -50px;
+  }
+  
+   #signup_modal .ssw-socialconnect > div {
+     margin: 0 4px;
+   }
+
+  #login_modal .ssw-close:after,
+  #signup_modal .ssw-close:after,
+  #signup_modal .ssw-modal-footer a:before {
+    font-size: 14px;
+  }
+
+  #signup_modal .ssw-modal-body{
+    max-width: 400px;
+    margin: 0 auto;
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+  }
+
+  #login_modal .login-failed,
+  #signup_modal  .login-failed{
+    margin: 0 !important;
+  }
+
+  #login_modal input#hesy-login-submit,
+  #signup_modal input#hesy-sign-up-submit{
+    font-size: 13px;
+    padding: 5px;
+  }
+
+  #login_modal.ssw-login form {
+    width: 70%;
+  }
+
+  #login_modal form input,
+  #signup_modal form input {
+    padding: 5px 10px;
+    line-height: 15px !important;
+  }
+  
+  #signup_modal .ssw-modal-body .ssw-h3{
+    font-size: 13px;
+    max-width: 60%;
+    margin-top: 40px;
+  }
+  
+  #login_modal .ssw-modal-body .ssw-h3{
+    font-size: 17px;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  #login_modal  .ssw-modal-footer{
+    font-size: 12px;
+  }
+    
+  #signup_modal .ssw-close {
+    bottom: -100px;
+  }
+  
+  #signup_modal .ssw-modal-footer{
+    font-size: 0;
+  }
+
+
+}
+
+@media all and (max-width: 350px) {
+  #signup_modal .ssw-modal-body .ssw-h3 {
+    max-width: 50%;
+  }
+  
+  #signup_modal .ssw-modal-footer .ssw-gdpr-subscribe-notify.ssw-muted {
+    font-size: 9px;
+  }
+  
+  #signup_modal .ssw-modal-body{
+    zoom: 0.73;
+  }
+
+}
+
+
+/* Login modal customization end */
+
+li#ssw-topauth {
+  opacity: 1;
+}
+
+.mobile-nav-panel .ssw-dropdown-menu {
+  left: 10px;
+  right: unset;
+}
+
+
+.ssw-edit-profile-page h2 {
+  line-height: 18px;
+  margin-top: 0;
+}
+
+.ssw-nav > li > a {
+  padding-bottom: 5px;
+}
+
+#ssw-page {
+  padding: 0 20px;
+}
+
+#ssw-page .ssw-nav > li.ssw-active > a,
+#ssw-page .ssw-nav > li.ssw-active > a:hover  {
+  background: none !important;
+  color: #3e3d54 !important;
+  border-color: #3e3d54 !important;
+  text-decoration:none;
+}
+
+#ssw-page  a {
+  color: #403e55 ;
+  text-decoration:none !important;
+}
+
+.ssw-page #privacy_div{
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.ssw-fbconnect.ssw-social-btn a i {
+  width: 30% !important;
+}
+
+.ssw-fbconnect.ssw-social-btn a i:before {
+  margin: 0 auto
+}
+
+.ssw-fbconnect.ssw-social-btn a span {
+  padding-left: 10px !important;
+}
+
+.ssw-page input,
+.ssw-page textarea,
+#ssw-widget-recommends-html input[type="email"],
+.ssw-modal input[type="text"],
+.ssw-modal input[type="email"],
+.ssw-modal input[type="submit"],
+.ssw-modal input[type="number"],
+.ssw-modal input[type="password"] {
+  padding: 8px 16px;
+  border: 1px solid silver;
+  outline: none;
+}
+
+
+.ssw-fave-item__button-move.btn-move.btn {
+  margin-left: 0;
+}
+
+#ssw-widget-recommends-html .ssw-socialconnect + .ssw-or {
+  float:left;
+  margin-top: 10px;
+}
+
+.ssw-review-socialconnect.ssw-socialconnect-3.ssw-group1 {
+  margin-bottom: 10px !important;
+}
+
+@media all and (max-width: 1024px) {
+  .site-header-main-actions #ssw-topauth {
+    display: none;
+  }
+}
+
+form .form-action-row {
+  display: flex;
+  text-align: right;
+  flex-direction: column;
+}
+
+form .form-action--submit {
+  max-width: 185px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.ssw-faveiticon {
+  left: 5px;
+  top: 5px;
+}
+
+.product-recently-viewed-wrapper .ssw-faveiticon {
+  right: 18px;
+  top: 0;
+}
+
+.shopify-payment-button {
+  height: 42px !important;
+}
+
+
+#ssw-wishlist-save button[type="submit"],
+.ssw-page input[type="submit"],
+#ssw-widget-recommends-html input[type="submit"],
+#ssw-product-modal .ssw-product-reviews input[type='submit']{
+  padding: 8px 14px;
+  background-color: #928ebd;
+  color: #fff;
+  border: none;
+}
+
+#ssw-wishlist-save button[type="submit"]:hover,
+.ssw-page input[type="submit"]:hover,
+#ssw-widget-recommends-html input[type="submit"]:hover,
+#ssw-product-modal .ssw-product-reviews input[type='submit']:hover{
+  background-color: #3e3d54;
+
+}
+
+
+
+.ssw-page input[type="submit"] {
+  padding: 15px 13px;
+}
+
+.ssw-cmar .ssw-price {
+  float: none !important;
+}
+
+.ssw-cmar .ssw-available-content.ssw-pull-left {
+  display: block !important;
+  float: none !important;
+  margin-top: 10px;
+}
+
+.ssw-cmar .ssw-product-btns {
+  margin: 10px 0;
+}
+
+#ssw-product-modal .ssw-modal-body {
+  background-color: #fae0da;
+}
+
+#ssw-product-modal #ssw-addToCartBtn {
+  color: #ffffff;
+  background-color: #a9e1cd;
+  border: 1px solid #a9e1cd;
+}
+
+#ssw-product-modal .ssw-nav > li.ssw-active > a,
+#ssw-product-modal .ssw-nav > li.ssw-active > a:hover  {
+  background: none !important;
+  color: #3e3d54 !important;
+  border-color: #3e3d54 !important;
+  text-decoration:none;
+}
+
+#ssw-product-modal .ssw-nav > li > a {
+  color: #3e3d54 !important;
+  text-decoration:none;
+}
+
+#ssw-product-modal  .ssw-product-title {
+  font-family: Muli,sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.0em;
+  color: #3e3d54;
+  font-size: var(--font-size-heading-1);
+  text-decoration: none;
+} 
+
+#ssw-product-modal .ssw-money{
+  font-size: calc(0.9375rem * 1.25);
+}
+
+#ssw-product-modal select {
+  width: 100%;
+  padding: 14px;
+  color: #212121;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+#ssw-product-modal .ssw-product-reviews a {
+  color: #3e3d54;
+}
+
+#ssw-page .ssw-fave-vendor-title {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#ssw-product-modal .ssw-product-description a {
+  color: #000;
+}
+
+.ssw-page .ssw-fave-product-actions {
+  display: flex;
+  justify-content: center;
+}
+
+div#ssw-wishlist-save .ssw-collections > .ssw-span{
+  width: 50%;
+}
+
+#ssw-wishlist-save .ssw-product-info .pname{
+  font-family: Muli,sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--font-size-product-card);
+  letter-spacing: normal;
+  color: #3e3d54;
+  text-decoration: none;
+}
+
+#ssw-wishlist-save .ssw-product-info .ssw-listing-product-price {
+  font-size: var(--font-size-body);
+  line-height: 1.4375rem;
+  color: #928ebd;
+  margin-top: 0.234375rem;
+}
+
+#ssw-wishlist-save .ssw-product-info {
+  text-align: left;
+}
+
+.ssw-custom-user-info .ssw-img-circle {
+  background-color: #f3f365;
+}
+
+#ssw-instagram-modal .ssw-instagram-detail-product-add-to-cart  {
+  margin-top: 10px;
+  float: left!important;
+  background-color: #928ebd!important;
+  order: 1;
+}
+
+#ssw-instagram-modal .ssw-instagram-detail-product {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ssw-instagram-load-more a {
+  padding: 8px 14px;
+  background-color: #928ebd;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.ssw-custom-user-info {
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+}
+.ssw-vendor {
+  display: flex;
+  margin-bottom: 0.1em;
+  font-weight: 700;
+  color: grey;
+  font-size: 14px;
+}
+
