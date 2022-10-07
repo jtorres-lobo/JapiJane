@@ -1,0 +1,4 @@
+static-basic-header
+static-collection
+cart.json
+collection.json
