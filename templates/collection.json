@@ -1,1 +1,117 @@
-{"sections":{"main":{"type":"static-collection","blocks":{"filter-1":{"type":"filter","settings":{"filter_option":"faceted","show_product_counts":true,"filter_limit":"999","filter_position":"above_menus","filter_style":"tags","grid_categories":"","custom_ordered_categories":"","custom_ordered_tags":""}},"menu-1":{"type":"menu","settings":{"menu":""}}},"block_order":["filter-1","menu-1"],"settings":{"show_breadcrumbs":true,"show_collection_image":false,"products_per_page_range":24,"pagination":"traditional","sort_by":true,"grid_list":true,"menu_depth_range":1}},"static-recently-viewed":{"type":"static-recently-viewed","settings":{"enable_recently_viewed_products":true}},"static-collection-promo-grid":{"type":"static-collection-promo-grid","blocks":{"grid-tile-1":{"type":"promotion","settings":{"preheading":"Preheading","preheading_color":"#4d4d4d","title":"Grid","heading_color":"#4d4d4d","text":"Use this section to welcome customers to your store, say a bit about your brand, or share news.","text_color":"#4d4d4d","block_link":"","button_text":"","button_style":"primary","signpost_color":"#4D4D4D","text_alignment":"top-left","promo_width":"half-width","desktop_height":380,"mobile_height":270,"overlay_style":"none","background":"","opacity":50}},"grid-tile-2":{"type":"promotion","settings":{"preheading":"Preheading","preheading_color":"#4d4d4d","title":"Grid","heading_color":"#4d4d4d","text":"Use this section to welcome customers to your store, say a bit about your brand, or share news.","text_color":"#4d4d4d","block_link":"","button_text":"","button_style":"primary","signpost_color":"#4D4D4D","text_alignment":"top-left","promo_width":"half-width","desktop_height":380,"mobile_height":270,"overlay_style":"none","background":"","opacity":50}}},"block_order":["grid-tile-1","grid-tile-2"],"settings":{"enable":false,"title":"Grid","subheading":"","heading_color":"#4D4D4D","subheading_color":"#4D4D4D","background_color":"","section_spacing_desktop":50,"section_spacing_mobile":36,"maintain_aspect_ratio":false,"compress_blocks":false}}},"order":["main","static-recently-viewed","static-collection-promo-grid"]}
+{
+  "sections": {
+    "main": {
+      "type": "static-collection",
+      "blocks": {
+        "filter-1": {
+          "type": "filter",
+          "settings": {
+            "filter_option": "tag",
+            "show_product_counts": true,
+            "filter_limit": "5",
+            "filter_position": "below_menus",
+            "filter_style": "tags",
+            "grid_categories": "color",
+            "custom_ordered_categories": "Tipo, Subtipo, Característica, Características, Tamaño, Formato, Color, Material, Marca, Categoría, Subcategoría",
+            "custom_ordered_tags": "Subcategoría_anal,\nSubcategoría_bdsm,\nSubcategoría_bombas para pene,\nSubcategoría_cargadores Y controles,\nSubcategoría_condones,\nSubcategoría_dildos,\nSubcategoría_educación,\nSubcategoría_estimulantes y retardantes,\nSubcategoría_feromonas,\nSubcategoría_juego anal,\nSubcategoría_juegos,\nSubcategoría_kits,\nSubcategoría_limpiadores,\nSubcategoría_lubricantes,\nSubcategoría_masaje,\nSubcategoría_para el pene,\nSubcategoría_pilas,\nSubcategoría_salud femenina,\nSubcategoría_trans,\nSubcategoría_vibradores,\nTipo_accesorios,\nTipo_aceite,\nTipo_agua,\nTipo_amarras y esposas,\nTipo_anal,\nTipo_anillos,\nTipo_antifaces y mordazas,\nTipo_arneses,\nTipo_babydolls,\nTipo_blanqueadores,\nTipo_bolitas,\nTipo_bolitas kegel,\nTipo_boxer,\nTipo_brief,\nTipo_calzones,\nTipo_clitorial,\nTipo_clítoris,\nTipo_columpios y cojines,\nTipo_conjuntos,\nTipo_copas menstruales,\nTipo_desafíos,\nTipo_desensibilizantes,\nTipo_dilatadores vaginales,\nTipo_dobles,\nTipo_enteritos,\nTipo_estimulantes,\nTipo_fundas,\nTipo_fustas y plumeros,\nTipo_jockstrap,\nTipo_joyas,\nTipo_juegos de mesa,\nTipo_limpieza,\nTipo_masturbadores,\nTipo_medias y portaligas,\nTipo_oral,\nTipo_packing,\nTipo_para el pene,\nTipo_para pezones,\nTipo_parejas,\nTipo_pene,\nTipo_perfumes,\nTipo_plugs,\nTipo_próstata,\nTipo_relajantes,\nTipo_silicona,\nTipo_simples,\nTipo_sostenes,\nTipo_urinarios portátiles,\nTipo_vaginal,\nSubtipo_aceite,\nSubtipo_air pleasure,\nSubtipo_ajustados,\nSubtipo_anillos,\nSubtipo_antifaces,\nSubtipo_avanzado,\nSubtipo_balas,\nSubtipo_bodies,\nSubtipo_bralette,\nSubtipo_cintas,\nSubtipo_cojines,\nSubtipo_collares,\nSubtipo_columpios,\nSubtipo_con abertura,\nSubtipo_con copa,\nSubtipo_con vibración,\nSubtipo_corazones,\nSubtipo_corporales,\nSubtipo_crema,\nSubtipo_cuerdas,\nSubtipo_cuerpo completo,\nSubtipo_dados,\nSubtipo_copas menstruales,\nSubtipo_de juguetes,\nSubtipo_dedos,\nSubtipo_desechable,\nSubtipo_discretos,\nSubtipo_disfraces,\nSubtipo_duales o triples,\nSubtipo_entrenamiento,\nSubtipo_erección,\nSubtipo_ergonómicos,\nSubtipo_esposas,\nSubtipo_estimulantes,\nSubtipo_experimentado,\nSubtipo_femenina,\nSubtipo_flúor,\nSubtipo_fustas,\nSubtipo_gel,\nSubtipo_gorros,\nSubtipo_holgados,\nSubtipo_inicial,\nSubtipo_jaulas,\nSubtipo_joyas,\nSubtipo_kits,\nSubtipo_labial,\nSubtipo_largos,\nSubtipo_látigos,\nSubtipo_limpieza,\nSubtipo_manos libres,\nSubtipo_manuales,\nSubtipo_masculina,\nSubtipo_medias,\nSubtipo_mordazas,\nSubtipo_naipes,\nSubtipo_neutros,\nSubtipo_novia,\nSubtipo_palmetas,\nSubtipo_panties,\nSubtipo_para la cama,\nSubtipo_petazeta,\nSubtipo_pezoneras,\nSubtipo_pinzas,\nSubtipo_plumeros,\nSubtipo_portaligas,\nSubtipo_potenciador,\nSubtipo_próstata,\nSubtipo_pulseras,\nSubtipo_realistas,\nSubtipo_retardantes,\nSubtipo_reutilizable,\nSubtipo_roll-on,\nSubtipo_saborizados,\nSubtipo_sensación natural,\nSubtipo_sexo oral,\nSubtipo_simples,\nSubtipo_sin abertura,\nSubtipo_sin copa,\nSubtipo_sin vibración,\nSubtipo_spray,\nSubtipo_tamaño xl,\nSubtipo_tarjetas,\nSubtipo_texturados,\nSubtipo_unitaria,\nSubtipo_velas,\nSubtipo_ventosas,\nCaracterísticas_a pilas,\nCaracterísticas_antiséptico,\nCaracterísticas_cálido,\nCaracterísticas_cítrico,\nCaracterísticas_compatible con juguetes,\nCaracterísticas_con alcohol,\nCaracterísticas_con app,\nCaracterísticas_con aroma,\nCaracterísticas_con benzocaína,\nCaracterísticas_con calor,\nCaracterísticas_con control,\nCaracterísticas_con feromonas,\nCaracterísticas_con lidocaína,\nCaracterísticas_con sabor,\nCaracterísticas_desensibilizante,\nCaracterísticas_dulce,\nCaracterísticas_efecto intenso,\nCaracterísticas_efecto suave,\nCaracterísticas_entre 12 y 18 cm,\nCaracterísticas_estrechamiento,\nCaracterísticas_floral,\nCaracterísticas_fresco,\nCaracterísticas_frutal,\nCaracterísticas_gay,\nCaracterísticas_hasta 12 cm,\nCaracterísticas_hetero,\nCaracterísticas_intenso,\nCaracterísticas_larga duración,\nCaracterísticas_lesbiana,\nCaracterísticas_más de 18 cm,\nCaracterísticas_natural,\nCaracterísticas_neutro,\nCaracterísticas_piel sensible,\nCaracterísticas_pilas,\nCaracterísticas_punto g,\nCaracterísticas_recargable,\nCaracterísticas_relajantes,\nCaracterísticas_sin alcohol,\nCaracterísticas_suave,\nCaracterísticas_uso anal,\nCaracterísticas_vegano,\nFormato_10 unidades,\nFormato_12 unidades,\nFormato_3 unidades,\nFormato_hasta 13 cm,\nFormato_entre 13 y 17 cm,\nFormato_entre 15 y 20 ml,\nFormato_entre 15 y 50 ml,\nFormato_entre 20 y 60 ml,\n\nFormato_hasta 15 ml,\nFormato_hasta 6 ml,\nFormato_más de 100 ml,\nFormato_más de 17 cm,\nFormato_más de 20 ml,\nColor_azul,\nColor_rosado,\nColor_morado,\nColor_piel,\nColor_negro,\nColor_multicolor,\nColor_gris,\nColor_plata,\nColor_rojo,\nColor_blanco,\nColor_verde,\nColor_transparente,\nMaterial_acero,\nMaterial_caramelo,\nMaterial_crafpack,\nMaterial_gamuza,\nMaterial_látex,\nMaterial_metal,\nMaterial_nylon,\nMaterial_plástico,\nMaterial_plástico abs,\nMaterial_poliéster,\nMaterial_poliisopreno,\nMaterial_polipropileno,\nMaterial_PVC,\nMaterial_silicona,\nMaterial_silicona médica,\nMaterial_superskin,\nMaterial_TPE\/TPR,\nMaterial_TPR,\nMaterial_vidrio borosilicato,\nMaterial_vinilo,\n\nPeso_entre 62 y 98 gr,\nPeso_hasta 62 gr,\nPeso_más de 98 gr,"
+          }
+        },
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "filter-1",
+        "menu-1"
+      ],
+      "settings": {
+        "show_breadcrumbs": true,
+        "show_collection_image": false,
+        "products_per_page_range": 24,
+        "pagination": "traditional",
+        "sort_by": true,
+        "grid_list": true,
+        "menu_depth_range": 1
+      }
+    },
+    "static-recently-viewed": {
+      "type": "static-recently-viewed",
+      "settings": {
+        "enable_recently_viewed_products": true
+      }
+    },
+    "static-collection-promo-grid": {
+      "type": "static-collection-promo-grid",
+      "blocks": {
+        "grid-tile-1": {
+          "type": "promotion",
+          "settings": {
+            "preheading": "Preheading",
+            "preheading_color": "#4d4d4d",
+            "title": "Grid",
+            "heading_color": "#4d4d4d",
+            "text": "Use this section to welcome customers to your store, say a bit about your brand, or share news.",
+            "text_color": "#4d4d4d",
+            "block_link": "",
+            "button_text": "",
+            "button_style": "primary",
+            "signpost_color": "#4d4d4d",
+            "text_alignment": "top-left",
+            "promo_width": "half-width",
+            "desktop_height": 380,
+            "mobile_height": 270,
+            "overlay_style": "none",
+            "background": "",
+            "opacity": 50
+          }
+        },
+        "grid-tile-2": {
+          "type": "promotion",
+          "settings": {
+            "preheading": "Preheading",
+            "preheading_color": "#4d4d4d",
+            "title": "Grid",
+            "heading_color": "#4d4d4d",
+            "text": "Use this section to welcome customers to your store, say a bit about your brand, or share news.",
+            "text_color": "#4d4d4d",
+            "block_link": "",
+            "button_text": "",
+            "button_style": "primary",
+            "signpost_color": "#4d4d4d",
+            "text_alignment": "top-left",
+            "promo_width": "half-width",
+            "desktop_height": 380,
+            "mobile_height": 270,
+            "overlay_style": "none",
+            "background": "",
+            "opacity": 50
+          }
+        }
+      },
+      "block_order": [
+        "grid-tile-1",
+        "grid-tile-2"
+      ],
+      "settings": {
+        "enable": false,
+        "title": "Grid",
+        "subheading": "",
+        "heading_color": "#4d4d4d",
+        "subheading_color": "#4d4d4d",
+        "background_color": "",
+        "section_spacing_desktop": 50,
+        "section_spacing_mobile": 36,
+        "maintain_aspect_ratio": false,
+        "compress_blocks": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "static-recently-viewed",
+    "static-collection-promo-grid"
+  ]
+}
